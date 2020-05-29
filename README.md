@@ -16,6 +16,10 @@ Jogo de Tabuleiro com um contexto de pandemia.
 ### Interfaces
 (imagens interfaces)
 
+## Componente Tabuleiro
+### Interfaces
+(imagens interfaces)
+
 ### Detalhamento das Interfaces
 * **Interface IMovimento**
 
@@ -37,3 +41,5 @@ Interface que lida com o ataque entre as peças próximas
 Método | Objetivo
 ------ | --------
 `atacar` | faz uma peça atacar uma outra peça inimiga. A forma de ataque vária conforme o Peça e os               itens que ela possui
+
+
