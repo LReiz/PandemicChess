@@ -7,7 +7,7 @@
 Jogo de Tabuleiro com um contexto de pandemia.
 
 ## Vídeo do Projeto
-[Explicação do Projeto](youtube.com)
+[Explicação do Projeto](https://www.youtube.com/watch?v=WkQB7zuo9eI)
 
 ## Diagrama Geral de Componentes
 (imagens aqui)
@@ -16,9 +16,24 @@ Jogo de Tabuleiro com um contexto de pandemia.
 ### Interfaces
 (imagens interfaces)
 
+Campo | Valor
+----- | -----
+Classe | `<caminho completo da classe com pacotes>`
+Autores | Leonardo Almeida Reis e João Vitor
+Objetivo |
+Interface |
+
 ## Componente Tabuleiro
 ### Interfaces
 (imagens interfaces)
+
+Campo | Valor
+----- | -----
+Classe | `<caminho completo da classe com pacotes>`
+Autores | Leonardo Almeida Reis e João Vitor
+Objetivo |
+Interface |
+
 
 ### Detalhamento das Interfaces
 * **Interface IMovimento**
