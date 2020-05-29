@@ -12,7 +12,7 @@ Jogo de Tabuleiro com um contexto de pandemia.
 ## Diagrama Geral de Componentes
 (imagens aqui)
 
-## Componente (Nome do Componente)
+## Componente Peca
 ### Interfaces
 imagens interfaces
 
@@ -30,3 +30,10 @@ Interface que lida com a posição do Chá (item único) no Tabuleiro
 Método | Objetivo
 ------ | --------
 `getCha` | relatar a posição do Chá no Tabuleiro
+
+* **Interface IPeca**
+
+Interface que lida com o ataque entre as peças próximas
+Método | Objetivo
+------ | --------
+`atacar` | faz uma peça atacar uma outra peça inimiga. A forma de ataque vária conforme o Peça e os               itens que ela possui
