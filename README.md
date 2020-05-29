@@ -21,7 +21,7 @@ Campo | Valor
 Classe | `<caminho completo da classe com pacotes>`
 Autores | Leonardo Almeida Reis e João Vitor
 Objetivo |
-Interface |
+Interface | `código das interfaces`
 
 ## Componente Tabuleiro
 ### Interfaces
@@ -32,8 +32,18 @@ Campo | Valor
 Classe | `<caminho completo da classe com pacotes>`
 Autores | Leonardo Almeida Reis e João Vitor
 Objetivo |
-Interface |
+Interface | `código das interfaces`
 
+## Componente Celula
+### Interfaces
+(imagens interfaces)
+
+Campo | Valor
+----- | -----
+Classe | `<caminho completo da classe com pacotes>`
+Autores | Leonardo Almeida Reis e João Vitor
+Objetivo |
+Interface | `código das interfaces`
 
 ### Detalhamento das Interfaces
 * **Interface IMovimento**
