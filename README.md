@@ -17,5 +17,8 @@ Jogo de Tabuleiro com um contexto de pandemia.
 imagens interfaces
 
 ### Detalhamento das Interfaces
-**Interface (nome da interface)**
-(imagens aqui)
+**Interface IMovimento**
+Interface que lida com os movimento no Tabuleiro
+Método | Objetivo
+------ | --------
+verificar_movimento | Verificar se o movimento da peça pode ser realizado ou não
