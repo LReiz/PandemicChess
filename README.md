@@ -19,7 +19,7 @@ Jogo de Tabuleiro com um contexto de pandemia.
 Campo | Valor
 ----- | -----
 Classe | `<caminho completo da classe com pacotes>`
-Autores | Leonardo Almeida Reis e João Vitor
+Autores | Leonardo Reis e João Vitor
 Objetivo |
 Interface | `código das interfaces`
 
@@ -30,18 +30,16 @@ Interface | `código das interfaces`
 Campo | Valor
 ----- | -----
 Classe | `<caminho completo da classe com pacotes>`
-Autores | Leonardo Almeida Reis e João Vitor
+Autores | Leonardo Reis e João Vitor
 Objetivo |
 Interface | `código das interfaces`
 
 ## Componente Celula
-### Interfaces
-(imagens interfaces)
 
 Campo | Valor
 ----- | -----
 Classe | `<caminho completo da classe com pacotes>`
-Autores | Leonardo Almeida Reis e João Vitor
+Autores | Leonardo Reis e João Vitor
 Objetivo |
 Interface | `código das interfaces`
 
