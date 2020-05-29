@@ -7,7 +7,7 @@
 Jogo de Tabuleiro com um contexto de pandemia.
 
 ## Vídeo do Projeto
-
+[Explicação do Projeto](https://drive.google.com/file/d/1lKIbwxLPw6zoEPEx4KbcQeDr7Z_oECp6/view)
 
 ## Diagrama Geral de Componentes
 (imagens aqui)
