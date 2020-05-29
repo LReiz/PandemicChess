@@ -18,7 +18,14 @@ imagens interfaces
 
 ### Detalhamento das Interfaces
 **Interface IMovimento**
+
 Interface que lida com os movimento no Tabuleiro
 Método | Objetivo
 ------ | --------
 verificar_movimento | Verificar se o movimento da peça pode ser realizado ou não
+**Interface ICha**
+
+Interface que lida com a posição do Chá (item único) no Tabuleiro
+Método | Objetivo
+------ | --------
+getCha | relatar a posição do Chá no Tabuleiro
