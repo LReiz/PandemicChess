@@ -1,7 +1,7 @@
 # Projeto PandemicChess
 ## Equipe
 * Leonardo Almeida Reis - RA: 239104
-* João Vitor Baptista Moreira 237833
+* João Vitor Baptista Moreira - RA: 237833
 
 ## Descrição
 Jogo de Tabuleiro com um contexto de pandemia.
@@ -14,7 +14,7 @@ Jogo de Tabuleiro com um contexto de pandemia.
 
 ## Componente Peca
 ### Interfaces
-imagens interfaces
+(imagens interfaces)
 
 ### Detalhamento das Interfaces
 * **Interface IMovimento**
