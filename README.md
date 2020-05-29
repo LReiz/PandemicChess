@@ -26,20 +26,23 @@ Jogo de Tabuleiro com um contexto de pandemia.
 Interface que lida com os movimento no Tabuleiro
 Método | Objetivo
 ------ | --------
-`verificar_movimento` | Verificar se o movimento da peça pode ser realizado ou não
+`verificar_movimento` | Recebe como parâmetro as coordenadas do posição final e retorna true se for                           possível fazer o movimento ou false caso contrário.
+
 
 * **Interface ICha**
 
 Interface que lida com a posição do Chá (item único) no Tabuleiro
 Método | Objetivo
 ------ | --------
-`getCha` | relatar a posição do Chá no Tabuleiro
+`getCha` | Recebe como parâmetro o tabuleiro  e retorna um vetor de inteiros contendo as coordenadas            x,y do chá.
+
 
 * **Interface IPeca**
 
 Interface que lida com o ataque entre as peças próximas
 Método | Objetivo
 ------ | --------
-`atacar` | faz uma peça atacar uma outra peça inimiga. A forma de ataque vária conforme o Peça e os               itens que ela possui
+`atacar` | Recebe como parâmetro a peça que será atacada e retorna false se nenhuma peça foi alterada             e true se uma peça foi infectada ou colocada em quarentena
+
 
 
