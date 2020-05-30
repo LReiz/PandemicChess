@@ -22,8 +22,21 @@ Campo | Valor
 ----- | -----
 Classe | `<caminho completo da classe com pacotes>`
 Autores | Leonardo Reis e João Vitor
-Objetivo |
-Interface | `código das interfaces`
+Objetivo | Representar as peças que serão movidas no tabuleiro
+Interface | `<interface em Java do componente>`
+```java
+  public interface ICha{
+    int[] getCha(Tabuleiro tab);
+  }
+  public interface IMovimento{
+    boolean verificarMovimento(int x_final, int y_final);
+  }
+  public interface IPeca extends ICha, IMovimento{
+    int[] getCha(Tabuleiro tab);
+  boolean verificarMovimento(int x_final, int y_final);
+  void atacar(Peca inimigo);	
+  }
+```
 
 ### Detalhamento das Interfaces
 * **Interface IMovimento**
@@ -59,8 +72,13 @@ Campo | Valor
 ----- | -----
 Classe | `<caminho completo da classe com pacotes>`
 Autores | Leonardo Reis e João Vitor
-Objetivo |
-Interface | `código das interfaces`
+Objetivo | Gerenciar movimentos e células no espaço
+Interface | `<interface em Java do componente>`
+```java
+  public interface ICha{
+    int[] getCha(Tabuleiro tab);
+  }
+```
 
 ### Detalhamento das Interfaces
 * **Interface ICha**
@@ -80,8 +98,8 @@ Campo | Valor
 ----- | -----
 Classe | `<caminho completo da classe com pacotes>`
 Autores | Leonardo Reis e João Vitor
-Objetivo |
-Interface | `código das interfaces`
+Objetivo | Representar cada subdivisão do tabuleiro
+Interface | `<interface em Java do componente>`
 
 
 
