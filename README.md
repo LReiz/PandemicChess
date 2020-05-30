@@ -13,29 +13,11 @@ Jogo de Tabuleiro com um contexto de pandemia.
 ![Diagrama Geral](./assets/componentes.png)
 
 ## Componente Peca
+<img src="./assets/componente-peca.png" alt="Componente Peca" width="400" />
+
 ### Interfaces
-![Peca e suas Interfaces](./assets/peca-e-interfaces.png)
+<img src="./assets/peca-e-interfaces.png" alt="Peca e suas Interfaces" width="800" />
 
-Campo | Valor
------ | -----
-Classe | `<caminho completo da classe com pacotes>`
-Autores | Leonardo Reis e João Vitor
-Objetivo |
-Interface | `código das interfaces`
-
-## Componente Tabuleiro
-### Interfaces
-![Tabuleiro e sua Interface](./assets/tabuleiro-e-interface.png)
-
-Campo | Valor
------ | -----
-Classe | `<caminho completo da classe com pacotes>`
-Autores | Leonardo Reis e João Vitor
-Objetivo |
-Interface | `código das interfaces`
-
-## Componente Celula
-![Celula e Herdeiras](./assets/celula-e-herdeiras.png)
 Campo | Valor
 ----- | -----
 Classe | `<caminho completo da classe com pacotes>`
@@ -66,6 +48,42 @@ Interface que lida com o ataque entre as peças próximas
 Método | Objetivo
 ------ | --------
 `atacar` | Recebe como parâmetro a peça que será atacada e retorna false se nenhuma peça foi alterada             e true se uma peça foi infectada ou colocada em quarentena
+
+## Componente Tabuleiro
+<img src="./assets/componente-tabuleiro.png" alt="Componente Tabuleiro" width="400" />
+
+### Interfaces
+<img src="./assets/tabuleiro-e-interface.png" alt="Tabuleiro e sua Interface" width="500"/>
+
+Campo | Valor
+----- | -----
+Classe | `<caminho completo da classe com pacotes>`
+Autores | Leonardo Reis e João Vitor
+Objetivo |
+Interface | `código das interfaces`
+
+### Detalhamento das Interfaces
+* **Interface ICha**
+
+Interface que lida com a posição do Chá (item único) no Tabuleiro
+Método | Objetivo
+------ | --------
+`getCha` | Recebe como parâmetro o tabuleiro  e retorna um vetor de inteiros contendo as coordenadas            x,y do chá.
+
+
+## Componente Celula
+<img src="./assets/componente-celula.png" alt="Componente Celula" width="400" />
+
+<img src="./assets/celula-e-herdeiras.png" alt="Celula e Herdeiras" width="600"/>
+
+Campo | Valor
+----- | -----
+Classe | `<caminho completo da classe com pacotes>`
+Autores | Leonardo Reis e João Vitor
+Objetivo |
+Interface | `código das interfaces`
+
+
 
 
 
