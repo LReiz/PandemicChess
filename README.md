@@ -92,7 +92,7 @@ Método | Objetivo
 ## Componente Celula
 <img src="./assets/componente-celula.png" alt="Componente Celula" width="400" />
 
-<img src="./assets/celula-e-herdeiras.png" alt="Celula e Herdeiras" width="600"/>
+<img src="./assets/celula-e-herdeiros.png" alt="Celula e Herdeiras" width="600"/>
 
 Campo | Valor
 ----- | -----
