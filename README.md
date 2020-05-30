@@ -35,7 +35,7 @@ Objetivo |
 Interface | `código das interfaces`
 
 ## Componente Celula
-
+![Celula e Herdeiras](./assets/celula-e-herdeiras.png)
 Campo | Valor
 ----- | -----
 Classe | `<caminho completo da classe com pacotes>`
