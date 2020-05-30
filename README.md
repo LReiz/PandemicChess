@@ -10,11 +10,11 @@ Jogo de Tabuleiro com um contexto de pandemia.
 [Explicação do Projeto](https://www.youtube.com/watch?v=WkQB7zuo9eI)
 
 ## Diagrama Geral de Componentes
-(imagens aqui)
+![Diagrama Geral](./assets/componentes.png)
 
 ## Componente Peca
 ### Interfaces
-(imagens interfaces)
+![Peca e suas Interfaces](./assets/peca-e-interfaces.png)
 
 Campo | Valor
 ----- | -----
@@ -25,7 +25,7 @@ Interface | `código das interfaces`
 
 ## Componente Tabuleiro
 ### Interfaces
-(imagens interfaces)
+![Tabuleiro e sua Interface](./assets/tabuleiro-e-interface.png)
 
 Campo | Valor
 ----- | -----
