@@ -9,6 +9,9 @@ Jogo de Tabuleiro com um contexto de pandemia.
 ## Vídeo do Projeto
 [Explicação do Projeto](https://www.youtube.com/watch?v=WkQB7zuo9eI)
 
+## Vídeo do Projeto
+[Link dos Slides](https://docs.google.com/presentation/d/1BnTau2gv0Le8qmwgCXDSPN9meJ2tbU3B72DFIPi_jm0/edit#slide=id.g87b85ba923_0_169)
+
 ## Diagrama Geral de Componentes
 ![Diagrama Geral](./assets/componentes.png)
 
