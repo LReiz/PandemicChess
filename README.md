@@ -6,6 +6,9 @@
 ## Descrição
 Jogo de Tabuleiro com um contexto de pandemia.
 
+## Objetivo 
+Dois jogadores competem pela vitória, cada um com seu objetivo. O time dos médicos procura controlar a doença e salvar toda a população, enquanto que o time dos Infectados tenta disseminar a doença a todo custo.
+
 ## Vídeo do Projeto
 [Explicação do Projeto](https://www.youtube.com/watch?v=WkQB7zuo9eI)
 
