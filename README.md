@@ -10,10 +10,10 @@ Jogo de Tabuleiro com um contexto de pandemia.
 Dois jogadores competem com seus times pela vitória, cada um com seu objetivo. O time dos médicos procura controlar a doença e salvar toda a população, enquanto que o time dos Infectados tenta disseminar a doença a todo custo. 
 
 ## Itens
-* *Algemas:* usadas pelos médicos para colocar infectados de quarentena
-* *Chá de boldo:* usada pelos médicos para vencer o jogo
-* *Máscaras:* usadas pelos médicos para se proteger dos infectados
-* *Baús:* estão espalhados aleatoriamente pelo mapa e carregam um dos 3 tipos de itens
+* **Algemas:** usadas pelos médicos para colocar infectados de quarentena
+* **Chá de boldo:** usada pelos médicos para vencer o jogo
+* **Máscaras:** usadas pelos médicos para se proteger dos infectados
+* **Baús:** estão espalhados aleatoriamente pelo mapa e carregam um dos 3 tipos de itens
 
 ## Vídeo do Projeto
 [Explicação do Projeto](https://www.youtube.com/watch?v=WkQB7zuo9eI)
