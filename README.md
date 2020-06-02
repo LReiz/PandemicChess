@@ -15,6 +15,16 @@ Dois jogadores competem com seus times pela vitória, cada um com seu objetivo. 
 * **Máscaras:** usadas pelos médicos para se proteger dos infectados
 * **Baús:** estão espalhados aleatoriamente pelo mapa e carregam um dos 3 tipos de itens
 
+## Interações entre Entidades do Tabuleiro
+* **Adquirir Item do Baú:** Ao chegar na vizinhança do baú, o médico adquire um dos seguintes itens: Máscara, Algema, Chá de Boldo.
+* **Adquirir Chá de Boldo** (Cura): Caso um médico seja infectado com o Chá de Boldo na mão, esse item é largado no chão (na mesma célula onde ele se encontra) e pode ser coletado por um médico que chegue em sua vizinhança.
+* **Perder Máscaras:** Caso um jogador saudável esteja a menos de duas casas de distância de um jogador infectado, ele perde uma máscara.
+* **Infecção:** Se não tiver mais máscaras e estiver próximo de um jogador infectado, o jogador passa a ser do time dos infectados.
+* **Quarentena:** Se um jogador com algema chegar na vizinhança de um jogador infectado, esse jogador entra em quarentena e sai do mapa. 
+* **Cura do vírus:** Se um jogador chegar ao hospital com a cura do vírus(chá de boldo), o time dos médicos ganha.
+* **Lockdown:** Se só sobram médicos no mapa, os médicos ganham.
+* **Genocídio:** Se só sobram infectados no mapa, os Infectados ganham.
+
 ## Vídeo do Projeto
 [Explicação do Projeto](https://www.youtube.com/watch?v=WkQB7zuo9eI)
 
