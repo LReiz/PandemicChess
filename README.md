@@ -169,14 +169,14 @@ Interface | `<interface em Java do componente>`
 Interface que lida com os movimento no Tabuleiro
 Método | Objetivo
 ------ | --------
-`movimento` | Recebe como parâmetro as coordenadas do posição final e caso o Tabuleiro verifique que o movimento é válido, a peça executa o movimento
+`movimento` | Recebe como parâmetro as coordenadas do posição final e caso o Tabuleiro verifique que o movimento é válido, a peça executa o movimento.
 
 * **Interface IAtaque**
 
 Interface que lida com as mecânicas de ataque entre peças
 Método | Objetivo
 ------ | --------
-`atacar` | Recebe a peça como parametro, verifica se ela é diferente de null e inimiga, caso passe pelas condições chama o Tabuleiro para que este execute o ataque à peça inimiga.
+`atacar` | Recebe a peça como parametro, verifica se ela é diferente de null e inimiga, caso passe pelas condições chama o Tabuleiro para que este execute o ataque à peça inimiga. Retorna void
 
 ## Componente PecaMedico
 
@@ -274,4 +274,4 @@ Método | Objetivo
 Interface que cria o PecaCha no Tabuleiro
 Método | Objetivo
 ------ | --------
-`criaCha` | Recebe o próprio Tabuleiro e cria a PecaCha no jogo, que deve ser única. Retorna void
+`criaCha` | Recebe o Tabuleiro e cria a PecaCha no jogo, que deve ser única. Retorna void
