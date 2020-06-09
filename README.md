@@ -97,6 +97,11 @@ Classe | `<caminho completo da classe com pacotes>`
 Autores | Leonardo Reis e João Vitor
 Objetivo | Lidar com os movimentos das peças no Tabuleiro
 Interface | `<interface em Java do componente>`
+```java
+public interface IMovimento{
+	boolean verificarMovimento(int x_final, int y_final);
+}
+```
 
 * **Interface IAtaque**
 <img src="./assets/interface-ataque.png" alt="Peca e suas Interfaces" width="800" />
@@ -107,6 +112,11 @@ Classe | `<caminho completo da classe com pacotes>`
 Autores | Leonardo Reis e João Vitor
 Objetivo | Lidar com as mecânicas de ataque entre as peças
 Interface | `<interface em Java do componente>`
+```java
+public interface IAtaque{
+	void atacar(Peca inimigo);
+}
+```
 
 * **Interface ICriaCha**
 <img src="./assets/interface-cria-cha.png" alt="Peca e suas Interfaces" width="800" />
@@ -117,6 +127,11 @@ Classe | `<caminho completo da classe com pacotes>`
 Autores | Leonardo Reis e João Vitor
 Objetivo | Guardar o Chá dentro de uma PecaBau
 Interface | `<interface em Java do componente>`
+```java
+public interface ICriaCha{
+	void criaCha(Tabuleiro tab);
+}
+```
 
 ### Detalhamento das Interfaces
 * **Interface IMovimento**
@@ -152,6 +167,11 @@ Classe | `<caminho completo da classe com pacotes>`
 Autores | Leonardo Reis e João Vitor
 Objetivo | Lidar com os movimentos das peças no Tabuleiro
 Interface | `<interface em Java do componente>`
+```java
+public interface IMovimento{
+	boolean verificarMovimento(int x_final, int y_final);
+}
+```
 
 * **Interface IAtaque**
 <img src="./assets/interface-ataque.png" alt="Peca e suas Interfaces" width="800" />
@@ -162,6 +182,11 @@ Classe | `<caminho completo da classe com pacotes>`
 Autores | Leonardo Reis e João Vitor
 Objetivo | Lidar com as mecânicas de ataque entre as peças
 Interface | `<interface em Java do componente>`
+```java
+public interface IAtaque{
+	void atacar(Peca inimigo);
+}
+```
 
 ### Detalhamento das Interfaces
 * **Interface IMovimento**
@@ -190,6 +215,11 @@ Classe | `<caminho completo da classe com pacotes>`
 Autores | Leonardo Reis e João Vitor
 Objetivo | Lidar com as transferências de itens entre uma PecaBau e uma PecaMedico 
 Interface | `<interface em Java do componente>`
+```java
+public interface ITransferir{
+	void transferirItens(PecaMedico medico);
+}
+```
 
 ### Detalhamento de Interfaces
 * **Interface ITransferir**
@@ -211,6 +241,11 @@ Classe | `<caminho completo da classe com pacotes>`
 Autores | Leonardo Reis e João Vitor
 Objetivo | Lidar com as transferências de itens entre uma PecaBau e uma PecaMedico 
 Interface | `<interface em Java do componente>`
+```java
+public interface ITransferir{
+	void transferirItens(PecaMedico medico);
+}
+```
 
 * **Interface IGuardaCha**
 <img src="./assets/interface-guarda-cha.png" alt="Peca e suas Interfaces" width="800" />
@@ -221,7 +256,11 @@ Classe | `<caminho completo da classe com pacotes>`
 Autores | Leonardo Reis e João Vitor
 Objetivo | Guardar o Chá dentro de uma PecaBau
 Interface | `<interface em Java do componente>`
-
+```java
+public interface IGuardaCha{
+	void verificarBau();
+}
+```
 
 ### Detalhamento de Interfaces
 * **Interface ITransferir**
@@ -250,6 +289,11 @@ Classe | `<caminho completo da classe com pacotes>`
 Autores | Leonardo Reis e João Vitor
 Objetivo | Guardar o Chá dentro de uma PecaBau
 Interface | `<interface em Java do componente>`
+```java
+public interface IGuardaCha{
+	void verificarBau();
+}
+```
 
 * **Interface ICriaCha**
 <img src="./assets/interface-cria-cha.png" alt="Peca e suas Interfaces" width="800" />
@@ -260,6 +304,11 @@ Classe | `<caminho completo da classe com pacotes>`
 Autores | Leonardo Reis e João Vitor
 Objetivo | Guardar o Chá dentro de uma PecaBau
 Interface | `<interface em Java do componente>`
+```java
+public interface ICriaCha{
+	void criaCha(Tabuleiro tab);
+}
+```
 
 ### Detalhamento de Interfaces
 * **Interface IGuardaCha**
