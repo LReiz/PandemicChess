@@ -32,65 +32,17 @@ Dois jogadores competem com seus times pela vitória, cada um com seu objetivo. 
 [Link dos Slides](https://docs.google.com/presentation/d/1KDkpZwINmNoawVvCUoEiNdXEPe-MgW5p7afNmaXl2f0/edit#slide=id.p)
 
 ## Diagrama Geral de Componentes
-![Diagrama Geral](./assets/componentes.png)
-
-## Componente Peca
-<img src="./assets/componente-peca.png" alt="Componente Peca" width="400" />
-
-### Interfaces
-<img src="./assets/peca-e-interfaces.png" alt="Peca e suas Interfaces" width="800" />
-
-Campo | Valor
------ | -----
-Classe | `<caminho completo da classe com pacotes>`
-Autores | Leonardo Reis e João Vitor
-Objetivo | Representar as peças que serão movidas no tabuleiro
-Interface | `<interface em Java do componente>`
-```java
-  public interface ICha{
-    int[] getCha(Tabuleiro tab);
-  }
-  public interface IMovimento{
-    boolean verificarMovimento(int x_final, int y_final);
-  }
-  public interface IPeca extends ICha, IMovimento{
-    int[] getCha(Tabuleiro tab);
-  boolean verificarMovimento(int x_final, int y_final);
-  void atacar(Peca inimigo);	
-  }
-```
-
-### Detalhamento das Interfaces
-* **Interface IMovimento**
-
-Interface que lida com os movimento no Tabuleiro
-Método | Objetivo
------- | --------
-`verificar_movimento` | Recebe como parâmetro as coordenadas do posição final e retorna true se for possível fazer o movimento ou false caso contrário.
-
-
-* **Interface ICha**
-
-Interface que lida com a posição do Chá (item único) no Tabuleiro
-Método | Objetivo
------- | --------
-`getCha` | Recebe como parâmetro o tabuleiro  e retorna um vetor de inteiros contendo as coordenadas            x,y do chá.
-
-
-* **Interface IPeca**
-
-Interface que lida com o ataque entre as peças próximas
-Método | Objetivo
------- | --------
-`atacar` | Recebe como parâmetro a peça que será atacada e retorna false se nenhuma peça foi alterada             e true se uma peça foi infectada ou colocada em quarentena
-
+![Diagrama Geral](./assets/diagrama-componentes.png)
 
 ## Componente Tabuleiro
+<img src="./assets/componente-tabuleiro.png" alt="componente-tabuleiro" width="800" />
 
 ### Interfaces
-<img src="./assets/interface-movimento.png" alt="Peca e suas Interfaces" width="800" />
-<img src="./assets/interface-ataque.png" alt="Peca e suas Interfaces" width="800" />
-<img src="./assets/interface-cria-cha.png" alt="Peca e suas Interfaces" width="800" />
+<img src="./assets/interface-movimento.png" alt="interface-movimento" width="800" />
+
+<img src="./assets/interface-ataque.png" alt="interface-ataque" width="800" />
+
+<img src="./assets/interface-cria-cha.png" alt="interface-cria-cha" width="800" />
 
 Campo | Valor
 ----- | -----
@@ -133,10 +85,14 @@ Método | Objetivo
 `criaCha` | Recebe o próprio Tabuleiro e verifica se o número mínimo de rodadas da partida já foi atingido e tenta criar o chá. Retorna void
 
 ## Componente PecasMoveis
+<img src="./assets/componente-peca-infectado.png" alt="componente-peca-infectado" width="800" />
+
+<img src="./assets/componente-peca-medico.png" alt="componente-peca-medico" width="800" />
 
 ### Interfaces
-<img src="./assets/interface-movimento.png" alt="Peca e suas Interfaces" width="800" />
-<img src="./assets/interface-ataque.png" alt="Peca e suas Interfaces" width="800" />
+<img src="./assets/interface-movimento.png" alt="interface-movimento" width="800" />
+
+<img src="./assets/interface-ataque.png" alt="interface-ataque" width="800" />
 
 Campo | Valor
 ----- | -----
@@ -169,10 +125,11 @@ Método | Objetivo
 `atacar` | Recebe a peça como parametro, verifica se ela é diferente de null e inimiga, caso passe pelas condições chama o Tabuleiro para que este execute o ataque à peça inimiga. Retorna void
 
 ## Componente PecaMedico
+<img src="./assets/componente-peca-medico.png" alt="componente-peca-medico" width="800" />
 
 ### Interfaces
 * **Interface ITransferir**
-<img src="./assets/interface-pecas-paradas.png" alt="Peca e suas Interfaces" width="800" />
+<img src="./assets/interface-transferir.png" alt="interface-transferir" width="800" />
 
 Campo | Valor
 ----- | -----
@@ -195,11 +152,10 @@ Método | Objetivo
 `transferirItens` | Recebe a própria PecaMedico como parâmetro e verifica os PecaBau próximos. Caso encontre um PecaBau suficientemente próximo chama este para executar a transferêcia de itens. Retorna void
 
 ## Componente PecaBau
+<img src="./assets/componente-peca-bau.png" alt="componente-peca-bau" width="800" />
 
 ### Interfaces
-* **Interface ITransferir**
-<img src="./assets/interface-pecas-paradas.png" alt="Peca e suas Interfaces" width="800" />
-<img src="./assets/interface-guarda-cha.png" alt="Peca e suas Interfaces" width="800" />
+<img src="./assets/interface-transferir.png" alt="interface-transferir" width="800" />
 
 Campo | Valor
 ----- | -----
@@ -232,11 +188,12 @@ Método | Objetivo
 `verificarBau` | Guarda o PecaCha dentro do PecaBau correspondente. Retorna void
 
 ## Componente PecaCha
+<img src="./assets/componente-peca-cha.png" alt="componente-peca-cha" width="800" />
 
 ### Interfaces
-* **Interface IGuardaCha**
-<img src="./assets/interface-guarda-cha.png" alt="Peca e suas Interfaces" width="800" />
-<img src="./assets/interface-cria-cha.png" alt="Peca e suas Interfaces" width="800" />
+<img src="./assets/interface-guarda-cha.png" alt="interface-guarda-cha" width="800" />
+
+<img src="./assets/interface-cria-cha.png" alt="interface-cria-cha" width="800" />
 
 Campo | Valor
 ----- | -----
