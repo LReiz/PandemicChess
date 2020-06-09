@@ -66,7 +66,7 @@ Interface | `<interface em Java do componente>`
 Interface que lida com os movimento no Tabuleiro
 Método | Objetivo
 ------ | --------
-`verificar_movimento` | Recebe como parâmetro as coordenadas do posição final e retorna true se for                           possível fazer o movimento ou false caso contrário.
+`verificar_movimento` | Recebe como parâmetro as coordenadas do posição final e retorna true se for possível fazer o movimento ou false caso contrário.
 
 
 * **Interface ICha**
@@ -84,46 +84,85 @@ Método | Objetivo
 ------ | --------
 `atacar` | Recebe como parâmetro a peça que será atacada e retorna false se nenhuma peça foi alterada             e true se uma peça foi infectada ou colocada em quarentena
 
+
 ## Componente Tabuleiro
-<img src="./assets/componente-tabuleiro.png" alt="Componente Tabuleiro" width="400" />
 
 ### Interfaces
-<img src="./assets/tabuleiro-e-interface.png" alt="Tabuleiro e sua Interface" width="500"/>
+* **Interface IMovimento**
+<img src="./assets/interface-movimento.png" alt="Peca e suas Interfaces" width="800" />
 
 Campo | Valor
 ----- | -----
 Classe | `<caminho completo da classe com pacotes>`
 Autores | Leonardo Reis e João Vitor
-Objetivo | Gerenciar movimentos e células no espaço
+Objetivo | Lidar com os movimentos das peças no Tabuleiro
 Interface | `<interface em Java do componente>`
-```java
-  public interface ICha{
-    int[] getCha(Tabuleiro tab);
-  }
-```
+
+* **Interface IAtaque**
+<img src="./assets/interface-ataque.png" alt="Peca e suas Interfaces" width="800" />
+
+Campo | Valor
+----- | -----
+Classe | `<caminho completo da classe com pacotes>`
+Autores | Leonardo Reis e João Vitor
+Objetivo | Lidar com as mecânicas de ataque entre as peças
+Interface | `<interface em Java do componente>`
 
 ### Detalhamento das Interfaces
-* **Interface ICha**
-
-Interface que lida com a posição do Chá (item único) no Tabuleiro
+* **Interface IMovimento**
+Interface que lida com os movimento no Tabuleiro
 Método | Objetivo
 ------ | --------
-`getCha` | Recebe como parâmetro o tabuleiro  e retorna um vetor de inteiros contendo as coordenadas            x,y do chá.
+`movimento` | Recebe como parâmetro as coordenadas do posição final e retorna true se for possível fazer o movimento ou false caso contrário.
 
+* **Interface IAtaque**
+Interface que lida com as mecânicas de ataque entre peças
+Método | Objetivo
+------ | --------
+`atacar` | Recebe a peça inimiga como parâmetro e realiza o ataque à essa peça e retorna void
 
-## Componente Celula
-<img src="./assets/componente-celula.png" alt="Componente Celula" width="400" />
+## Componente PeçasMoveis
 
-<img src="./assets/celula-e-herdeiros.png" alt="Celula e Herdeiras" width="600"/>
+### Interfaces
+* **Interface IMovimento**
+<img src="./assets/interface-movimento.png" alt="Peca e suas Interfaces" width="800" />
 
 Campo | Valor
 ----- | -----
 Classe | `<caminho completo da classe com pacotes>`
 Autores | Leonardo Reis e João Vitor
-Objetivo | Representar cada subdivisão do tabuleiro
+Objetivo | Lidar com os movimentos das peças no Tabuleiro
 Interface | `<interface em Java do componente>`
 
+* **Interface IAtaque**
+<img src="./assets/interface-ataque.png" alt="Peca e suas Interfaces" width="800" />
+
+Campo | Valor
+----- | -----
+Classe | `<caminho completo da classe com pacotes>`
+Autores | Leonardo Reis e João Vitor
+Objetivo | Lidar com as mecânicas de ataque entre as peças
+Interface | `<interface em Java do componente>`
+
+### Detalhamento das Interfaces
+* **Interface IMovimento**
+Interface que lida com os movimento no Tabuleiro
+Método | Objetivo
+------ | --------
+`movimento` | Recebe como parâmetro as coordenadas do posição final e caso o Tabuleiro verifique que o movimento é válido, a peça executa o movimento
+
+* **Interface IAtaque**
+Interface que lida com as mecânicas de ataque entre peças
+Método | Objetivo
+------ | --------
+`atacar` | Recebe a peça como parametro, verifica se ela é diferente de null e inimiga, caso passe pelas condições chama o Tabuleiro para que este execute o ataque à peça inimiga.
+
+## Componente PecaMedico
+
+### Interfaces
+* **Interface ITransferir**
 
 
-
+### Detalhamento de Interfaces
+* **Interface ITransferir**
 
