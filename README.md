@@ -120,12 +120,14 @@ Interface | `<interface em Java do componente>`
 
 ### Detalhamento das Interfaces
 * **Interface IMovimento**
+
 Interface que lida com os movimento no Tabuleiro
 Método | Objetivo
 ------ | --------
 `movimento` | Recebe como parâmetro as coordenadas do posição final e retorna true se for possível fazer o movimento ou false caso contrário.
 
 * **Interface IAtaque**
+
 Interface que lida com as mecânicas de ataque entre peças
 Método | Objetivo
 ------ | --------
