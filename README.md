@@ -152,6 +152,8 @@ Método | Objetivo
 `movimento` | Recebe como parâmetro as coordenadas do posição final e caso o Tabuleiro verifique que o movimento é válido, a peça executa o movimento
 
 * **Interface IAtaque**
+<img src="./assets/interface-ataque.png" alt="Peca e suas Interfaces" width="800" />
+
 Interface que lida com as mecânicas de ataque entre peças
 Método | Objetivo
 ------ | --------
@@ -161,8 +163,40 @@ Método | Objetivo
 
 ### Interfaces
 * **Interface ITransferir**
+<img src="./assets/interface-pecas-paradas.png" alt="Peca e suas Interfaces" width="800" />
 
+Campo | Valor
+----- | -----
+Classe | `<caminho completo da classe com pacotes>`
+Autores | Leonardo Reis e João Vitor
+Objetivo | Lidar com as transferências de itens entre uma PecaBau e uma PecaMedico 
+Interface | `<interface em Java do componente>`
 
 ### Detalhamento de Interfaces
 * **Interface ITransferir**
 
+Interface que lida com as transferências de itens entre uma PecaBau e uma PecaMedico
+Método | Objetivo
+------ | --------
+`transferirItens` | Recebe a própria PecaMedico como parâmetro e verifica os PecaBau próximos. Caso encontre um PecaBau suficientemente próximo chama este para executar a transferêcia de itens. Retorna void
+
+## Componente PecaBau
+
+### Interfaces
+* **Interface ITransferir**
+<img src="./assets/interface-pecas-paradas.png" alt="Peca e suas Interfaces" width="800" />
+
+Campo | Valor
+----- | -----
+Classe | `<caminho completo da classe com pacotes>`
+Autores | Leonardo Reis e João Vitor
+Objetivo | Lidar com as transferências de itens entre uma PecaBau e uma PecaMedico 
+Interface | `<interface em Java do componente>`
+
+### Detalhamento de Interfaces
+* **Interface ITransferir**
+
+Interface que lida com as transferências de itens entre uma PecaBau e uma PecaMedico
+Método | Objetivo
+------ | --------
+`transferirItens` | Recebe a PecaMedico como parâmetro e executa a transferência dos itens contidos na PecaBau para a PecaMedico. Retorna void
