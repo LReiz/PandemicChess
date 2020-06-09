@@ -108,7 +108,8 @@ Autores | Leonardo Reis e João Vitor
 Objetivo | Lidar com as mecânicas de ataque entre as peças
 Interface | `<interface em Java do componente>`
 
-* **Interface IGuardaCha**
+* **Interface ICriaCha**
+<img src="./assets/interface-cria-cha.png" alt="Peca e suas Interfaces" width="800" />
 
 Campo | Valor
 ----- | -----
