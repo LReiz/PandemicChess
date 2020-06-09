@@ -108,6 +108,15 @@ Autores | Leonardo Reis e João Vitor
 Objetivo | Lidar com as mecânicas de ataque entre as peças
 Interface | `<interface em Java do componente>`
 
+* **Interface IGuardaCha**
+
+Campo | Valor
+----- | -----
+Classe | `<caminho completo da classe com pacotes>`
+Autores | Leonardo Reis e João Vitor
+Objetivo | Guardar o Chá dentro de uma PecaBau
+Interface | `<interface em Java do componente>`
+
 ### Detalhamento das Interfaces
 * **Interface IMovimento**
 Interface que lida com os movimento no Tabuleiro
@@ -121,7 +130,14 @@ Método | Objetivo
 ------ | --------
 `atacar` | Recebe a peça inimiga como parâmetro e realiza o ataque à essa peça e retorna void
 
-## Componente PeçasMoveis
+* **Interface ICriaCha**
+
+Interface que cria o PecaCha no Tabuleiro
+Método | Objetivo
+------ | --------
+`criaCha` | Recebe o próprio Tabuddrifica se o número mínimo de rodadas da partida já foi atingido e tenta criar o chá. Retorna void
+
+## Componente PecasMoveis
 
 ### Interfaces
 * **Interface IMovimento**
@@ -146,13 +162,13 @@ Interface | `<interface em Java do componente>`
 
 ### Detalhamento das Interfaces
 * **Interface IMovimento**
+
 Interface que lida com os movimento no Tabuleiro
 Método | Objetivo
 ------ | --------
 `movimento` | Recebe como parâmetro as coordenadas do posição final e caso o Tabuleiro verifique que o movimento é válido, a peça executa o movimento
 
 * **Interface IAtaque**
-<img src="./assets/interface-ataque.png" alt="Peca e suas Interfaces" width="800" />
 
 Interface que lida com as mecânicas de ataque entre peças
 Método | Objetivo
@@ -193,6 +209,17 @@ Autores | Leonardo Reis e João Vitor
 Objetivo | Lidar com as transferências de itens entre uma PecaBau e uma PecaMedico 
 Interface | `<interface em Java do componente>`
 
+* **Interface IGuardaCha**
+<img src="./assets/interface-guarda-cha.png" alt="Peca e suas Interfaces" width="800" />
+
+Campo | Valor
+----- | -----
+Classe | `<caminho completo da classe com pacotes>`
+Autores | Leonardo Reis e João Vitor
+Objetivo | Guardar o Chá dentro de uma PecaBau
+Interface | `<interface em Java do componente>`
+
+
 ### Detalhamento de Interfaces
 * **Interface ITransferir**
 
@@ -200,3 +227,48 @@ Interface que lida com as transferências de itens entre uma PecaBau e uma PecaM
 Método | Objetivo
 ------ | --------
 `transferirItens` | Recebe a PecaMedico como parâmetro e executa a transferência dos itens contidos na PecaBau para a PecaMedico. Retorna void
+
+* **Interface IGuardaCha**
+
+Interface que guarda o chá em uma PecaBau
+Método | Objetivo
+------ | --------
+`verificarBau` | Guarda o PecaCha dentro do PecaBau correspondente. Retorna void
+
+## Componente PecaCha
+
+### Interfaces
+* **Interface IGuardaCha**
+<img src="./assets/interface-guarda-cha.png" alt="Peca e suas Interfaces" width="800" />
+
+Campo | Valor
+----- | -----
+Classe | `<caminho completo da classe com pacotes>`
+Autores | Leonardo Reis e João Vitor
+Objetivo | Guardar o Chá dentro de uma PecaBau
+Interface | `<interface em Java do componente>`
+
+* **Interface ICriaCha**
+<img src="./assets/interface-cria-cha.png" alt="Peca e suas Interfaces" width="800" />
+
+Campo | Valor
+----- | -----
+Classe | `<caminho completo da classe com pacotes>`
+Autores | Leonardo Reis e João Vitor
+Objetivo | Guardar o Chá dentro de uma PecaBau
+Interface | `<interface em Java do componente>`
+
+### Detalhamento de Interfaces
+* **Interface IGuardaCha**
+
+Interface que guarda o chá em uma PecaBau
+Método | Objetivo
+------ | --------
+`verificarBau` | Verifica se o Chá está dentro de uma PecaBau (mesma célula), caso esteja na mesma célula chama a PecaBau para guardá-lo neste. Retorna void.
+
+* **Interface ICriaCha**
+
+Interface que cria o PecaCha no Tabuleiro
+Método | Objetivo
+------ | --------
+`criaCha` | Cria a PecaCha no jogo, que deve ser única. Retorna void
