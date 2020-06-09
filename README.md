@@ -135,7 +135,7 @@ Método | Objetivo
 Interface que cria o PecaCha no Tabuleiro
 Método | Objetivo
 ------ | --------
-`criaCha` | Recebe o próprio Tabuddrifica se o número mínimo de rodadas da partida já foi atingido e tenta criar o chá. Retorna void
+`criaCha` | Recebe o próprio Tabuleiro e verifica se o número mínimo de rodadas da partida já foi atingido e tenta criar o chá. Retorna void
 
 ## Componente PecasMoveis
 
@@ -271,4 +271,4 @@ Método | Objetivo
 Interface que cria o PecaCha no Tabuleiro
 Método | Objetivo
 ------ | --------
-`criaCha` | Cria a PecaCha no jogo, que deve ser única. Retorna void
+`criaCha` | Recebe o próprio Tabuleiro e cria a PecaCha no jogo, que deve ser única. Retorna void
