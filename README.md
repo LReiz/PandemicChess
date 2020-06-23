@@ -224,3 +224,17 @@ Interface que cria o PecaCha no Tabuleiro
 Método | Objetivo
 ------ | --------
 `criaCha` | Recebe o Tabuleiro e cria a PecaCha no jogo, que deve ser única. Retorna void
+
+## Modelo do Plano de Exceções
+
+### Diagrama da hierarquia de exceções
+
+### Descrição das classes de exceção
+
+Classe | Descrição 
+------ | ---------
+ErroMovimento | Engloba todos os erros relacionados ao movimento de pecas
+ForaDeAlcance | Esse erro ocorre quando o jogador tenta se mover para fora do tabuleiro
+NaoVazio | Esse erro ocorre quando o jogador tenta se mover para uma casa não-vazia do tabuleiro
+MuitoDistante | Esse erro ocorre quando o jogador tenta se mover quando não é a sua vez
+ForaDoTurno | Esse erro ocorre quando o jogador tenta mover uma peça em mais de uma casa
