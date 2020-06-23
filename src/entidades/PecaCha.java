@@ -1,5 +1,5 @@
 package entidades;
-
-public class PecaCha {
+import interfaces.*;
+public class PecaCha implements ICriaCha, IGuardaCha{
 
 }

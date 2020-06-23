@@ -1,5 +1,5 @@
 package entidades;
-
-public class PecaBau {
+import interfaces.*;
+public class PecaBau implements IGuardaCha, ITransferir{
 
 }

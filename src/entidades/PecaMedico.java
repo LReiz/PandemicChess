@@ -1,5 +1,6 @@
 package entidades;
+import interfaces.*;
 
-public class PecaMedico {
+public class PecaMedico extends PecasMoveis implements ITransferir{
 
 }

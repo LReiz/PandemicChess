@@ -1,5 +1,6 @@
 package entidades;
+import interfaces.*;
 
-public class PecasMoveis {
+public abstract class PecasMoveis implements IAtaque, IMovimento{
 
 }

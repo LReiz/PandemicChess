@@ -1,5 +1,6 @@
 package tabuleiro;
+import interfaces.*;
 
-public class Tabuleiro {
+public class Tabuleiro implements IMovimento, ICriaCha {
 
 }

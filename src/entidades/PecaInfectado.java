@@ -1,5 +1,5 @@
 package entidades;
 
-public class PecaInfectado {
+public class PecaInfectado extends PecasMoveis {
 
 }
