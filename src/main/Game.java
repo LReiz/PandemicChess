@@ -9,8 +9,6 @@ import java.awt.image.BufferedImage;
 
 import javax.swing.JFrame;
 
-import com.sun.prism.Graphics;
-import com.sun.prism.paint.Color;
 
 public class Game extends Canvas implements KeyListener, Runnable {
 
