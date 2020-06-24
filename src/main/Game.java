@@ -1,7 +1,9 @@
 package main;
 
 import java.awt.Canvas;
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferStrategy;
@@ -52,7 +54,15 @@ public class Game extends Canvas implements KeyListener, Runnable {
 			return;
 		}
 		
+		Graphics g = mainImage.getGraphics();
+		g.setColor(Color.BLACK);
+		g.fillRect(0, 0, WIDTH, HEIGHT);
+	
+		g.dispose();
+		g = bs.getDrawGraphics();
+		g.drawImage(mainImage, 0, 0, WIDTH*SCALE, HEIGHT*SCALE, null);
 		
+		bs.show();
 	}
 	
 	private void initFrame() {
