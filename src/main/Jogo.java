@@ -11,6 +11,9 @@ import java.awt.image.BufferedImage;
 
 import javax.swing.JFrame;
 
+import graficos.Spritesheet;
+import tabuleiro.Tabuleiro;
+
 
 public class Jogo extends Canvas implements KeyListener, Runnable {
 
@@ -18,21 +21,30 @@ public class Jogo extends Canvas implements KeyListener, Runnable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1623940135482728576L;
-
-	public int DC = 16;		// dimensões da célula (16 x 16)
 	
-	private Thread thread;
+	// Estados do Jogo
 	public boolean jogoRodando = true;
 	
+	// Ferramentas
+	private Thread thread;
+	public static Spritesheet spritesheet;
 	private BufferedImage imagemPrincipal;
 	
-	private int LARGURA = DC*20;
-	private int ALTURA = DC*20;
-	private int ESCALA = 2;
+	// Constantes de Configuração
+	public static int LARGURA = Tabuleiro.DC*20;
+	public static int ALTURA = Tabuleiro.DC*20;
+	public static int ESCALA = 2;
+	
+	// Componentes
+	private Tabuleiro tabuleiro;
 	
 	// inicia o jogo
 	private Jogo() {
 		imagemPrincipal = new BufferedImage(LARGURA, ALTURA, BufferedImage.TYPE_INT_RGB);
+		spritesheet = new Spritesheet("/spritesheet.png");
+		
+		tabuleiro = new Tabuleiro("/mapa1.png");
+		
 		this.setPreferredSize(new Dimension(LARGURA*ESCALA, ALTURA*ESCALA));
 		addKeyListener(this);
 		iniciarFrame();
