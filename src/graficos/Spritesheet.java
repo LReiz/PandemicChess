@@ -10,17 +10,17 @@ public class Spritesheet {
 
 	BufferedImage spritesheet;
 	
-	public Spritesheet(String path) {
+	public Spritesheet(String endereco) {
 	
 			try {
-				spritesheet = ImageIO.read(getClass().getResource(path));
+				spritesheet = ImageIO.read(getClass().getResource(endereco));
 			} catch (IOException e) {
 				e.printStackTrace();
 			}			
 	}
 	
-	public BufferedImage getSprite(int x, int y, int width, int height) {
-		return (spritesheet.getSubimage(x, y, width, height));
+	public BufferedImage getSprite(int x, int y, int largura, int altura) {
+		return (spritesheet.getSubimage(x, y, largura, altura));
 	}
 	
 }

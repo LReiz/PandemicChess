@@ -12,60 +12,63 @@ import java.awt.image.BufferedImage;
 import javax.swing.JFrame;
 
 
-public class Game extends Canvas implements KeyListener, Runnable {
+public class Jogo extends Canvas implements KeyListener, Runnable {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1623940135482728576L;
 
-	public int TS = 16;
+	public int DC = 16;		// dimensões da célula (16 x 16)
 	
 	private Thread thread;
-	public boolean isRunning = true;
+	public boolean jogoRodando = true;
 	
-	private BufferedImage mainImage;
+	private BufferedImage imagemPrincipal;
 	
-	private int WIDTH = TS*20;
-	private int HEIGHT = TS*20;
-	private int SCALE = 2;
+	private int LARGURA = DC*20;
+	private int ALTURA = DC*20;
+	private int ESCALA = 2;
 	
-	private Game() {
-		mainImage = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
-		this.setPreferredSize(new Dimension(WIDTH*SCALE, HEIGHT*SCALE));
+	// inicia o jogo
+	private Jogo() {
+		imagemPrincipal = new BufferedImage(LARGURA, ALTURA, BufferedImage.TYPE_INT_RGB);
+		this.setPreferredSize(new Dimension(LARGURA*ESCALA, ALTURA*ESCALA));
 		addKeyListener(this);
-		initFrame();
+		iniciarFrame();
 	}
 	
 	public static void main(String args[]) {
-		Game game = new Game();
-		game.start();
-		game.stop();
+		Jogo jogo = new Jogo();
+		jogo.start();
+		jogo.stop();
 	}
 	
-	public void tick() {
+	// atualiza informações do jogo
+	public void att() {
 		
 	}
 	
-	public void render() {
+	// renderiza gráficos
+	public void renderizar() {
 		BufferStrategy bs = this.getBufferStrategy();
 		if(bs == null) {
 			this.createBufferStrategy(6);
 			return;
 		}
 		
-		Graphics g = mainImage.getGraphics();
+		Graphics g = imagemPrincipal.getGraphics();
 		g.setColor(Color.BLACK);
-		g.fillRect(0, 0, WIDTH, HEIGHT);
+		g.fillRect(0, 0, LARGURA, ALTURA);
 	
 		g.dispose();
 		g = bs.getDrawGraphics();
-		g.drawImage(mainImage, 0, 0, WIDTH*SCALE, HEIGHT*SCALE, null);
+		g.drawImage(imagemPrincipal, 0, 0, LARGURA*ESCALA, ALTURA*ESCALA, null);
 		
 		bs.show();
 	}
 	
-	private void initFrame() {
+	private void iniciarFrame() {
 		JFrame frame = new JFrame("PandemicChess");
 		frame.add(this);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -76,15 +79,15 @@ public class Game extends Canvas implements KeyListener, Runnable {
 	}
 	
 	private synchronized void start() {
-		if(isRunning)
+		if(jogoRodando)
 			return;
-		isRunning = true;
+		jogoRodando = true;
 		thread = new Thread(this);
 		thread.start();
 	}
 	
 	private synchronized void stop() {
-		if(!isRunning)
+		if(!jogoRodando)
 			return;
 		try {
 			thread.join();
@@ -96,30 +99,30 @@ public class Game extends Canvas implements KeyListener, Runnable {
 	@Override
 	public void run() {
 		requestFocus();
-		// Game FPS control	
+		// Controle de FPS do Jogo	
 		int fps = 60;
 		double ns = 1000000000/fps;
 		double delta = 0;
-		long pastNano = System.nanoTime();
-		long currentNano;
+		long nanoAnterior = System.nanoTime();
+		long nanoAtual;
 		
-		int numOfFrames = 0;
-		long pastSec = System.currentTimeMillis();
+		int numDeFrames = 0;
+		long segPassado = System.currentTimeMillis();
 		
-		while(isRunning) {
-			currentNano = System.nanoTime();
-			delta += (currentNano - pastNano)/ns;
-			pastNano = currentNano;
+		while(jogoRodando) {
+			nanoAtual = System.nanoTime();
+			delta += (nanoAtual - nanoAnterior)/ns;
+			nanoAnterior = nanoAtual;
 			if(delta >= 1) {
-				tick();
-				render();
-				numOfFrames++;
+				att();
+				renderizar();
+				numDeFrames++;
 				delta--;
 			}
-			if(System.currentTimeMillis() - pastSec >= 1000) {
-				System.out.println("FPS: " + numOfFrames);
-				numOfFrames = 0;
-				pastSec += 1000;
+			if(System.currentTimeMillis() - segPassado >= 1000) {
+				System.out.println("FPS: " + numDeFrames);
+				numDeFrames = 0;
+				segPassado += 1000;
 			}
 		}
 		
