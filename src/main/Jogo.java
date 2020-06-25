@@ -8,6 +8,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
+import java.util.Random;
 
 import javax.swing.JFrame;
 
@@ -29,6 +30,7 @@ public class Jogo extends Canvas implements KeyListener, Runnable {
 	private Thread thread;
 	public static Spritesheet spritesheet;
 	private BufferedImage imagemPrincipal;
+	public static Random rand = new Random();
 	
 	// Constantes de Configuração
 	public static int LARGURA = Tabuleiro.DC*20;
@@ -76,6 +78,13 @@ public class Jogo extends Canvas implements KeyListener, Runnable {
 		for(int yy = 0; yy < tabuleiro.alturaMapa; yy++) {
 			for(int xx = 0; xx < tabuleiro.larguraMapa; xx++) {
 				this.tabuleiro.vetorCelulas[yy][xx].renderizar(g);
+			}
+		}
+		
+		for(int yy = 0; yy < tabuleiro.alturaMapa; yy++) {
+			for(int xx = 0; xx < tabuleiro.larguraMapa; xx++) {
+				if(this.tabuleiro.vetorPecasMoveis[yy][xx] != null)
+					this.tabuleiro.vetorPecasMoveis[yy][xx].renderizar(g);
 			}
 		}
 		
