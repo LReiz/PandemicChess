@@ -20,6 +20,7 @@ public class Celulas {
 	public static BufferedImage CELULA_PAREDE_HOSPITAL4 = Jogo.spritesheet.getSprite(4*Tabuleiro.DC, 9*Tabuleiro.DC, Tabuleiro.DC, Tabuleiro.DC);
 	
 	public Celulas(int x, int y, BufferedImage sprite) {
+		this.pos = new int[2];
 		this.pos[0] = y;
 		this.pos[1] = x;
 		this.sprite = sprite;

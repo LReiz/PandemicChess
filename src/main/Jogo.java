@@ -23,7 +23,7 @@ public class Jogo extends Canvas implements KeyListener, Runnable {
 	private static final long serialVersionUID = 1623940135482728576L;
 	
 	// Estados do Jogo
-	public boolean jogoRodando = true;
+	public boolean jogoRodando = false;
 	
 	// Ferramentas
 	private Thread thread;
@@ -33,7 +33,7 @@ public class Jogo extends Canvas implements KeyListener, Runnable {
 	// Constantes de Configuração
 	public static int LARGURA = Tabuleiro.DC*20;
 	public static int ALTURA = Tabuleiro.DC*20;
-	public static int ESCALA = 2;
+	public static int ESCALA = 3;
 	
 	// Componentes
 	private Tabuleiro tabuleiro;
@@ -73,6 +73,12 @@ public class Jogo extends Canvas implements KeyListener, Runnable {
 		g.setColor(Color.BLACK);
 		g.fillRect(0, 0, LARGURA, ALTURA);
 	
+		for(int yy = 0; yy < tabuleiro.alturaMapa; yy++) {
+			for(int xx = 0; xx < tabuleiro.larguraMapa; xx++) {
+				this.tabuleiro.vetorCelulas[yy][xx].renderizar(g);
+			}
+		}
+		
 		g.dispose();
 		g = bs.getDrawGraphics();
 		g.drawImage(imagemPrincipal, 0, 0, LARGURA*ESCALA, ALTURA*ESCALA, null);
