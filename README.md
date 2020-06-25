@@ -35,7 +35,7 @@ Dois jogadores competem com seus times pela vitória, cada um com seu objetivo. 
 ![Diagrama Geral](./assets/diagrama-componentes.png)
 
 ## Componente Tabuleiro
-<img src="./assets/componente-tabuleiro.png" alt="componente-tabuleiro" width="400" />
+<img src="./assets/componente-tabuleiro.png" alt="componente-tabuleiro" width="600" />
 
 ### Interfaces
 <img src="./assets/interface-movimento.png" alt="interface-movimento" width="800" />
