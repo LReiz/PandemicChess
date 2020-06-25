@@ -1,5 +1,7 @@
 package interfaces;
 
-public interface IGuardaCha {
+import tabuleiro.Tabuleiro;
 
+public interface IGuardaCha {
+	public void verificarBau(Tabuleiro tab);
 }

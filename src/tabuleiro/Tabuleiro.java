@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+import entidades.PecaBau;
 import entidades.PecaInfectado;
 import entidades.PecaMedico;
 import entidades.PecasMoveis;
@@ -20,6 +21,7 @@ public class Tabuleiro implements IMovimento, ICriaCha {
 	
 	// Vetores dos elementos do mapa
 	public PecasMoveis vetorPecasMoveis[][];
+	public PecaBau vetorBaus[][];
 	public Celulas vetorCelulas[][];
 	
 	// Controle da quantidade de Peças no mapa
