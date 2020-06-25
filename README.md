@@ -35,7 +35,7 @@ Dois jogadores competem com seus times pela vitória, cada um com seu objetivo. 
 ![Diagrama Geral](./assets/diagrama-componentes.png)
 
 ## Componente Tabuleiro
-<img src="./assets/componente-tabuleiro.png" alt="componente-tabuleiro" width="800" />
+<img src="./assets/componente-tabuleiro.png" alt="componente-tabuleiro" width="400" />
 
 ### Interfaces
 <img src="./assets/interface-movimento.png" alt="interface-movimento" width="800" />
@@ -85,9 +85,9 @@ Método | Objetivo
 `criaCha` | Recebe o próprio Tabuleiro e verifica se o número mínimo de rodadas da partida já foi atingido e tenta criar o chá. Retorna void
 
 ## Componente PecasMoveis
-<img src="./assets/componente-peca-infectado.png" alt="componente-peca-infectado" width="800" />
+<img src="./assets/componente-peca-infectado.png" alt="componente-peca-infectado" width="400" />
 
-<img src="./assets/componente-peca-medico.png" alt="componente-peca-medico" width="800" />
+<img src="./assets/componente-peca-medico.png" alt="componente-peca-medico" width="400" />
 
 ### Interfaces
 <img src="./assets/interface-movimento.png" alt="interface-movimento" width="800" />
@@ -125,7 +125,7 @@ Método | Objetivo
 `atacar` | Recebe a peça como parametro, verifica se ela é diferente de null e inimiga, caso passe pelas condições chama o Tabuleiro para que este execute o ataque à peça inimiga. Retorna void
 
 ## Componente PecaMedico
-<img src="./assets/componente-peca-medico.png" alt="componente-peca-medico" width="800" />
+<img src="./assets/componente-peca-medico.png" alt="componente-peca-medico" width="400" />
 
 ### Interfaces
 * **Interface ITransferir**
@@ -152,7 +152,7 @@ Método | Objetivo
 `transferirItens` | Recebe a própria PecaMedico como parâmetro e verifica os PecaBau próximos. Caso encontre um PecaBau suficientemente próximo chama este para executar a transferêcia de itens. Retorna void
 
 ## Componente PecaBau
-<img src="./assets/componente-peca-bau.png" alt="componente-peca-bau" width="800" />
+<img src="./assets/componente-peca-bau.png" alt="componente-peca-bau" width="400" />
 
 ### Interfaces
 <img src="./assets/interface-transferir.png" alt="interface-transferir" width="800" />
@@ -188,7 +188,7 @@ Método | Objetivo
 `verificarBau` | Guarda o PecaCha dentro do PecaBau correspondente. Retorna void
 
 ## Componente PecaCha
-<img src="./assets/componente-peca-cha.png" alt="componente-peca-cha" width="800" />
+<img src="./assets/componente-peca-cha.png" alt="componente-peca-cha" width="400" />
 
 ### Interfaces
 <img src="./assets/interface-guarda-cha.png" alt="interface-guarda-cha" width="800" />
@@ -224,3 +224,19 @@ Interface que cria o PecaCha no Tabuleiro
 Método | Objetivo
 ------ | --------
 `criaCha` | Recebe o Tabuleiro e cria a PecaCha no jogo, que deve ser única. Retorna void
+
+## Modelo do Plano de Exceções
+
+### Diagrama da hierarquia de exceções
+
+<img src="./assets/classes-erros-movimento.png" alt="interface-cria-cha" width="800" />
+
+### Descrição das classes de exceção
+
+Classe | Descrição 
+------ | ---------
+ErroMovimento | Engloba todos os erros relacionados ao movimento de pecas
+ForaDeAlcance | Esse erro ocorre quando o jogador tenta se mover para fora do tabuleiro
+NaoVazio | Esse erro ocorre quando o jogador tenta se mover para uma casa não-vazia do tabuleiro
+MuitoDistante | Esse erro ocorre quando o jogador tenta se mover quando não é a sua vez
+ForaDoTurno | Esse erro ocorre quando o jogador tenta mover uma peça em mais de uma casa
