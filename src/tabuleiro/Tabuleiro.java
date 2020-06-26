@@ -75,7 +75,6 @@ public class Tabuleiro implements IMovimento, ICriaCha {
 				} else if(pixelsHexCelulas[xx + yy*larguraMapa] == 0xFFC9C9CC) {
 					this.vetorCelulas[yy][xx] = new ParedeHospital(xx*DC, yy*DC, Celulas.CELULA_PAREDE_HOSPITAL4);
 				} else {
-					System.out.println(xx+yy*larguraMapa + " " + pixelsHexCelulas[xx + yy*larguraMapa] + " " + 0x635F89FF);
 					this.vetorCelulas[yy][xx] = new ChaoRoxo(xx*DC, yy*DC, Celulas.CELULA_CHAO_ROXO);
 				}
 			}
@@ -153,7 +152,6 @@ public class Tabuleiro implements IMovimento, ICriaCha {
 	}
 	
 	public static void trocarVez() {
-		System.out.println(vezJogador);
 		if(vezJogador == 1)
 			vezJogador = 2;		// infectados
 		else if(vezJogador == 2)

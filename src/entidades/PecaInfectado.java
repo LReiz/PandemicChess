@@ -16,6 +16,21 @@ public class PecaInfectado extends PecasMoveis {
 	
 	public PecaInfectado(int x, int y, BufferedImage sprite) {
 		super(x, y, sprite);
+		animacaoEsquerda = new BufferedImage[3];
+		for(int i = 0; i < 3; i++)
+			animacaoEsquerda[i] = Jogo.spritesheet.getSprite(i*Tabuleiro.DC, 7*Tabuleiro.DC, Tabuleiro.DC, Tabuleiro.DC);
+		
+		animacaoDireita = new BufferedImage[3];
+		for(int i = 0; i < 3; i++)
+			animacaoDireita[i] = Jogo.spritesheet.getSprite(i*Tabuleiro.DC, 6*Tabuleiro.DC, Tabuleiro.DC, Tabuleiro.DC);
+		
+		animacaoCima = new BufferedImage[3];
+		for(int i = 0; i < 3; i++)
+			animacaoCima[i] = Jogo.spritesheet.getSprite(i*Tabuleiro.DC, 5*Tabuleiro.DC, Tabuleiro.DC, Tabuleiro.DC);
+		
+		animacaoBaixo = new BufferedImage[3];
+		for(int i = 0; i < 3; i++)
+			animacaoBaixo[i] = Jogo.spritesheet.getSprite(i*Tabuleiro.DC, 4*Tabuleiro.DC, Tabuleiro.DC, Tabuleiro.DC);
 
 	}
 	
@@ -30,5 +45,6 @@ public class PecaInfectado extends PecasMoveis {
 			}
 		}
 	}
+	
 
 }

@@ -14,10 +14,19 @@ public abstract class PecasMoveis implements IAtaque, IMovimento {
 
 	// Atributos individuais de peças
 	public int pos[];
+	public int dir;					// 0: esquerda; 1: direita; 2: cima; 3: baixo
 	public double speed = 1;
 	public boolean movendo = false;
 	
-//	private 
+	// Animação das Peças Móveis
+	private int maxAnimacoes = 2;
+	private int atualAnimacao = 0;
+	private int maxFramesAnimacao = 4;			// determina a velocidade da animação
+	private int atualFramesAnimacao = 0;
+	protected BufferedImage animacaoEsquerda[];
+	protected BufferedImage animacaoDireita[];
+	protected BufferedImage animacaoCima[];
+	protected BufferedImage animacaoBaixo[];
 	
 	// Atributos para movimentação do time dos médicos
 	public static boolean medicoSelecionado = false;
@@ -51,7 +60,32 @@ public abstract class PecasMoveis implements IAtaque, IMovimento {
 	}
 	
 	public void renderizar(Graphics g) {
-		g.drawImage(this.sprite, pos[1], pos[0], Tabuleiro.DC, Tabuleiro.DC, null);
+		if(movendo) {
+			atualFramesAnimacao++;
+			if(atualFramesAnimacao >= maxFramesAnimacao) {
+				atualAnimacao++;
+				atualFramesAnimacao = 0;
+				if(atualAnimacao >= maxAnimacoes)
+					atualAnimacao = 0;
+			}
+			
+			if(dir == 0) {
+				g.drawImage(this.animacaoEsquerda[atualAnimacao+1], pos[1], pos[0], Tabuleiro.DC, Tabuleiro.DC, null);
+				sprite = animacaoEsquerda[0];
+			} else if(dir == 1) {
+				g.drawImage(this.animacaoDireita[atualAnimacao+1], pos[1], pos[0], Tabuleiro.DC, Tabuleiro.DC, null);
+				sprite = animacaoDireita[0];
+			} else if(dir == 2) {
+				g.drawImage(this.animacaoCima[atualAnimacao+1], pos[1], pos[0], Tabuleiro.DC, Tabuleiro.DC, null);
+				sprite = animacaoCima[0];
+			} else if(dir == 3) {
+				g.drawImage(this.animacaoBaixo[atualAnimacao+1], pos[1], pos[0], Tabuleiro.DC, Tabuleiro.DC, null);
+				sprite = animacaoBaixo[0];
+			}
+			
+		} else {
+			g.drawImage(this.sprite, pos[1], pos[0], Tabuleiro.DC, Tabuleiro.DC, null);			
+		}
 	}
 	
 	public static PecasMoveis mudarSelecaoDePeca(List<PecasMoveis> vetorPecas, int jogador, int dir) {
@@ -90,8 +124,6 @@ public abstract class PecasMoveis implements IAtaque, IMovimento {
 		if(x_final == pos[1] && y_final == pos[0])
 			return false;
 		
-		System.out.println(PecasMoveis.proxPosicaoMedicoX);
-		System.out.println(PecasMoveis.proxPosicaoMedicoY);
 		if(tab.movimento(x_final, y_final, peca, tab)) {
 			// execução do movimento
 			if(x_dir < 0) {
@@ -103,7 +135,6 @@ public abstract class PecasMoveis implements IAtaque, IMovimento {
 				return true;
 			} else if(x_dir > 0) {
 				pos[1] += speed;
-				System.out.println(pos[1] + "g" + speed);
 				if(pos[1] >= x_final) {
 					pos[1] = x_final;
 					return false;

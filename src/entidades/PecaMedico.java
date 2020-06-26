@@ -19,7 +19,39 @@ public class PecaMedico extends PecasMoveis implements ITransferir{
 
 	public PecaMedico(int x, int y, BufferedImage sprite) {
 		super(x, y, sprite);
-
+		if(sprite == PECA_MEDICO_B) {
+			animacaoEsquerda = new BufferedImage[3];
+			for(int i = 0; i < 3; i++)
+				animacaoEsquerda[i] = Jogo.spritesheet.getSprite(i*Tabuleiro.DC, 3*Tabuleiro.DC, Tabuleiro.DC, Tabuleiro.DC);
+			
+			animacaoDireita = new BufferedImage[3];
+			for(int i = 0; i < 3; i++)
+				animacaoDireita[i] = Jogo.spritesheet.getSprite(i*Tabuleiro.DC, 2*Tabuleiro.DC, Tabuleiro.DC, Tabuleiro.DC);
+			
+			animacaoCima = new BufferedImage[3];
+			for(int i = 0; i < 3; i++)
+				animacaoCima[i] = Jogo.spritesheet.getSprite(i*Tabuleiro.DC, 1*Tabuleiro.DC, Tabuleiro.DC, Tabuleiro.DC);
+			
+			animacaoBaixo = new BufferedImage[3];
+			for(int i = 0; i < 3; i++)
+				animacaoBaixo[i] = Jogo.spritesheet.getSprite(i*Tabuleiro.DC, 0*Tabuleiro.DC, Tabuleiro.DC, Tabuleiro.DC);
+		} else if(sprite == PECA_MEDICO_P) {
+			animacaoEsquerda = new BufferedImage[3];
+			for(int i = 0; i < 3; i++)
+				animacaoEsquerda[i] = Jogo.spritesheet.getSprite((i+3)*Tabuleiro.DC, 3*Tabuleiro.DC, Tabuleiro.DC, Tabuleiro.DC);
+			
+			animacaoDireita = new BufferedImage[3];
+			for(int i = 0; i < 3; i++)
+				animacaoDireita[i] = Jogo.spritesheet.getSprite((i+3)*Tabuleiro.DC, 2*Tabuleiro.DC, Tabuleiro.DC, Tabuleiro.DC);
+			
+			animacaoCima = new BufferedImage[3];
+			for(int i = 0; i < 3; i++)
+				animacaoCima[i] = Jogo.spritesheet.getSprite((i+3)*Tabuleiro.DC, 1*Tabuleiro.DC, Tabuleiro.DC, Tabuleiro.DC);
+			
+			animacaoBaixo = new BufferedImage[3];
+			for(int i = 0; i < 3; i++)
+				animacaoBaixo[i] = Jogo.spritesheet.getSprite((i+3)*Tabuleiro.DC, 0*Tabuleiro.DC, Tabuleiro.DC, Tabuleiro.DC);
+		}
 	}
 	
 	public void att() throws NaoVazio, ForaDeAlcance, MuitoDistante {

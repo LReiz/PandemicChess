@@ -215,25 +215,28 @@ public class Jogo extends Canvas implements KeyListener, Runnable {
 					PecasMoveis.medicoAtualDirY = 0;
 					PecasMoveis.proxPosicaoMedicoX = PecasMoveis.medicoAtual.pos[1] + (PecasMoveis.medicoAtualDirX*Tabuleiro.DC);
 					PecasMoveis.proxPosicaoMedicoY = PecasMoveis.medicoAtual.pos[0] + (PecasMoveis.medicoAtualDirY*Tabuleiro.DC);
+					PecasMoveis.medicoAtual.dir = 0;
 					PecasMoveis.medicoAtual.movendo = true;
 				} else if(key.getKeyCode() == KeyEvent.VK_L) {
 					PecasMoveis.medicoAtualDirX = 1;
 					PecasMoveis.medicoAtualDirY = 0;
 					PecasMoveis.proxPosicaoMedicoX = PecasMoveis.medicoAtual.pos[1] + (PecasMoveis.medicoAtualDirX*Tabuleiro.DC);
 					PecasMoveis.proxPosicaoMedicoY = PecasMoveis.medicoAtual.pos[0] + (PecasMoveis.medicoAtualDirY*Tabuleiro.DC);
+					PecasMoveis.medicoAtual.dir = 1;
 					PecasMoveis.medicoAtual.movendo = true;
 				} else if(key.getKeyCode() == KeyEvent.VK_I) {
-					System.out.println(PecasMoveis.medicoAtual);
 					PecasMoveis.medicoAtualDirY = -1;
 					PecasMoveis.medicoAtualDirX = 0;
 					PecasMoveis.proxPosicaoMedicoX = PecasMoveis.medicoAtual.pos[1] + (PecasMoveis.medicoAtualDirX*Tabuleiro.DC);
 					PecasMoveis.proxPosicaoMedicoY = PecasMoveis.medicoAtual.pos[0] + (PecasMoveis.medicoAtualDirY*Tabuleiro.DC);
+					PecasMoveis.medicoAtual.dir = 2;
 					PecasMoveis.medicoAtual.movendo = true;
 				} else if(key.getKeyCode() == KeyEvent.VK_K) {
 					PecasMoveis.medicoAtualDirY = 1;
 					PecasMoveis.medicoAtualDirX = 0;
 					PecasMoveis.proxPosicaoMedicoX = PecasMoveis.medicoAtual.pos[1] + (PecasMoveis.medicoAtualDirX*Tabuleiro.DC);
 					PecasMoveis.proxPosicaoMedicoY = PecasMoveis.medicoAtual.pos[0] + (PecasMoveis.medicoAtualDirY*Tabuleiro.DC);
+					PecasMoveis.medicoAtual.dir = 3;
 					PecasMoveis.medicoAtual.movendo = true;
 				}
 			}
@@ -256,24 +259,28 @@ public class Jogo extends Canvas implements KeyListener, Runnable {
 					PecasMoveis.infectadoAtualDirY = 0;
 					PecasMoveis.proxPosicaoInfectadoX = PecasMoveis.infectadoAtual.pos[1] + (PecasMoveis.infectadoAtualDirX*Tabuleiro.DC);
 					PecasMoveis.proxPosicaoInfectadoY = PecasMoveis.infectadoAtual.pos[0] + (PecasMoveis.infectadoAtualDirY*Tabuleiro.DC);
+					PecasMoveis.infectadoAtual.dir = 0;
 					PecasMoveis.infectadoAtual.movendo = true;
 				} else if(key.getKeyCode() == KeyEvent.VK_D) {
 					PecasMoveis.infectadoAtualDirX = 1;
 					PecasMoveis.infectadoAtualDirY = 0;
 					PecasMoveis.proxPosicaoInfectadoX = PecasMoveis.infectadoAtual.pos[1] + (PecasMoveis.infectadoAtualDirX*Tabuleiro.DC);
 					PecasMoveis.proxPosicaoInfectadoY = PecasMoveis.infectadoAtual.pos[0] + (PecasMoveis.infectadoAtualDirY*Tabuleiro.DC);
+					PecasMoveis.infectadoAtual.dir = 1;
 					PecasMoveis.infectadoAtual.movendo = true;
 				} else if(key.getKeyCode() == KeyEvent.VK_W) {
 					PecasMoveis.infectadoAtualDirY = -1;
 					PecasMoveis.infectadoAtualDirX = 0;
 					PecasMoveis.proxPosicaoInfectadoX = PecasMoveis.infectadoAtual.pos[1] + (PecasMoveis.infectadoAtualDirX*Tabuleiro.DC);
 					PecasMoveis.proxPosicaoInfectadoY = PecasMoveis.infectadoAtual.pos[0] + (PecasMoveis.infectadoAtualDirY*Tabuleiro.DC);
+					PecasMoveis.infectadoAtual.dir = 2;
 					PecasMoveis.infectadoAtual.movendo = true;
 				} else if(key.getKeyCode() == KeyEvent.VK_S) {
 					PecasMoveis.infectadoAtualDirY = 1;
 					PecasMoveis.infectadoAtualDirX = 0;
 					PecasMoveis.proxPosicaoInfectadoX = PecasMoveis.infectadoAtual.pos[1] + (PecasMoveis.infectadoAtualDirX*Tabuleiro.DC);
 					PecasMoveis.proxPosicaoInfectadoY = PecasMoveis.infectadoAtual.pos[0] + (PecasMoveis.infectadoAtualDirY*Tabuleiro.DC);
+					PecasMoveis.infectadoAtual.dir = 3;
 					PecasMoveis.infectadoAtual.movendo = true;
 				}
 			}
