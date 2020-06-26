@@ -12,10 +12,14 @@ import tabuleiro.Tabuleiro;
 
 public abstract class PecasMoveis implements IAtaque, IMovimento {
 
+	// Atributos individuais de peças
 	public int pos[];
 	public double speed = 1;
 	public boolean movendo = false;
 	
+//	private 
+	
+	// Atributos para movimentação do time dos médicos
 	public static boolean medicoSelecionado = false;
 	public static PecasMoveis medicoAtual = null;
 	public static int medicoAtualDirX = 0;
@@ -24,6 +28,7 @@ public abstract class PecasMoveis implements IAtaque, IMovimento {
 	public static int proxPosicaoMedicoY = 0;
 	public static int indexMedico = 0;
 	
+	// Atributos para movimentação do time dos infectados
 	public static boolean infectadoSelecionado = false;
 	public static PecasMoveis infectadoAtual = null;
 	public static int infectadoAtualDirX = 0;

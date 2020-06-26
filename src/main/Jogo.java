@@ -38,8 +38,8 @@ public class Jogo extends Canvas implements KeyListener, Runnable {
 	public static Random rand = new Random();
 	
 	// Constantes de Configuração
-	public static int LARGURA = Tabuleiro.DC*20;
-	public static int ALTURA = Tabuleiro.DC*20;
+	public static int LARGURA = Tabuleiro.DC*17;
+	public static int ALTURA = Tabuleiro.DC*17;
 	public static int ESCALA = 3;
 	
 	// Componentes
@@ -107,9 +107,9 @@ public class Jogo extends Canvas implements KeyListener, Runnable {
 		}
 		
 		if(PecasMoveis.medicoSelecionado) {
-			g.setColor(new Color(0xFFFF0000));			// vermelho
+			g.setColor(new Color(0xFFFF0000));			// vermelho (indica que a peça está selecionada)
 		} else {
-			g.setColor(new Color(0xFFFFAA00));			// amarelo
+			g.setColor(new Color(0xFFFFAA00));			// amarelo (indica que a peça não está selecionada ainda)
 		}
 		g.drawRect(entidadesMedicos.get(PecasMoveis.indexMedico).pos[1], entidadesMedicos.get(PecasMoveis.indexMedico).pos[0], Tabuleiro.DC, Tabuleiro.DC);
 		
