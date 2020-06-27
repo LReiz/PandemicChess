@@ -33,12 +33,16 @@ public class Tabuleiro implements IMovimento, ICriaCha {
 	private int numMedicos = 0;
 	private int maxInfectados = 5;
 	private int numInfectados = 0;
+	private int maxBaus = 8;
+	private int numBaus = 0;
 	
 	public Tabuleiro(String endereco) {
-		numMedicos = maxMedicos;
-		numInfectados = maxInfectados;
+		this.numMedicos = this.maxMedicos;
+		this.numInfectados = this.maxInfectados;
+		this.numBaus = this.maxBaus;
 		
 		inicializarMapa(endereco);
+		inicializarPecasParadas();
 		inicializarPecasMoveis();
 		vetorBaus = new PecaBau[Jogo.ALTURA][Jogo.ALTURA];
 	}
@@ -77,6 +81,20 @@ public class Tabuleiro implements IMovimento, ICriaCha {
 				} else {
 					this.vetorCelulas[yy][xx] = new ChaoRoxo(xx*DC, yy*DC, Celulas.CELULA_CHAO_ROXO);
 				}
+			}
+		}
+	}
+	
+	private void inicializarPecasParadas() {
+		vetorBaus = new PecaBau[alturaMapa][larguraMapa];
+		
+		// inicialização dos Baus (metade superior do mapa)
+		int xx = larguraMapa-1;
+		int yy = (int)(alturaMapa/2);
+		while(numBaus > 0) {
+			if(vetorBaus[yy][xx] == null && Jogo.rand.nextInt(100) < 1) {
+				vetorBaus[yy][xx] = new PecaBau(xx*DC, yy*DC, Jogo.rand.nextInt(5), Jogo.rand.nextInt(1));
+				numBaus--;
 			}
 		}
 	}
@@ -156,5 +174,11 @@ public class Tabuleiro implements IMovimento, ICriaCha {
 			vezJogador = 2;		// infectados
 		else if(vezJogador == 2)
 			vezJogador = 1;		// médicos
+	}
+
+	@Override
+	public void criaCha(Tabuleiro tab) {
+		
+		
 	}
 }
