@@ -92,7 +92,6 @@ public class Tabuleiro implements IMovimento, ICriaCha {
 
 		if(pecaCha != null)
 			pecaCha.renderizar(g);
-		else
 		
 		for(int i = 0; i < entidadesMedicos.size(); i++) {
 			entidadesMedicos.get(i).renderizar(g);
