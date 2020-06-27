@@ -10,10 +10,11 @@ import tabuleiro.Tabuleiro;
 
 public class PecaMedico extends PecasMoveis implements ITransferir{
 
+	// sprites dos médicos
 	public static BufferedImage PECA_MEDICO_B = Jogo.spritesheet.getSprite(0*Tabuleiro.DC, 1*Tabuleiro.DC, Tabuleiro.DC, Tabuleiro.DC);
 	public static BufferedImage PECA_MEDICO_P = Jogo.spritesheet.getSprite(3*Tabuleiro.DC, 1*Tabuleiro.DC, Tabuleiro.DC, Tabuleiro.DC);
 	
-	public int mascaras;
+	public int mascaras = 3;
 	public int algemas;
 	public boolean cha;
 
@@ -58,6 +59,7 @@ public class PecaMedico extends PecasMoveis implements ITransferir{
 		if(movendo) {
 			movendo = movimento(PecasMoveis.proxPosicaoMedicoX, PecasMoveis.proxPosicaoMedicoY, this, Jogo.tabuleiro);
 			if(!movendo) {
+				atualizarVetorBau(pos[1] - (Tabuleiro.DC*PecasMoveis.medicoAtualDirX), pos[0] - (Tabuleiro.DC*PecasMoveis.medicoAtualDirY));
 				PecasMoveis.infectadoAtualDirX = 0;
 				PecasMoveis.infectadoAtualDirY = 0;
 				Tabuleiro.trocarVez();

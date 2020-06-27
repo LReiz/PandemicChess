@@ -1,8 +1,9 @@
 package interfaces;
 
+import entidades.PecaCha;
 import tabuleiro.Tabuleiro;
 
 public interface ICriaCha {
 
-	public void criaCha(Tabuleiro tab);
+	public PecaCha criaCha();
 }

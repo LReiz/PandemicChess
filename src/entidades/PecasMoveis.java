@@ -17,6 +17,7 @@ public abstract class PecasMoveis implements IAtaque, IMovimento {
 	public int dir;					// 0: esquerda; 1: direita; 2: cima; 3: baixo
 	public double speed = 1;
 	public boolean movendo = false;
+	private BufferedImage sprite;
 	
 	// Animação das Peças Móveis
 	private int maxAnimacoes = 2;
@@ -46,7 +47,6 @@ public abstract class PecasMoveis implements IAtaque, IMovimento {
 	public static int proxPosicaoInfectadoY = 0;
 	public static int indexInfectado = 0;	
 	
-	private BufferedImage sprite;
 	
 	public PecasMoveis(int x, int y, BufferedImage sprite) {
 		this.pos = new int[2];
@@ -157,5 +157,10 @@ public abstract class PecasMoveis implements IAtaque, IMovimento {
 			}
 		}
 		return false;
+	}
+	
+	protected void atualizarVetorBau(int x_inicial, int y_inicial) {
+		Jogo.tabuleiro.vetorPecasMoveis[(int)(y_inicial/Tabuleiro.DC)][(int)(x_inicial/Tabuleiro.DC)] = null;
+		Jogo.tabuleiro.vetorPecasMoveis[(int)(pos[0]/Tabuleiro.DC)][(int)(pos[1]/Tabuleiro.DC)] = this;
 	}
 }

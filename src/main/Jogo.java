@@ -13,6 +13,7 @@ import java.util.Random;
 
 import javax.swing.JFrame;
 
+import entidades.PecaBau;
 import entidades.PecasMoveis;
 import erros.ForaDeAlcance;
 import erros.MuitoDistante;
@@ -44,19 +45,13 @@ public class Jogo extends Canvas implements KeyListener, Runnable {
 	
 	// Componentes
 	public static Tabuleiro tabuleiro;
-	public static ArrayList<PecasMoveis> entidadesMedicos;
-	public static ArrayList<PecasMoveis> entidadesInfectados;
 	
 	// inicia o jogo
 	private Jogo() {
 		imagemPrincipal = new BufferedImage(LARGURA, ALTURA, BufferedImage.TYPE_INT_RGB);
 		spritesheet = new Spritesheet("/spritesheet.png");
 		
-		entidadesMedicos = new ArrayList<PecasMoveis>();
-		entidadesInfectados = new ArrayList<PecasMoveis>();
 		tabuleiro = new Tabuleiro("/mapa1.png");
-		PecasMoveis.medicoAtual = entidadesMedicos.get(0);
-		PecasMoveis.infectadoAtual = entidadesInfectados.get(0);
 		
 		this.setPreferredSize(new Dimension(LARGURA*ESCALA, ALTURA*ESCALA));
 		addKeyListener(this);
@@ -71,13 +66,7 @@ public class Jogo extends Canvas implements KeyListener, Runnable {
 	
 	// atualiza informações do jogo
 	public void att() throws NaoVazio, ForaDeAlcance, MuitoDistante {
-		for(int i = 0; i < entidadesMedicos.size(); i++) {
-			entidadesMedicos.get(i).att();
-		}
-		
-		for(int i = 0; i < entidadesInfectados.size(); i++) {
-			entidadesInfectados.get(i).att();
-		}
+		tabuleiro.att();
 	}
 	
 	// renderiza gráficos
@@ -93,33 +82,7 @@ public class Jogo extends Canvas implements KeyListener, Runnable {
 		g.fillRect(0, 0, LARGURA, ALTURA);
 	
 		// Renderização dos elementos do tabuleiro
-		for(int yy = 0; yy < tabuleiro.alturaMapa; yy++) {
-			for(int xx = 0; xx < tabuleiro.larguraMapa; xx++) {
-				tabuleiro.vetorCelulas[yy][xx].renderizar(g);
-			}
-		}
-		
-		for(int yy = 0; yy < tabuleiro.alturaMapa; yy++) {
-			for(int xx = 0; xx < tabuleiro.larguraMapa; xx++) {
-				if(tabuleiro.vetorPecasMoveis[yy][xx] != null)
-					tabuleiro.vetorPecasMoveis[yy][xx].renderizar(g);
-			}
-		}
-		
-		if(PecasMoveis.medicoSelecionado) {
-			g.setColor(new Color(0xFFFF0000));			// vermelho (indica que a peça está selecionada)
-		} else {
-			g.setColor(new Color(0xFFFFAA00));			// amarelo (indica que a peça não está selecionada ainda)
-		}
-		g.drawRect(entidadesMedicos.get(PecasMoveis.indexMedico).pos[1], entidadesMedicos.get(PecasMoveis.indexMedico).pos[0], Tabuleiro.DC, Tabuleiro.DC);
-		
-		if(PecasMoveis.infectadoSelecionado) {
-			g.setColor(new Color(0xFFFF0000));			// vermelho
-		} else {
-			g.setColor(new Color(0xFFFFAA00));			// amarelo
-		}
-		g.drawRect(entidadesInfectados.get(PecasMoveis.indexInfectado).pos[1], entidadesInfectados.get(PecasMoveis.indexInfectado).pos[0], Tabuleiro.DC, Tabuleiro.DC);
-		/////
+		tabuleiro.renderizar(g);
 		
 		g.dispose();
 		g = bs.getDrawGraphics();
@@ -203,9 +166,9 @@ public class Jogo extends Canvas implements KeyListener, Runnable {
 				if(key.getKeyCode() == KeyEvent.VK_ENTER) {
 					PecasMoveis.medicoSelecionado = true;
 				} else if(key.getKeyCode() == KeyEvent.VK_J) {
-					PecasMoveis.medicoAtual = PecasMoveis.mudarSelecaoDePeca(entidadesMedicos, 1, -1);			
+					PecasMoveis.medicoAtual = PecasMoveis.mudarSelecaoDePeca(Tabuleiro.entidadesMedicos, 1, -1);			
 				} else if(key.getKeyCode() == KeyEvent.VK_L) {
-					PecasMoveis.medicoAtual = PecasMoveis.mudarSelecaoDePeca(entidadesMedicos, 1, 1);
+					PecasMoveis.medicoAtual = PecasMoveis.mudarSelecaoDePeca(Tabuleiro.entidadesMedicos, 1, 1);
 				}
 			} else if(!PecasMoveis.medicoAtual.movendo){
 				if(key.getKeyCode() == KeyEvent.VK_ENTER) {
@@ -247,9 +210,9 @@ public class Jogo extends Canvas implements KeyListener, Runnable {
 				if(key.getKeyCode() == KeyEvent.VK_R) {
 					PecasMoveis.infectadoSelecionado = true;
 				} else if(key.getKeyCode() == KeyEvent.VK_A) {
-					PecasMoveis.infectadoAtual = PecasMoveis.mudarSelecaoDePeca(entidadesInfectados, 2, -1);			
+					PecasMoveis.infectadoAtual = PecasMoveis.mudarSelecaoDePeca(Tabuleiro.entidadesInfectados, 2, -1);			
 				} else if(key.getKeyCode() == KeyEvent.VK_D) {
-					PecasMoveis.infectadoAtual = PecasMoveis.mudarSelecaoDePeca(entidadesInfectados, 2, 1);
+					PecasMoveis.infectadoAtual = PecasMoveis.mudarSelecaoDePeca(Tabuleiro.entidadesInfectados, 2, 1);
 				}
 			} else if(!PecasMoveis.infectadoAtual.movendo){
 				if(key.getKeyCode() == KeyEvent.VK_R) {
