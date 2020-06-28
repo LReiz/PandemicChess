@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="output" path="bin/default"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8/"/>
+	<classpathentry sourcepath="C:/Users/leore/.gradle/caches/modules-2/files-2.1/com.google.firebase/firebase-admin/6.8.1/fc60c2b65b6c1f3c275681f99e1130dd892bafb/firebase-admin-6.8.1-sources.jar" kind="lib" path="C:/Users/leore/.gradle/caches/modules-2/files-2.1/com.google.firebase/firebase-admin/6.8.1/ffd7e5352421639a249018cc5413b2796009a2e4/firebase-admin-6.8.1.jar">
+		<attributes>
+			<attribute name="gradle_used_by_scope" value="main,test"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry sourcepath="C:/Users/leore/.gradle/caches/modules-2/files-2.1/com.google.api-client/google-api-client-gson/1.25.0/520d2350902ea07d1cd50ad24f66ee392ff3f2a5/google-api-client-gson-1.25.0-sources.jar" kind="lib" path="C:/Users/leore/.gradle/caches/modules-2/files-2.1/com.google.api-client/google-api-client-gson/1.25.0/57c2625fcd249024b931f31f7719826f4b46a538/google-api-client-gson-1.25.0.jar">
+		<attributes>
+			<attribute name="gradle_used_by_scope" value="main,test"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry sourcepath="C:/Users/leore/.gradle/caches/modules-2/files-2.1/com.google.cloud/google-cloud-storage/1.43.0/58943951afaac1ab1454c99cb52b23e464ce69b1/google-cloud-storage-1.43.0-sources.jar" kind="lib" path="C:/Users/leore/.gradle/caches/modules-2/files-2.1/com.google.cloud/google-cloud-storage/1.43.0/6358bbf7a173027274aacc65789dd46c06451539/google-cloud-storage-1.43.0.jar">
+		<attributes>
+			<attribute name="gradle_used_by_scope" value="main,test"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry sourcepath="C:/Users/leore/.gradle/caches/modules-2/files-2.1/com.google.cloud/google-cloud-core-http/1.43.0/806816de57906a94b10668c7828f4316236f33d4/google-cloud-core-http-1.43.0-sources.jar" kind="lib" path="C:/Users/leore/.gradle/caches/modules-2/files-2.1/com.google.cloud/google-cloud-core-http/1.43.0/a81185d18d017f68b14e4f5f1047b4e8f4709632/google-cloud-core-http-1.43.0.jar">
+		<attributes>
+			<attribute name="gradle_used_by_scope" value="main,test"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry sourcepath="C:/Users/leore/.gradle/caches/modules-2/files-2.1/com.google.api-client/google-api-client/1.25.0/f57f84aecde93c4c9fde6b0ced9deee893e6c0/google-api-client-1.25.0-sources.jar" kind="lib" path="C:/Users/leore/.gradle/caches/modules-2/files-2.1/com.google.api-client/google-api-client/1.25.0/e7ff725e89ff5dcbed107be1a24e8102ae2441ee/google-api-client-1.25.0.jar">
+		<attributes>
+			<attribute name="gradle_used_by_scope" value="main,test"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry sourcepath="C:/Users/leore/.gradle/caches/modules-2/files-2.1/com.google.cloud/google-cloud-firestore/0.61.0-beta/be876ef74a6cf3c4fe39092a32f9b70f761df242/google-cloud-firestore-0.61.0-beta-sources.jar" kind="lib" path="C:/Users/leore/.gradle/caches/modules-2/files-2.1/com.google.cloud/google-cloud-firestore/0.61.0-beta/57925e99afbe7a7155523ea6e74cbd7081257c59/google-cloud-firestore-0.61.0-beta.jar">
+		<attributes>
+			<attribute name="gradle_used_by_scope" value="main,test"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry sourcepath="C:/Users/leore/.gradle/caches/modules-2/files-2.1/com.google.cloud/google-cloud-core-grpc/1.43.0/b59f06e9d35293a1367d0516ac4cf136f40c1c1e/google-cloud-core-grpc-1.43.0-sources.jar" kind="lib" path="C:/Users/leore/.gradle/caches/modules-2/files-2.1/com.google.cloud/google-cloud-core-grpc/1.43.0/58b4839ab48c06592f738ddd156ef81ecd19bd84/google-cloud-core-grpc-1.43.0.jar">
+		<attributes>
+			<attribute name="gradle_used_by_scope" value="main,test"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry sourcepath="C:/Users/leore/.gradle/caches/modules-2/files-2.1/com.google.api/gax-grpc/1.30.0/9102e528e2649c37ab72f64b2196825c6451f026/gax-grpc-1.30.0-sources.jar" kind="lib" path="C:/Users/leore/.gradle/caches/modules-2/files-2.1/com.google.api/gax-grpc/1.30.0/ada82a4a0c020807e1c1a674b18658374264e401/gax-grpc-1.30.0.jar">
+		<attributes>
+			<attribute name="gradle_used_by_scope" value="main,test"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry sourcepath="C:/Users/leore/.gradle/caches/modules-2/files-2.1/com.google.cloud/google-cloud-core/1.43.0/2126584b2c5150ae78834afc786d8684186544e3/google-cloud-core-1.43.0-sources.jar" kind="lib" path="C:/Users/leore/.gradle/caches/modules-2/files-2.1/com.google.cloud/google-cloud-core/1.43.0/a28eb94f2410e20ae5b663e943b8465078a4bc02/google-cloud-core-1.43.0.jar">
+		<attributes>
+			<attribute name="gradle_used_by_scope" value="main,test"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry sourcepath="C:/Users/leore/.gradle/caches/modules-2/files-2.1/com.google.api/gax-httpjson/0.47.0/a77c7501cddaf9ba00f5f60a3eed32d044fd7649/gax-httpjson-0.47.0-sources.jar" kind="lib" path="C:/Users/leore/.gradle/caches/modules-2/files-2.1/com.google.api/gax-httpjson/0.47.0/d096f3142eb3adbf877588d1044895d148d9efcb/gax-httpjson-0.47.0.jar">
+		<attributes>
+			<attribute name="gradle_used_by_scope" value="main,test"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry sourcepath="C:/Users/leore/.gradle/caches/modules-2/files-2.1/com.google.api/gax/1.30.0/35d44c10f9f80218236ecf672413abd9f25614b0/gax-1.30.0-sources.jar" kind="lib" path="C:/Users/leore/.gradle/caches/modules-2/files-2.1/com.google.api/gax/1.30.0/58fa2feb11b092be0a6ebe705a28736f12374230/gax-1.30.0.jar">
+		<attributes>
+			<attribute name="gradle_used_by_scope" value="main,test"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry sourcepath="C:/Users/leore/.gradle/caches/modules-2/files-2.1/com.google.auth/google-auth-library-oauth2-http/0.11.0/7b6c76e48114bdca75c1a7105b328b67e1d68c/google-auth-library-oauth2-http-0.11.0-sources.jar" kind="lib" path="C:/Users/leore/.gradle/caches/modules-2/files-2.1/com.google.auth/google-auth-library-oauth2-http/0.11.0/576d6ae74c10e6a0d3f30a97ef59499473b02175/google-auth-library-oauth2-http-0.11.0.jar">
+		<attributes>
+			<attribute name="gradle_used_by_scope" value="main,test"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry sourcepath="C:/Users/leore/.gradle/caches/modules-2/files-2.1/com.google.oauth-client/google-oauth-client/1.25.0/bbcdea68f77ccff826927fe15ec952e8bd305209/google-oauth-client-1.25.0-sources.jar" kind="lib" path="C:/Users/leore/.gradle/caches/modules-2/files-2.1/com.google.oauth-client/google-oauth-client/1.25.0/c9ee14e8b095b4b301b28d57755cc482b8d6f39f/google-oauth-client-1.25.0.jar">
+		<attributes>
+			<attribute name="gradle_used_by_scope" value="main,test"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry sourcepath="C:/Users/leore/.gradle/caches/modules-2/files-2.1/com.google.http-client/google-http-client-jackson2/1.25.0/1a954308ce312da7be014d807506f9f3d734e3e3/google-http-client-jackson2-1.25.0-sources.jar" kind="lib" path="C:/Users/leore/.gradle/caches/modules-2/files-2.1/com.google.http-client/google-http-client-jackson2/1.25.0/7c5c89bd4d0d34d9f1cb3396e8da6233e5074b5c/google-http-client-jackson2-1.25.0.jar">
+		<attributes>
+			<attribute name="gradle_used_by_scope" value="main,test"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry sourcepath="C:/Users/leore/.gradle/caches/modules-2/files-2.1/com.google.http-client/google-http-client-gson/1.25.0/63b4a2a17396e6002069d12372499932d5f749df/google-http-client-gson-1.25.0-sources.jar" kind="lib" path="C:/Users/leore/.gradle/caches/modules-2/files-2.1/com.google.http-client/google-http-client-gson/1.25.0/b73df76fb315b1cc8be1a26240954bde40c26109/google-http-client-gson-1.25.0.jar">
+		<attributes>
+			<attribute name="gradle_used_by_scope" value="main,test"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry sourcepath="C:/Users/leore/.gradle/caches/modules-2/files-2.1/com.google.http-client/google-http-client-appengine/1.24.1/3296da51896a946417bd582227cbfaa4442f10d7/google-http-client-appengine-1.24.1-sources.jar" kind="lib" path="C:/Users/leore/.gradle/caches/modules-2/files-2.1/com.google.http-client/google-http-client-appengine/1.24.1/8535031ae10bf6a196e68f25e10c0d6382699cb6/google-http-client-appengine-1.24.1.jar">
+		<attributes>
+			<attribute name="gradle_used_by_scope" value="main,test"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry sourcepath="C:/Users/leore/.gradle/caches/modules-2/files-2.1/com.google.http-client/google-http-client-jackson/1.24.1/13c74c544e5d390ee19a3c535392ce8544538371/google-http-client-jackson-1.24.1-sources.jar" kind="lib" path="C:/Users/leore/.gradle/caches/modules-2/files-2.1/com.google.http-client/google-http-client-jackson/1.24.1/2c88e77c14effdda76f02a0eac968de74e0bd4e/google-http-client-jackson-1.24.1.jar">
+		<attributes>
+			<attribute name="gradle_used_by_scope" value="main,test"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry sourcepath="C:/Users/leore/.gradle/caches/modules-2/files-2.1/com.google.http-client/google-http-client/1.25.0/d3d62cbe331fa1d450f3668fb1dc9439b5d932ce/google-http-client-1.25.0-sources.jar" kind="lib" path="C:/Users/leore/.gradle/caches/modules-2/files-2.1/com.google.http-client/google-http-client/1.25.0/5fb16523c393bfe0210c29db44742bd308311841/google-http-client-1.25.0.jar">
+		<attributes>
+			<attribute name="gradle_used_by_scope" value="main,test"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry sourcepath="C:/Users/leore/.gradle/caches/modules-2/files-2.1/com.google.api.grpc/proto-google-cloud-firestore-v1beta1/0.26.0/fb371a10caeb0dfed8fc61c95bacd392119695b1/proto-google-cloud-firestore-v1beta1-0.26.0-sources.jar" kind="lib" path="C:/Users/leore/.gradle/caches/modules-2/files-2.1/com.google.api.grpc/proto-google-cloud-firestore-v1beta1/0.26.0/69030565c34affbbcee0df2a79e0a9d97692320a/proto-google-cloud-firestore-v1beta1-0.26.0.jar">
+		<attributes>
+			<attribute name="gradle_used_by_scope" value="main,test"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry sourcepath="C:/Users/leore/.gradle/caches/modules-2/files-2.1/com.google.api.grpc/proto-google-iam-v1/0.12.0/13bdeda1d8cbcc01b39152129fa09bfb7ff4c6b0/proto-google-iam-v1-0.12.0-sources.jar" kind="lib" path="C:/Users/leore/.gradle/caches/modules-2/files-2.1/com.google.api.grpc/proto-google-iam-v1/0.12.0/ea312c0250a5d0a7cdd1b20bc2c3259938b79855/proto-google-iam-v1-0.12.0.jar">
+		<attributes>
+			<attribute name="gradle_used_by_scope" value="main,test"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry sourcepath="C:/Users/leore/.gradle/caches/modules-2/files-2.1/com.google.api/api-common/1.7.0/ea3511ae369f8ac676ca35229483c67fee0b0789/api-common-1.7.0-sources.jar" kind="lib" path="C:/Users/leore/.gradle/caches/modules-2/files-2.1/com.google.api/api-common/1.7.0/ea59fb8b2450999345035dec8a6f472543391766/api-common-1.7.0.jar">
+		<attributes>
+			<attribute name="gradle_used_by_scope" value="main,test"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry sourcepath="C:/Users/leore/.gradle/caches/modules-2/files-2.1/io.opencensus/opencensus-contrib-grpc-util/0.15.0/3ddbe1d25eba2fd8e3be0ec62fb5c027d955f865/opencensus-contrib-grpc-util-0.15.0-sources.jar" kind="lib" path="C:/Users/leore/.gradle/caches/modules-2/files-2.1/io.opencensus/opencensus-contrib-grpc-util/0.15.0/bd86852303d3e4610ef44c007a6e3a728d95568f/opencensus-contrib-grpc-util-0.15.0.jar">
+		<attributes>
+			<attribute name="gradle_used_by_scope" value="main,test"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry sourcepath="C:/Users/leore/.gradle/caches/modules-2/files-2.1/io.opencensus/opencensus-contrib-http-util/0.15.0/d0146ecf3da4d2dba710d8051b383659e2cfccba/opencensus-contrib-http-util-0.15.0-sources.jar" kind="lib" path="C:/Users/leore/.gradle/caches/modules-2/files-2.1/io.opencensus/opencensus-contrib-http-util/0.15.0/d88690591669d9b5ba6d91d9eac7736e58ccf3da/opencensus-contrib-http-util-0.15.0.jar">
+		<attributes>
+			<attribute name="gradle_used_by_scope" value="main,test"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry sourcepath="C:/Users/leore/.gradle/caches/modules-2/files-2.1/io.grpc/grpc-stub/1.13.1/cce5bfb7fbc7fa579ed4056315e2383ac5b661da/grpc-stub-1.13.1-sources.jar" kind="lib" path="C:/Users/leore/.gradle/caches/modules-2/files-2.1/io.grpc/grpc-stub/1.13.1/2fc6e85e459ac522a3d81a78add8b6695f7525f1/grpc-stub-1.13.1.jar">
+		<attributes>
+			<attribute name="gradle_used_by_scope" value="main,test"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry sourcepath="C:/Users/leore/.gradle/caches/modules-2/files-2.1/io.grpc/grpc-auth/1.13.1/e2dc3f66d63bd3711b7cb04aacb7ea1fdac069d9/grpc-auth-1.13.1-sources.jar" kind="lib" path="C:/Users/leore/.gradle/caches/modules-2/files-2.1/io.grpc/grpc-auth/1.13.1/96327e5774b7e0ed7f47043af9ff4fbc7f00f36/grpc-auth-1.13.1.jar">
+		<attributes>
+			<attribute name="gradle_used_by_scope" value="main,test"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry sourcepath="C:/Users/leore/.gradle/caches/modules-2/files-2.1/io.grpc/grpc-protobuf/1.13.1/ebfa359cabbfb2dac261c962c15d22954f19d57f/grpc-protobuf-1.13.1-sources.jar" kind="lib" path="C:/Users/leore/.gradle/caches/modules-2/files-2.1/io.grpc/grpc-protobuf/1.13.1/832f531a79249af2d9c1d50168301ba2bc45b54b/grpc-protobuf-1.13.1.jar">
+		<attributes>
+			<attribute name="gradle_used_by_scope" value="main,test"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry sourcepath="C:/Users/leore/.gradle/caches/modules-2/files-2.1/io.grpc/grpc-protobuf-lite/1.13.1/d068893016c622a1ce63be4fe0abbf388d1d7e27/grpc-protobuf-lite-1.13.1-sources.jar" kind="lib" path="C:/Users/leore/.gradle/caches/modules-2/files-2.1/io.grpc/grpc-protobuf-lite/1.13.1/6ca13585100ad99e1c6140a7c8138dd96596aaf5/grpc-protobuf-lite-1.13.1.jar">
+		<attributes>
+			<attribute name="gradle_used_by_scope" value="main,test"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry sourcepath="C:/Users/leore/.gradle/caches/modules-2/files-2.1/io.grpc/grpc-core/1.13.1/cfbf7ba44c7fa2e926a475f8216abc285923ec8/grpc-core-1.13.1-sources.jar" kind="lib" path="C:/Users/leore/.gradle/caches/modules-2/files-2.1/io.grpc/grpc-core/1.13.1/74f5300e1e4d5c2abc0e4fc927d24f4f593c5a7d/grpc-core-1.13.1.jar">
+		<attributes>
+			<attribute name="gradle_used_by_scope" value="main,test"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry sourcepath="C:/Users/leore/.gradle/caches/modules-2/files-2.1/io.opencensus/opencensus-contrib-grpc-metrics/0.12.3/9a7d004b774700837eeebff61230b8662d0e30d1/opencensus-contrib-grpc-metrics-0.12.3-sources.jar" kind="lib" path="C:/Users/leore/.gradle/caches/modules-2/files-2.1/io.opencensus/opencensus-contrib-grpc-metrics/0.12.3/a4c7ff238a91b901c8b459889b6d0d7a9d889b4d/opencensus-contrib-grpc-metrics-0.12.3.jar">
+		<attributes>
+			<attribute name="gradle_used_by_scope" value="main,test"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry sourcepath="C:/Users/leore/.gradle/caches/modules-2/files-2.1/io.opencensus/opencensus-api/0.15.0/fdd00cf587ed70886dc8cf3416c426011ec4daf1/opencensus-api-0.15.0-sources.jar" kind="lib" path="C:/Users/leore/.gradle/caches/modules-2/files-2.1/io.opencensus/opencensus-api/0.15.0/9a098392b287d7924660837f4eba0ce252013683/opencensus-api-0.15.0.jar">
+		<attributes>
+			<attribute name="gradle_used_by_scope" value="main,test"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry sourcepath="C:/Users/leore/.gradle/caches/modules-2/files-2.1/com.google.protobuf/protobuf-java-util/3.6.0/1ac9d14befa9c98d382529dafa562a2dd4650011/protobuf-java-util-3.6.0-sources.jar" kind="lib" path="C:/Users/leore/.gradle/caches/modules-2/files-2.1/com.google.protobuf/protobuf-java-util/3.6.0/3680d0042d4fe0b95ada844ff24da0698a7f0773/protobuf-java-util-3.6.0.jar">
+		<attributes>
+			<attribute name="gradle_used_by_scope" value="main,test"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry sourcepath="C:/Users/leore/.gradle/caches/modules-2/files-2.1/com.google.guava/guava/20.0/9c8493c7991464839b612d7547d6c263adf08f75/guava-20.0-sources.jar" kind="lib" path="C:/Users/leore/.gradle/caches/modules-2/files-2.1/com.google.guava/guava/20.0/89507701249388e1ed5ddcf8c41f4ce1be7831ef/guava-20.0.jar">
+		<attributes>
+			<attribute name="gradle_used_by_scope" value="main,test"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry sourcepath="C:/Users/leore/.gradle/caches/modules-2/files-2.1/org.slf4j/slf4j-api/1.7.25/962153db4a9ea71b79d047dfd1b2a0d80d8f4739/slf4j-api-1.7.25-sources.jar" kind="lib" path="C:/Users/leore/.gradle/caches/modules-2/files-2.1/org.slf4j/slf4j-api/1.7.25/da76ca59f6a57ee3102f8f9bd9cee742973efa8a/slf4j-api-1.7.25.jar">
+		<attributes>
+			<attribute name="gradle_used_by_scope" value="main,test"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry sourcepath="C:/Users/leore/.gradle/caches/modules-2/files-2.1/io.netty/netty-codec-http/4.1.22.Final/48aeeab8dca245c2a301d10fa7953e346df73975/netty-codec-http-4.1.22.Final-sources.jar" kind="lib" path="C:/Users/leore/.gradle/caches/modules-2/files-2.1/io.netty/netty-codec-http/4.1.22.Final/3805f3ca0d57630200defc7f9bb6ed3382dcb10b/netty-codec-http-4.1.22.Final.jar">
+		<attributes>
+			<attribute name="gradle_used_by_scope" value="main,test"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry sourcepath="C:/Users/leore/.gradle/caches/modules-2/files-2.1/io.netty/netty-handler/4.1.22.Final/7d768f600a71bf82a2aa984d08d46b4cd1f59069/netty-handler-4.1.22.Final-sources.jar" kind="lib" path="C:/Users/leore/.gradle/caches/modules-2/files-2.1/io.netty/netty-handler/4.1.22.Final/a3a16b17d5a5ed6f784b0daba95e28d940356109/netty-handler-4.1.22.Final.jar">
+		<attributes>
+			<attribute name="gradle_used_by_scope" value="main,test"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry sourcepath="C:/Users/leore/.gradle/caches/modules-2/files-2.1/io.netty/netty-codec/4.1.22.Final/e75ce62a24c2c5dd023b5551ab720943a124a960/netty-codec-4.1.22.Final-sources.jar" kind="lib" path="C:/Users/leore/.gradle/caches/modules-2/files-2.1/io.netty/netty-codec/4.1.22.Final/239c0af275952e70bb4adf7cf8c03d88ddc394c9/netty-codec-4.1.22.Final.jar">
+		<attributes>
+			<attribute name="gradle_used_by_scope" value="main,test"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry sourcepath="C:/Users/leore/.gradle/caches/modules-2/files-2.1/io.netty/netty-transport/4.1.22.Final/68839f38eacd3e2a25c429d87fb70d373a2f57c9/netty-transport-4.1.22.Final-sources.jar" kind="lib" path="C:/Users/leore/.gradle/caches/modules-2/files-2.1/io.netty/netty-transport/4.1.22.Final/3bd455cd9e5e5fb2e08fd9cd0acfa54c079ca989/netty-transport-4.1.22.Final.jar">
+		<attributes>
+			<attribute name="gradle_used_by_scope" value="main,test"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry sourcepath="C:/Users/leore/.gradle/caches/modules-2/files-2.1/com.google.code.findbugs/jsr305/3.0.2/b19b5927c2c25b6c70f093767041e641ae0b1b35/jsr305-3.0.2-sources.jar" kind="lib" path="C:/Users/leore/.gradle/caches/modules-2/files-2.1/com.google.code.findbugs/jsr305/3.0.2/25ea2e8b0c338a877313bd4672d3fe056ea78f0d/jsr305-3.0.2.jar">
+		<attributes>
+			<attribute name="gradle_used_by_scope" value="main,test"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry sourcepath="C:/Users/leore/.gradle/caches/modules-2/files-2.1/org.apache.httpcomponents/httpclient/4.5.5/9fd59f6f22326a4241f9524fdfd66a1f34824054/httpclient-4.5.5-sources.jar" kind="lib" path="C:/Users/leore/.gradle/caches/modules-2/files-2.1/org.apache.httpcomponents/httpclient/4.5.5/1603dfd56ebcd583ccdf337b6c3984ac55d89e58/httpclient-4.5.5.jar">
+		<attributes>
+			<attribute name="gradle_used_by_scope" value="main,test"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry sourcepath="C:/Users/leore/.gradle/caches/modules-2/files-2.1/com.google.j2objc/j2objc-annotations/1.1/1efdf5b737b02f9b72ebdec4f72c37ec411302ff/j2objc-annotations-1.1-sources.jar" kind="lib" path="C:/Users/leore/.gradle/caches/modules-2/files-2.1/com.google.j2objc/j2objc-annotations/1.1/ed28ded51a8b1c6b112568def5f4b455e6809019/j2objc-annotations-1.1.jar">
+		<attributes>
+			<attribute name="gradle_used_by_scope" value="main,test"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry sourcepath="C:/Users/leore/.gradle/caches/modules-2/files-2.1/com.google.auth/google-auth-library-credentials/0.11.0/a31d0c48e7d31f9bed6f7c1d80593098d6a1cb9e/google-auth-library-credentials-0.11.0-sources.jar" kind="lib" path="C:/Users/leore/.gradle/caches/modules-2/files-2.1/com.google.auth/google-auth-library-credentials/0.11.0/75f79364e9d4977c6462446fcccf83d2f6eeb69f/google-auth-library-credentials-0.11.0.jar">
+		<attributes>
+			<attribute name="gradle_used_by_scope" value="main,test"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry sourcepath="C:/Users/leore/.gradle/caches/modules-2/files-2.1/com.google.apis/google-api-services-storage/v1-rev135-1.24.1/cb89361d586ee169edfb488060db6e3da3bee73e/google-api-services-storage-v1-rev135-1.24.1-sources.jar" kind="lib" path="C:/Users/leore/.gradle/caches/modules-2/files-2.1/com.google.apis/google-api-services-storage/v1-rev135-1.24.1/28d3d391dfc7e7e7951760708ad2f48cecacf38f/google-api-services-storage-v1-rev135-1.24.1.jar">
+		<attributes>
+			<attribute name="gradle_used_by_scope" value="main,test"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry sourcepath="C:/Users/leore/.gradle/caches/modules-2/files-2.1/com.google.auto.value/auto-value/1.4/ef79d7581a68edf7ab2a0b471d89b7310c8a815/auto-value-1.4-sources.jar" kind="lib" path="C:/Users/leore/.gradle/caches/modules-2/files-2.1/com.google.auto.value/auto-value/1.4/6d1448fcd13074bd3658ef915022410b7c48343b/auto-value-1.4.jar">
+		<attributes>
+			<attribute name="gradle_used_by_scope" value="main,test"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry sourcepath="C:/Users/leore/.gradle/caches/modules-2/files-2.1/io.grpc/grpc-netty-shaded/1.13.1/f9fb7a4634642b1b239e1f8dcf0f897516637c3d/grpc-netty-shaded-1.13.1-sources.jar" kind="lib" path="C:/Users/leore/.gradle/caches/modules-2/files-2.1/io.grpc/grpc-netty-shaded/1.13.1/ccdc4f2c2791d93164c574fbfb90d614aa0849ae/grpc-netty-shaded-1.13.1.jar">
+		<attributes>
+			<attribute name="gradle_used_by_scope" value="main,test"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry sourcepath="C:/Users/leore/.gradle/caches/modules-2/files-2.1/io.netty/netty-buffer/4.1.22.Final/be5207108099abea6595804acc01389fdccab75b/netty-buffer-4.1.22.Final-sources.jar" kind="lib" path="C:/Users/leore/.gradle/caches/modules-2/files-2.1/io.netty/netty-buffer/4.1.22.Final/15e964a2095031364f534a6e21977f5ee9ca32a9/netty-buffer-4.1.22.Final.jar">
+		<attributes>
+			<attribute name="gradle_used_by_scope" value="main,test"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry sourcepath="C:/Users/leore/.gradle/caches/modules-2/files-2.1/io.netty/netty-resolver/4.1.22.Final/8623af4c73371b8a318b9e540746fc1db1479088/netty-resolver-4.1.22.Final-sources.jar" kind="lib" path="C:/Users/leore/.gradle/caches/modules-2/files-2.1/io.netty/netty-resolver/4.1.22.Final/b5484d17a97cb57b07d2a1ac092c249e47234c17/netty-resolver-4.1.22.Final.jar">
+		<attributes>
+			<attribute name="gradle_used_by_scope" value="main,test"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry sourcepath="C:/Users/leore/.gradle/caches/modules-2/files-2.1/com.fasterxml.jackson.core/jackson-core/2.9.6/297b561cc2ca89e07bf4cb6445c08260b524aa4d/jackson-core-2.9.6-sources.jar" kind="lib" path="C:/Users/leore/.gradle/caches/modules-2/files-2.1/com.fasterxml.jackson.core/jackson-core/2.9.6/4e393793c37c77e042ccc7be5a914ae39251b365/jackson-core-2.9.6.jar">
+		<attributes>
+			<attribute name="gradle_used_by_scope" value="main,test"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry sourcepath="C:/Users/leore/.gradle/caches/modules-2/files-2.1/com.google.code.gson/gson/2.7/bbb63ca253b483da8ee53a50374593923e3de2e2/gson-2.7-sources.jar" kind="lib" path="C:/Users/leore/.gradle/caches/modules-2/files-2.1/com.google.code.gson/gson/2.7/751f548c85fa49f330cecbb1875893f971b33c4e/gson-2.7.jar">
+		<attributes>
+			<attribute name="gradle_used_by_scope" value="main,test"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry sourcepath="C:/Users/leore/.gradle/caches/modules-2/files-2.1/org.apache.httpcomponents/httpcore/4.4.9/5808b4637c385d939e901eee3dc5f1121fc73a3b/httpcore-4.4.9-sources.jar" kind="lib" path="C:/Users/leore/.gradle/caches/modules-2/files-2.1/org.apache.httpcomponents/httpcore/4.4.9/a86ce739e5a7175b4b234c290a00a5fdb80957a0/httpcore-4.4.9.jar">
+		<attributes>
+			<attribute name="gradle_used_by_scope" value="main,test"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry sourcepath="C:/Users/leore/.gradle/caches/modules-2/files-2.1/commons-logging/commons-logging/1.2/ecf26c7507d67782a3bbd148d170b31dfad001aa/commons-logging-1.2-sources.jar" kind="lib" path="C:/Users/leore/.gradle/caches/modules-2/files-2.1/commons-logging/commons-logging/1.2/4bfc12adfe4842bf07b657f0369c4cb522955686/commons-logging-1.2.jar">
+		<attributes>
+			<attribute name="gradle_used_by_scope" value="main,test"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry sourcepath="C:/Users/leore/.gradle/caches/modules-2/files-2.1/commons-codec/commons-codec/1.10/11fb3d88ae7e3b757d70237064210ceb954a5a04/commons-codec-1.10-sources.jar" kind="lib" path="C:/Users/leore/.gradle/caches/modules-2/files-2.1/commons-codec/commons-codec/1.10/4b95f4897fa13f2cd904aee711aeafc0c5295cd8/commons-codec-1.10.jar">
+		<attributes>
+			<attribute name="gradle_used_by_scope" value="main,test"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry sourcepath="C:/Users/leore/.gradle/caches/modules-2/files-2.1/joda-time/joda-time/2.9.2/95a8bd67d07e893710325efd4edd94b91f0d6bbf/joda-time-2.9.2-sources.jar" kind="lib" path="C:/Users/leore/.gradle/caches/modules-2/files-2.1/joda-time/joda-time/2.9.2/36d6e77a419cb455e6fd5909f6f96b168e21e9d0/joda-time-2.9.2.jar">
+		<attributes>
+			<attribute name="gradle_used_by_scope" value="main,test"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry sourcepath="C:/Users/leore/.gradle/caches/modules-2/files-2.1/com.google.api.grpc/proto-google-common-protos/1.12.0/af18069b1d8368ffc8dce50a919df75f039cf507/proto-google-common-protos-1.12.0-sources.jar" kind="lib" path="C:/Users/leore/.gradle/caches/modules-2/files-2.1/com.google.api.grpc/proto-google-common-protos/1.12.0/1140cc74df039deb044ed0e320035e674dc13062/proto-google-common-protos-1.12.0.jar">
+		<attributes>
+			<attribute name="gradle_used_by_scope" value="main,test"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry sourcepath="C:/Users/leore/.gradle/caches/modules-2/files-2.1/com.google.protobuf/protobuf-java/3.6.0/6013b3453e0c102a8bd330d37f8e6918ce431882/protobuf-java-3.6.0-sources.jar" kind="lib" path="C:/Users/leore/.gradle/caches/modules-2/files-2.1/com.google.protobuf/protobuf-java/3.6.0/5333f7e422744d76840c08a106e28e519fbe3acd/protobuf-java-3.6.0.jar">
+		<attributes>
+			<attribute name="gradle_used_by_scope" value="main,test"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry sourcepath="C:/Users/leore/.gradle/caches/modules-2/files-2.1/io.grpc/grpc-context/1.13.1/5831bd9d289d47af4911abf90d4f8a11709ad2c0/grpc-context-1.13.1-sources.jar" kind="lib" path="C:/Users/leore/.gradle/caches/modules-2/files-2.1/io.grpc/grpc-context/1.13.1/e8d8407217ffe43996700f667fa1f6bee0a8c19a/grpc-context-1.13.1.jar">
+		<attributes>
+			<attribute name="gradle_used_by_scope" value="main,test"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry sourcepath="C:/Users/leore/.gradle/caches/modules-2/files-2.1/org.threeten/threetenbp/1.3.3/dbca917b92624cc219df74ef5da110f451903511/threetenbp-1.3.3-sources.jar" kind="lib" path="C:/Users/leore/.gradle/caches/modules-2/files-2.1/org.threeten/threetenbp/1.3.3/3ea31c96676ff12ab56be0b1af6fff61d1a4f1f2/threetenbp-1.3.3.jar">
+		<attributes>
+			<attribute name="gradle_used_by_scope" value="main,test"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry sourcepath="C:/Users/leore/.gradle/caches/modules-2/files-2.1/io.netty/netty-common/4.1.22.Final/8e865091acf0b8f3ec0961220b74517d331a34b5/netty-common-4.1.22.Final-sources.jar" kind="lib" path="C:/Users/leore/.gradle/caches/modules-2/files-2.1/io.netty/netty-common/4.1.22.Final/56ff4deca53fc791ed59ac2b72eb6718714a4de9/netty-common-4.1.22.Final.jar">
+		<attributes>
+			<attribute name="gradle_used_by_scope" value="main,test"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry sourcepath="C:/Users/leore/.gradle/caches/modules-2/files-2.1/org.codehaus.jackson/jackson-core-asl/1.9.11/e61687a76d77cda609bab7479acbded1f7cceec4/jackson-core-asl-1.9.11-sources.jar" kind="lib" path="C:/Users/leore/.gradle/caches/modules-2/files-2.1/org.codehaus.jackson/jackson-core-asl/1.9.11/e32303ef8bd18a5c9272780d49b81c95e05ddf43/jackson-core-asl-1.9.11.jar">
+		<attributes>
+			<attribute name="gradle_used_by_scope" value="main,test"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry sourcepath="C:/Users/leore/.gradle/caches/modules-2/files-2.1/com.google.errorprone/error_prone_annotations/2.1.2/380fceb109283ad515a05ca6955f97290e392cd8/error_prone_annotations-2.1.2-sources.jar" kind="lib" path="C:/Users/leore/.gradle/caches/modules-2/files-2.1/com.google.errorprone/error_prone_annotations/2.1.2/6dcc08f90f678ac33e5ef78c3c752b6f59e63e0c/error_prone_annotations-2.1.2.jar">
+		<attributes>
+			<attribute name="gradle_used_by_scope" value="main,test"/>
+		</attributes>
+	</classpathentry>
+</classpath>

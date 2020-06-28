@@ -8,6 +8,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
+import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -20,6 +21,8 @@ import erros.MuitoDistante;
 import erros.NaoVazio;
 import graficos.Spritesheet;
 import tabuleiro.Tabuleiro;
+
+//import com.google.firebase;
 
 
 public class Jogo extends Canvas implements KeyListener, Runnable {
@@ -59,6 +62,16 @@ public class Jogo extends Canvas implements KeyListener, Runnable {
 	}
 	
 	public static void main(String args[]) {
+//		FileInputStream serviceAccount =
+//				  new FileInputStream("./serviceAccountKey.json");
+//
+//				FirebaseOptions options = new FirebaseOptions.Builder()
+//				  .setCredentials(GoogleCredentials.fromStream(serviceAccount))
+//				  .setDatabaseUrl("https://pandemicchess-16070.firebaseio.com")
+//				  .build();
+//
+//				FirebaseApp.initializeApp(options);
+		
 		Jogo jogo = new Jogo();
 		jogo.start();
 		jogo.stop();
