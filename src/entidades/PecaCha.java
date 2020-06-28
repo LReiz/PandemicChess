@@ -22,7 +22,8 @@ public class PecaCha implements ICriaCha, IGuardaCha{
 	}
 	
 	public void att() {
-		criaCha();
+		if(!Tabuleiro.chaCriado)
+			criaCha();
 		verificarBau(Jogo.tabuleiro);
 	}
 	
@@ -45,9 +46,35 @@ public class PecaCha implements ICriaCha, IGuardaCha{
 
 	@Override
 	public PecaCha criaCha() {
-		if(Tabuleiro.rodada > Tabuleiro.rodadaCriaCha) {
-			return new PecaCha(0, 0, null);
+		boolean criado = false;
+		int xCha = 0;
+		int yCha = 0;
+		
+		// determinar uma posição do chá dentro de um baú
+		boolean existeBauFechado = false;
+		for(int i = 0; i < Tabuleiro.entidadesBau.size(); i++) {
+			if(!Tabuleiro.entidadesBau.get(i).aberto)
+				existeBauFechado = true;
 		}
-		return null;
+		// se todos os baús já foram abertos
+		if(!existeBauFechado) {
+			for(int i = 0; i < Tabuleiro.entidadesBau.size(); i++) {
+				Tabuleiro.entidadesBau.get(i).aberto = false;		// fecha todos os baús
+				existeBauFechado = true;
+			}
+		}
+		// se existem baús fechados ainda
+		if(existeBauFechado) {
+			while(!criado) {
+				int i = Jogo.rand.nextInt(Tabuleiro.entidadesBau.size());
+				if(!Tabuleiro.entidadesBau.get(i).aberto) {
+					xCha = Tabuleiro.entidadesBau.get(i).pos[1];
+					yCha = Tabuleiro.entidadesBau.get(i).pos[0];
+					criado = true;
+				}				
+			}
+		}
+		System.out.println(xCha/Tabuleiro.DC + " " + yCha/Tabuleiro.DC);
+		return new PecaCha(xCha, yCha, null);
 	}
 }

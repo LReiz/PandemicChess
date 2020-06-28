@@ -27,7 +27,8 @@ public class Tabuleiro implements IMovimento, ICriaCha {
 	public int alturaMapa;
 	public static int vezJogador = 1;			// medicos 1; infectados: 2
 	public static int rodada = 1;
-	public static int rodadaCriaCha = -24;
+	public static int rodadaCriaCha = 2;
+	public static boolean chaCriado;
 	
 	// Vetores dos elementos do mapa
 	public PecasMoveis vetorPecasMoveis[][];
@@ -67,8 +68,10 @@ public class Tabuleiro implements IMovimento, ICriaCha {
 	}
 	
 	public void att() throws NaoVazio, ForaDeAlcance, MuitoDistante {
-		if(pecaCha != null)
+		if(chaCriado)
 			pecaCha.att();
+		
+		criaCha();
 		
 		for(int i = 0; i < entidadesMedicos.size(); i++) {
 			entidadesMedicos.get(i).att();
@@ -90,8 +93,6 @@ public class Tabuleiro implements IMovimento, ICriaCha {
 			}
 		}
 
-		if(pecaCha != null)
-			pecaCha.renderizar(g);
 		
 		for(int i = 0; i < entidadesMedicos.size(); i++) {
 			entidadesMedicos.get(i).renderizar(g);
@@ -100,9 +101,11 @@ public class Tabuleiro implements IMovimento, ICriaCha {
 		for(int i = 0; i < entidadesInfectados.size(); i++) {
 			entidadesInfectados.get(i).renderizar(g);
 		}
-		for(int i = 0; i < entidadesInfectados.size(); i++) {
+		for(int i = 0; i < entidadesBau.size(); i++) {
 			entidadesBau.get(i).renderizar(g);
 		}
+		if(chaCriado)
+			pecaCha.renderizar(g);
 
 		
 		if(PecasMoveis.medicoSelecionado) {
@@ -164,10 +167,12 @@ public class Tabuleiro implements IMovimento, ICriaCha {
 		// inicialização dos Baus (metade superior do mapa)
 		int xx = larguraMapa-1;
 		int yy = (int)(alturaMapa/2);
+		
 		while(numBaus > 0) {
 			if(vetorBaus[yy][xx] == null
 					&& !vetorCelulas[yy][xx].colisao
 					&& Jogo.rand.nextInt(100) < 1) {
+				
 				PecaBau bau = new PecaBau(xx*DC, yy*DC, Jogo.rand.nextInt(6), Jogo.rand.nextInt(2), PecaBau.PECA_BAU);
 				
 				vetorBaus[yy][xx] = bau;
@@ -272,7 +277,10 @@ public class Tabuleiro implements IMovimento, ICriaCha {
 
 	@Override
 	public PecaCha criaCha() {
-		pecaCha = pecaCha.criaCha();
+		if(Tabuleiro.rodada > Tabuleiro.rodadaCriaCha && !chaCriado) {
+			pecaCha = pecaCha.criaCha();
+			chaCriado = true;
+		}
 		return null;
 	}
 }
