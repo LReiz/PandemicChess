@@ -81,7 +81,7 @@ public class Tabuleiro implements IMovimento, ICriaCha {
 			entidadesInfectados.get(i).att();
 		}
 		
-		for(int i = 0; i < entidadesInfectados.size(); i++) {
+		for(int i = 0; i < entidadesBau.size(); i++) {
 			entidadesBau.get(i).att();
 		}
 	}

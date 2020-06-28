@@ -46,6 +46,8 @@ public class PecaBau implements IGuardaCha, ITransferir {
 	public void att() {
 		if(aberto) {
 			sprite = PECA_BAU_ABERTO;
+		} else {
+			sprite = PECA_BAU;
 		}
 	}
 	

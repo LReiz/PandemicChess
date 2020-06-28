@@ -67,14 +67,14 @@ public class PecaCha implements ICriaCha, IGuardaCha{
 		if(existeBauFechado) {
 			while(!criado) {
 				int i = Jogo.rand.nextInt(Tabuleiro.entidadesBau.size());
-				if(!Tabuleiro.entidadesBau.get(i).aberto) {
+				if(!Tabuleiro.entidadesBau.get(i).aberto) {				// escolhe um baú fechado para colocar o cha
 					xCha = Tabuleiro.entidadesBau.get(i).pos[1];
 					yCha = Tabuleiro.entidadesBau.get(i).pos[0];
 					criado = true;
 				}				
 			}
 		}
-		System.out.println(xCha/Tabuleiro.DC + " " + yCha/Tabuleiro.DC);
+
 		return new PecaCha(xCha, yCha, null);
 	}
 }
