@@ -27,7 +27,7 @@ public class Tabuleiro implements IMovimento, ICriaCha {
 	public int alturaMapa;
 	public static int vezJogador = 1;			// medicos 1; infectados: 2
 	public static int rodada = 1;
-	public static int rodadaCriaCha = 2;
+	public static int rodadaCriaCha = 24;
 	public static boolean chaCriado;
 	
 	// Vetores dos elementos do mapa

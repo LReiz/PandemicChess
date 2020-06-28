@@ -29,13 +29,18 @@ public class PecaBau implements IGuardaCha, ITransferir {
 	}
 	
 	public void transferirItens(PecaMedico med, Tabuleiro tab) {
-		med.mascaras = this.mascaras;
-		med.algemas = this.algemas;
-		if(cha == true) {
+		// acrescenta os itens no médico correspondente
+		med.mascaras += this.mascaras;
+		med.algemas += this.algemas;
+		if(this.cha == true) {
 			med.cha = true;
+			this.cha = false;
 		}
+		
+		// zera seus itens
 		this.algemas = 0;
 		this.mascaras = 0;
+		aberto = true;
 		
 	}
 	

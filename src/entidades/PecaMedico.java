@@ -14,6 +14,7 @@ public class PecaMedico extends PecasMoveis implements ITransferir{
 	public static BufferedImage PECA_MEDICO_B = Jogo.spritesheet.getSprite(0*Tabuleiro.DC, 1*Tabuleiro.DC, Tabuleiro.DC, Tabuleiro.DC);
 	public static BufferedImage PECA_MEDICO_P = Jogo.spritesheet.getSprite(3*Tabuleiro.DC, 1*Tabuleiro.DC, Tabuleiro.DC, Tabuleiro.DC);
 	
+	// itens do médico
 	public int mascaras = 3;
 	public int algemas;
 	public boolean cha;
@@ -66,45 +67,67 @@ public class PecaMedico extends PecasMoveis implements ITransferir{
 				PecasMoveis.medicoSelecionado = false;
 			}
 		}
+		
+		transferirItens(this, Jogo.tabuleiro);
 	}
 	
 	public void transferirItens(PecaMedico med, Tabuleiro tab) {
-		int yMed = med.pos[0];
-		int xMed = med.pos[1];
-		int yBau = -1; int xBau = -1;
-		if(tab.vetorBaus[yMed+1][xMed-1]!= null){
+		int yMed = (int)(med.pos[0]/Tabuleiro.DC);
+		int xMed = (int)(med.pos[1]/Tabuleiro.DC);
+		int yBau = -1; 
+		int xBau = -1;
+		if(yMed+1 >= 0 && xMed-1 >= 0 
+				&& yMed+1 < tab.alturaMapa && xMed-1 < tab.larguraMapa
+				&& tab.vetorBaus[yMed+1][xMed-1]!= null){
 			yBau = yMed+1;
 			xBau = xMed-1;
 		}
-		else if	(tab.vetorBaus[yMed+1][xMed]!= null) {
+		else if	(yMed+1 >= 0 && xMed >= 0 
+					&& yMed+1 < tab.alturaMapa && xMed < tab.larguraMapa
+					&& tab.vetorBaus[yMed+1][xMed]!= null) {
 			yBau = yMed+1;
 			xBau = xMed;
 		}
-		else if	(tab.vetorBaus[yMed+1][xMed+1]!= null) {
+		else if	(yMed+1 >= 0 && xMed+1 >= 0 
+					&& yMed+1 < tab.alturaMapa && xMed+1 < tab.larguraMapa
+					&& tab.vetorBaus[yMed+1][xMed+1]!= null) {
 			yBau = yMed+1;
 			xBau = xMed+1;
 		}
-		else if	(tab.vetorBaus[yMed][xMed-1]!= null) {
+		else if	(yMed >= 0 && xMed-1 >= 0 
+					&& yMed < tab.alturaMapa && xMed-1 < tab.larguraMapa
+					&& tab.vetorBaus[yMed][xMed-1]!= null) {
 			yBau = yMed;
 			xBau = xMed-1;
 		}
-		else if	(tab.vetorBaus[yMed][xMed+1]!= null) {
+		else if	(yMed >= 0 && xMed+1 >= 0 
+					&& yMed < tab.alturaMapa && xMed+1 < tab.larguraMapa
+					&& tab.vetorBaus[yMed][xMed+1]!= null) {
 			yBau = yMed;
 			xBau = xMed+1;
 		}
-		else if	(tab.vetorBaus[yMed-1][xMed-1]!= null) {
+		else if	(yMed-1 >= 0 && xMed-1 >= 0 
+				&& yMed-1 < tab.alturaMapa && xMed-1 < tab.larguraMapa
+				&& tab.vetorBaus[yMed-1][xMed-1]!= null) {
 			yBau = yMed-1;
 			xBau = xMed-1;
 		}
-		else if	(tab.vetorBaus[yMed-1][xMed]!= null) {
+		else if	(yMed-1 >= 0 && xMed >= 0 
+					&& yMed-1 < tab.alturaMapa && xMed < tab.larguraMapa
+					&& tab.vetorBaus[yMed-1][xMed]!= null) {
 			yBau = yMed-1;
 			xBau = xMed;
 		}
-		else if	(tab.vetorBaus[yMed-1][xMed+1]!= null) {
+		else if	(yMed-1 >= 0 && xMed+1 >= 0 
+				&& yMed-1 < tab.alturaMapa && xMed+1 < tab.larguraMapa
+				&& tab.vetorBaus[yMed-1][xMed+1]!= null) {
 			yBau = yMed-1;
 			xBau = xMed+1;
 		}
-		if((yBau >= 0)&&(xBau>=0)&&(Math.abs(yMed-yBau) <2 && Math.abs(xMed-xBau) < 2)) {
+		if(yBau >= 0 && xBau >= 0 && xBau < tab.larguraMapa 
+				&& yBau < tab.alturaMapa
+				&& tab.vetorBaus[yBau][xBau] != null
+				&& tab.vetorBaus[yBau][xBau].aberto == false) {
 			tab.vetorBaus[yBau][xBau].transferirItens(med, tab);
 			
 		}
