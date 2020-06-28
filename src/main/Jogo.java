@@ -9,12 +9,16 @@ import java.awt.event.KeyListener;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.io.FileInputStream;
-import java.util.ArrayList;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Random;
 
 import javax.swing.JFrame;
 
-import entidades.PecaBau;
+import com.google.auth.oauth2.GoogleCredentials;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.FirebaseOptions;
+
 import entidades.PecasMoveis;
 import erros.ForaDeAlcance;
 import erros.MuitoDistante;
@@ -22,7 +26,6 @@ import erros.NaoVazio;
 import graficos.Spritesheet;
 import tabuleiro.Tabuleiro;
 
-//import com.google.firebase;
 
 
 public class Jogo extends Canvas implements KeyListener, Runnable {
@@ -62,17 +65,9 @@ public class Jogo extends Canvas implements KeyListener, Runnable {
 	}
 	
 	public static void main(String args[]) {
-//		FileInputStream serviceAccount =
-//				  new FileInputStream("./serviceAccountKey.json");
-//
-//				FirebaseOptions options = new FirebaseOptions.Builder()
-//				  .setCredentials(GoogleCredentials.fromStream(serviceAccount))
-//				  .setDatabaseUrl("https://pandemicchess-16070.firebaseio.com")
-//				  .build();
-//
-//				FirebaseApp.initializeApp(options);
-		
 		Jogo jogo = new Jogo();
+		
+		jogo.iniciarFB();
 		jogo.start();
 		jogo.stop();
 	}
@@ -102,6 +97,31 @@ public class Jogo extends Canvas implements KeyListener, Runnable {
 		g.drawImage(imagemPrincipal, 0, 0, LARGURA*ESCALA, ALTURA*ESCALA, null);
 		
 		bs.show();
+	}
+	
+	private void iniciarFB() {
+		FileInputStream serviceAccount = null;
+		try {
+			serviceAccount = new FileInputStream("./serviceAccountKey.json");
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+
+				FirebaseOptions options = null;
+				try {
+					options = new FirebaseOptions.Builder()
+					  .setCredentials(GoogleCredentials.fromStream(serviceAccount))
+					  .setDatabaseUrl("https://pandemicchess-16070.firebaseio.com")
+					  .build();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+
+				FirebaseApp.initializeApp(options);
+	}
+	
+	private void attFB() {
+		
 	}
 	
 	private void iniciarFrame() {
