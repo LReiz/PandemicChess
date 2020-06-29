@@ -93,14 +93,15 @@ public class PecaMedico extends PecasMoveis implements ITransferir{
 	public PecasMoveis encontrarInimigo(Tabuleiro tab) {
 		int yMed = this.pos[0];
 		int xMed = this.pos[1];
+	
 		for(int i = -1;i<2;i++) {
+			if(yMed+i < 0 || yMed+i > 16) continue;
 			for(int j = -1;j<2;j++) {
 				if(xMed+j < 0 || xMed+j > 16) continue;
 				if(tab.vetorPecasMoveis[yMed+i][xMed+j]instanceof PecaInfectado) {
 					return tab.vetorPecasMoveis[yMed+i][xMed+j];
 				}
 			}
-			if(yMed+i < 0 || yMed+i > 16) continue;
 		}
 		return null;
 	}
@@ -110,13 +111,13 @@ public class PecaMedico extends PecasMoveis implements ITransferir{
 		int yBau = -1; int xBau = -1;
 		
 		for(int i = -1; i<2; i++) {
+			if(yMed+i < 0 || yMed+i > 16) continue;
 			for(int j = -1; j<2; j++) {
 				if(xMed+j < 0 || xMed+j > 16) continue;
 				if	(tab.vetorBaus[yMed+i][xMed+j]!= null) {
 					tab.vetorBaus[yBau][xBau].transferirItens(med, tab);
 				}	
 			}
-			if(yMed+i < 0 || yMed+i > 16) continue;
 		}
 	}
 	

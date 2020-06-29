@@ -7,18 +7,19 @@ import erros.ForaDeAlcance;
 import erros.MuitoDistante;
 import erros.NaoVazio;
 import interfaces.*;
+import main.Jogo;
 import tabuleiro.Tabuleiro;
 
 public abstract class PecasMoveis implements IAtaque, IMovimento {
 
 	// Atributos individuais de peças
 	public int pos[];
-<<<<<<< HEAD
 	public int mascaras;
 	public int algemas;
-=======
+	public boolean cha;
+
 	public int dir;					// 0: esquerda; 1: direita; 2: cima; 3: baixo
->>>>>>> 42c772e1aa70eb56a9e3d642de92839918807883
+
 	public double speed = 1;
 	public boolean movendo = false;
 	private BufferedImage sprite;

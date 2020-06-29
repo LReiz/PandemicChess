@@ -302,12 +302,33 @@ public class Tabuleiro implements IMovimento, ICriaCha, IAtaque {
 				int xMed = inimigo.pos[1];
 				PecasMoveis infectado = new PecaInfectado(xMed,yMed,PecaInfectado.PECA_INFECTADO);
 				tab.vetorPecasMoveis[yMed][xMed] = infectado;
+				numMedicos --;
+				numInfectados ++;
 		}
 		else {
 			if(inimigo.algemas > 0) {
 				int yMed = inimigo.pos[0];
 				int xMed = inimigo.pos[1];
 				tab.vetorPecasMoveis[yMed][xMed] = null;
+				numInfectados --;
+			}
+		}
+	}
+	public void verificarVitoria() {
+		if(numMedicos == 0) {
+			System.out.println("VITÓRIA DOS INFECTADOS");
+			System.out.println("Genocídio: O vírus venceu a humanidade!");
+			return;
+		}
+		else if(numInfectados == 0) {
+			System.out.println("VITÓRIA DOS MÉDICOS");
+			System.out.println("Lockdown: Todos os infectados foram colocados em quarentena!");
+		}
+		else {
+			if((vetorPecasMoveis[15][8] instanceof PecaMedico && vetorPecasMoveis[15][8].cha == true) ||
+				(vetorPecasMoveis[15][9] instanceof PecaMedico && vetorPecasMoveis[15][8].cha == true)){
+				System.out.println("VITÓRIA DOS MÉDICOS");
+				System.out.println("Cura encontrada: Os cientistas descobriram que a cura para a doença era um pouco de repuso e um chazinho de boldo!");
 			}
 		}
 	}

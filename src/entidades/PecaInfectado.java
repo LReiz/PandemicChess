@@ -69,6 +69,7 @@ public class PecaInfectado extends PecasMoveis {
 		int yParede;
 		int xParede;
 		for(int i = -2;i<3;i++) {
+			if(yInfec+i < 0 || yInfec+i > 16) continue;
 			for(int j = -2;j<3;j++) {
 				if(xInfec+j < 0 || xInfec+j > 16) continue;
 				if(tab.vetorPecasMoveis[yInfec+i][xInfec+j]instanceof PecaMedico) {
@@ -81,7 +82,7 @@ public class PecaInfectado extends PecasMoveis {
 					}
 				}
 			}
-			if(yInfec+i < 0 || yInfec+i > 16) continue;
+
 		}
 		
 		
