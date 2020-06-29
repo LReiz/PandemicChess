@@ -90,66 +90,41 @@ public class PecaMedico extends PecasMoveis implements ITransferir{
 		
 		transferirItens(this, Jogo.tabuleiro);
 	}
-	
+	public PecasMoveis encontrarInimigo(Tabuleiro tab) {
+		int yMed = this.pos[0];
+		int xMed = this.pos[1];
+		for(int i = -1;i<2;i++) {
+			for(int j = -1;j<2;j++) {
+				if(xMed+j < 0 || xMed+j > 16) continue;
+				if(tab.vetorPecasMoveis[yMed+i][xMed+j]instanceof PecaInfectado) {
+					return tab.vetorPecasMoveis[yMed+i][xMed+j];
+				}
+			}
+			if(yMed+i < 0 || yMed+i > 16) continue;
+		}
+		return null;
+	}
 	public void transferirItens(PecaMedico med, Tabuleiro tab) {
-		int yMed = (int)(med.pos[0]/Tabuleiro.DC);
-		int xMed = (int)(med.pos[1]/Tabuleiro.DC);
-		int yBau = -1; 
-		int xBau = -1;
-		if(yMed+1 >= 0 && xMed-1 >= 0 
-				&& yMed+1 < tab.alturaMapa && xMed-1 < tab.larguraMapa
-				&& tab.vetorBaus[yMed+1][xMed-1]!= null){
-			yBau = yMed+1;
-			xBau = xMed-1;
-		}
-		else if	(yMed+1 >= 0 && xMed >= 0 
-					&& yMed+1 < tab.alturaMapa && xMed < tab.larguraMapa
-					&& tab.vetorBaus[yMed+1][xMed]!= null) {
-			yBau = yMed+1;
-			xBau = xMed;
-		}
-		else if	(yMed+1 >= 0 && xMed+1 >= 0 
-					&& yMed+1 < tab.alturaMapa && xMed+1 < tab.larguraMapa
-					&& tab.vetorBaus[yMed+1][xMed+1]!= null) {
-			yBau = yMed+1;
-			xBau = xMed+1;
-		}
-		else if	(yMed >= 0 && xMed-1 >= 0 
-					&& yMed < tab.alturaMapa && xMed-1 < tab.larguraMapa
-					&& tab.vetorBaus[yMed][xMed-1]!= null) {
-			yBau = yMed;
-			xBau = xMed-1;
-		}
-		else if	(yMed >= 0 && xMed+1 >= 0 
-					&& yMed < tab.alturaMapa && xMed+1 < tab.larguraMapa
-					&& tab.vetorBaus[yMed][xMed+1]!= null) {
-			yBau = yMed;
-			xBau = xMed+1;
-		}
-		else if	(yMed-1 >= 0 && xMed-1 >= 0 
-				&& yMed-1 < tab.alturaMapa && xMed-1 < tab.larguraMapa
-				&& tab.vetorBaus[yMed-1][xMed-1]!= null) {
-			yBau = yMed-1;
-			xBau = xMed-1;
-		}
-		else if	(yMed-1 >= 0 && xMed >= 0 
-					&& yMed-1 < tab.alturaMapa && xMed < tab.larguraMapa
-					&& tab.vetorBaus[yMed-1][xMed]!= null) {
-			yBau = yMed-1;
-			xBau = xMed;
-		}
-		else if	(yMed-1 >= 0 && xMed+1 >= 0 
-				&& yMed-1 < tab.alturaMapa && xMed+1 < tab.larguraMapa
-				&& tab.vetorBaus[yMed-1][xMed+1]!= null) {
-			yBau = yMed-1;
-			xBau = xMed+1;
-		}
-		if(yBau >= 0 && xBau >= 0 && xBau < tab.larguraMapa 
-				&& yBau < tab.alturaMapa
-				&& tab.vetorBaus[yBau][xBau] != null
-				&& tab.vetorBaus[yBau][xBau].aberto == false) {
-			tab.vetorBaus[yBau][xBau].transferirItens(med, tab);
-			
+		int yMed = med.pos[0];
+		int xMed = med.pos[1];
+		int yBau = -1; int xBau = -1;
+		
+		for(int i = -1; i<2; i++) {
+			for(int j = -1; j<2; j++) {
+				if(xMed+j < 0 || xMed+j > 16) continue;
+				if	(tab.vetorBaus[yMed+i][xMed+j]!= null) {
+					tab.vetorBaus[yBau][xBau].transferirItens(med, tab);
+				}	
+			}
+			if(yMed+i < 0 || yMed+i > 16) continue;
 		}
 	}
+	
+	public void atacar(PecasMoveis inimigo, Tabuleiro tab) {
+		if (inimigo == null) return;
+		if(this.algemas == 0) return;
+
+		tab.atacar(inimigo, tab);
+	}
+	
 }
