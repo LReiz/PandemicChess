@@ -19,6 +19,9 @@ public abstract class PecasMoveis implements IAtaque, IMovimento {
 	public boolean movendo = false;
 	private BufferedImage sprite;
 	
+	// Atributos para Multiplayer
+	public int indexNoVetor;
+	
 	// Animação das Peças Móveis
 	private int maxAnimacoes = 2;
 	private int atualAnimacao = 0;

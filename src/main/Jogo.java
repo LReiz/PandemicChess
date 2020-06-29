@@ -18,7 +18,10 @@ import javax.swing.JFrame;
 import com.google.auth.oauth2.GoogleCredentials;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
+import database.Time;
 import entidades.PecasMoveis;
 import erros.ForaDeAlcance;
 import erros.MuitoDistante;
@@ -37,6 +40,7 @@ public class Jogo extends Canvas implements KeyListener, Runnable {
 	
 	// Estados do Jogo
 	public boolean jogoRodando = false;
+	public static boolean multiplayer = false;
 	
 	// Ferramentas
 	private Thread thread;
@@ -51,6 +55,14 @@ public class Jogo extends Canvas implements KeyListener, Runnable {
 	
 	// Componentes
 	public static Tabuleiro tabuleiro;
+	
+	// Firebase (multiplayer)
+	public static FirebaseDatabase db;
+	public static DatabaseReference ref;
+	public static DatabaseReference medRef;
+	public static DatabaseReference infRef;
+	public static Time medDoc;
+	public static Time infDoc;
 	
 	// inicia o jogo
 	private Jogo() {
@@ -67,7 +79,8 @@ public class Jogo extends Canvas implements KeyListener, Runnable {
 	public static void main(String args[]) {
 		Jogo jogo = new Jogo();
 		
-		jogo.iniciarFB();
+		if(multiplayer)
+			jogo.iniciarFB();
 		jogo.start();
 		jogo.stop();
 	}
@@ -75,6 +88,8 @@ public class Jogo extends Canvas implements KeyListener, Runnable {
 	// atualiza informações do jogo
 	public void att() throws NaoVazio, ForaDeAlcance, MuitoDistante {
 		tabuleiro.att();
+		if(multiplayer)
+			attFB();
 	}
 	
 	// renderiza gráficos
@@ -106,7 +121,6 @@ public class Jogo extends Canvas implements KeyListener, Runnable {
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
-
 				FirebaseOptions options = null;
 				try {
 					options = new FirebaseOptions.Builder()
@@ -118,10 +132,23 @@ public class Jogo extends Canvas implements KeyListener, Runnable {
 				}
 
 				FirebaseApp.initializeApp(options);
+		
+		db = FirebaseDatabase.getInstance();
+		ref = db.getReference();
+		
+		medRef = ref.child("medicos");
+		infRef = ref.child("infectados");
+		medDoc = new Time("1", Tabuleiro.entidadesMedicos.size());
+		infDoc = new Time("2", Tabuleiro.entidadesInfectados.size());
+		medRef.setValueAsync(medDoc);
+		infRef.setValueAsync(infDoc);
 	}
 	
 	private void attFB() {
-		
+		medDoc.att();
+		infDoc.att();
+		medRef.setValueAsync(medDoc);
+		infRef.setValueAsync(infDoc);
 	}
 	
 	private void iniciarFrame() {

@@ -57,14 +57,34 @@ public class PecaMedico extends PecasMoveis implements ITransferir{
 	}
 	
 	public void att() throws NaoVazio, ForaDeAlcance, MuitoDistante {
-		if(movendo) {
-			movendo = movimento(PecasMoveis.proxPosicaoMedicoX, PecasMoveis.proxPosicaoMedicoY, this, Jogo.tabuleiro);
-			if(!movendo) {
-				atualizarVetorBau(pos[1] - (Tabuleiro.DC*PecasMoveis.medicoAtualDirX), pos[0] - (Tabuleiro.DC*PecasMoveis.medicoAtualDirY));
-				PecasMoveis.infectadoAtualDirX = 0;
-				PecasMoveis.infectadoAtualDirY = 0;
-				Tabuleiro.trocarVez();
-				PecasMoveis.medicoSelecionado = false;
+		// atualização da peça no modo singleplayer
+		if(!Jogo.multiplayer) {
+			if(movendo) {
+				movendo = movimento(PecasMoveis.proxPosicaoMedicoX, PecasMoveis.proxPosicaoMedicoY, this, Jogo.tabuleiro);
+				if(!movendo) {
+					atualizarVetorBau(pos[1] - (Tabuleiro.DC*PecasMoveis.medicoAtualDirX), pos[0] - (Tabuleiro.DC*PecasMoveis.medicoAtualDirY));
+					PecasMoveis.medicoAtualDirX = 0;
+					PecasMoveis.medicoAtualDirY = 0;
+					Tabuleiro.trocarVez();
+					PecasMoveis.medicoSelecionado = false;
+				}
+			}
+			
+		// atualização da peça no modo multiplayer
+		} else if(Jogo.multiplayer) {
+			if(Jogo.medDoc.vetor.get(String.valueOf(indexNoVetor)).movendo == "true") {
+				if(movimento(Integer.parseInt(Jogo.medDoc.proxX), Integer.parseInt(Jogo.medDoc.proxY), this, Jogo.tabuleiro)) {
+					movendo = true;
+				} else {
+					movendo = false;
+				}
+				if(!movendo) {
+					atualizarVetorBau(pos[1] - (Tabuleiro.DC*PecasMoveis.medicoAtualDirX), pos[0] - (Tabuleiro.DC*PecasMoveis.medicoAtualDirY));
+					PecasMoveis.medicoAtualDirX = 0;
+					PecasMoveis.medicoAtualDirY = 0;
+					Tabuleiro.trocarVez();
+					PecasMoveis.medicoSelecionado = false;
+				}
 			}
 		}
 		

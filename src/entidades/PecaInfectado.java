@@ -34,14 +34,31 @@ public class PecaInfectado extends PecasMoveis {
 	}
 	
 	public void att() throws NaoVazio, ForaDeAlcance, MuitoDistante {
-		if(movendo) {
-			movendo = movimento(PecasMoveis.proxPosicaoInfectadoX, PecasMoveis.proxPosicaoInfectadoY, this, Jogo.tabuleiro);
-			if(!movendo) {
-				atualizarVetorBau(pos[1] - (Tabuleiro.DC*PecasMoveis.infectadoAtualDirX), pos[0] - (Tabuleiro.DC*PecasMoveis.infectadoAtualDirY));
-				PecasMoveis.infectadoAtualDirX = 0;
-				PecasMoveis.infectadoAtualDirY = 0;
-				Tabuleiro.trocarVez();
-				PecasMoveis.infectadoSelecionado = false;
+		if(!Jogo.multiplayer) {
+			if(movendo) {
+				movendo = movimento(PecasMoveis.proxPosicaoInfectadoX, PecasMoveis.proxPosicaoInfectadoY, this, Jogo.tabuleiro);
+				if(!movendo) {
+					atualizarVetorBau(pos[1] - (Tabuleiro.DC*PecasMoveis.infectadoAtualDirX), pos[0] - (Tabuleiro.DC*PecasMoveis.infectadoAtualDirY));
+					PecasMoveis.infectadoAtualDirX = 0;
+					PecasMoveis.infectadoAtualDirY = 0;
+					Tabuleiro.trocarVez();
+					PecasMoveis.infectadoSelecionado = false;
+				}
+			}
+		} else if(Jogo.multiplayer) {
+			if(Jogo.infDoc.vetor.get(String.valueOf(indexNoVetor)).movendo == "true") {
+				if(movimento(Integer.parseInt(Jogo.infDoc.proxX), Integer.parseInt(Jogo.infDoc.proxY), this, Jogo.tabuleiro)) {
+					movendo = true;
+				} else {
+					movendo = false;
+				}
+				if(!movendo) {
+					atualizarVetorBau(pos[1] - (Tabuleiro.DC*PecasMoveis.infectadoAtualDirX), pos[0] - (Tabuleiro.DC*PecasMoveis.infectadoAtualDirY));
+					PecasMoveis.infectadoAtualDirX = 0;
+					PecasMoveis.infectadoAtualDirY = 0;
+					Tabuleiro.trocarVez();
+					PecasMoveis.infectadoSelecionado = false;
+				}
 			}
 		}
 	}

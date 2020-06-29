@@ -68,46 +68,58 @@ public class Tabuleiro implements IMovimento, ICriaCha {
 	}
 	
 	public void att() throws NaoVazio, ForaDeAlcance, MuitoDistante {
+		// atualiza chá
 		if(chaCriado)
 			pecaCha.att();
+		else
+			criaCha();
 		
-		criaCha();
-		
+		// atualiza médicos
 		for(int i = 0; i < entidadesMedicos.size(); i++) {
 			entidadesMedicos.get(i).att();
+			entidadesMedicos.get(i).indexNoVetor = i;
 		}
 		
+		// atualiza infectados
 		for(int i = 0; i < entidadesInfectados.size(); i++) {
 			entidadesInfectados.get(i).att();
+			entidadesInfectados.get(i).indexNoVetor = i;
 		}
 		
+		// atualiza baús
 		for(int i = 0; i < entidadesBau.size(); i++) {
 			entidadesBau.get(i).att();
 		}
 	}
 	
 	public void renderizar(Graphics g) {
+		// renderiza células
 		for(int yy = 0; yy < alturaMapa; yy++) {
 			for(int xx = 0; xx < larguraMapa; xx++) {
 				vetorCelulas[yy][xx].renderizar(g);
 			}
 		}
 
-		
+		// renderiza médicos
 		for(int i = 0; i < entidadesMedicos.size(); i++) {
 			entidadesMedicos.get(i).renderizar(g);
 		}
 		
+		// renderiza infectados
 		for(int i = 0; i < entidadesInfectados.size(); i++) {
 			entidadesInfectados.get(i).renderizar(g);
 		}
+		
+		// renderiza baús
 		for(int i = 0; i < entidadesBau.size(); i++) {
 			entidadesBau.get(i).renderizar(g);
 		}
+		
+		// renderiza chá
 		if(chaCriado)
 			pecaCha.renderizar(g);
 
-		
+		// renderiza indicador de seleção de peça
 		if(PecasMoveis.medicoSelecionado) {
 			g.setColor(new Color(0xFFFF0000));			// vermelho (indica que a peça está selecionada)
 		} else {
@@ -130,7 +142,6 @@ public class Tabuleiro implements IMovimento, ICriaCha {
 		try {
 			MapaDePixels = ImageIO.read(getClass().getResource(endereco));
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -277,7 +288,7 @@ public class Tabuleiro implements IMovimento, ICriaCha {
 
 	@Override
 	public PecaCha criaCha() {
-		if(Tabuleiro.rodada > Tabuleiro.rodadaCriaCha && !chaCriado) {
+		if(Tabuleiro.rodada > Tabuleiro.rodadaCriaCha) {
 			pecaCha = pecaCha.criaCha();
 			chaCriado = true;
 		}
