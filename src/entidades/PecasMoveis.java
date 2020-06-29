@@ -7,13 +7,14 @@ import erros.ForaDeAlcance;
 import erros.MuitoDistante;
 import erros.NaoVazio;
 import interfaces.*;
-import main.Jogo;
 import tabuleiro.Tabuleiro;
 
 public abstract class PecasMoveis implements IAtaque, IMovimento {
 
 	// Atributos individuais de peças
 	public int pos[];
+	public int mascaras;
+	public int algemas;
 	public double speed = 1;
 	public boolean movendo = false;
 	
@@ -126,5 +127,10 @@ public abstract class PecasMoveis implements IAtaque, IMovimento {
 			}
 		}
 		return false;
+	}
+	public PecasMoveis encontrarInimigo(Tabuleiro tab) {
+		return null;
+	}
+	public void atacar(PecasMoveis inimigo,Tabuleiro tab) {
 	}
 }

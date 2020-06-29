@@ -33,46 +33,41 @@ public class PecaMedico extends PecasMoveis implements ITransferir{
 			}
 		}
 	}
-	
+	public PecasMoveis encontrarInimigo(Tabuleiro tab) {
+		int yMed = this.pos[0];
+		int xMed = this.pos[1];
+		for(int i = -1;i<2;i++) {
+			for(int j = -1;j<2;j++) {
+				if(xMed+j < 0 || xMed+j > 16) continue;
+				if(tab.vetorPecasMoveis[yMed+i][xMed+j]instanceof PecaInfectado) {
+					return tab.vetorPecasMoveis[yMed+i][xMed+j];
+				}
+			}
+			if(yMed+i < 0 || yMed+i > 16) continue;
+		}
+		return null;
+	}
 	public void transferirItens(PecaMedico med, Tabuleiro tab) {
 		int yMed = med.pos[0];
 		int xMed = med.pos[1];
 		int yBau = -1; int xBau = -1;
-		if(tab.vetorBaus[yMed+1][xMed-1]!= null){
-			yBau = yMed+1;
-			xBau = xMed-1;
-		}
-		else if	(tab.vetorBaus[yMed+1][xMed]!= null) {
-			yBau = yMed+1;
-			xBau = xMed;
-		}
-		else if	(tab.vetorBaus[yMed+1][xMed+1]!= null) {
-			yBau = yMed+1;
-			xBau = xMed+1;
-		}
-		else if	(tab.vetorBaus[yMed][xMed-1]!= null) {
-			yBau = yMed;
-			xBau = xMed-1;
-		}
-		else if	(tab.vetorBaus[yMed][xMed+1]!= null) {
-			yBau = yMed;
-			xBau = xMed+1;
-		}
-		else if	(tab.vetorBaus[yMed-1][xMed-1]!= null) {
-			yBau = yMed-1;
-			xBau = xMed-1;
-		}
-		else if	(tab.vetorBaus[yMed-1][xMed]!= null) {
-			yBau = yMed-1;
-			xBau = xMed;
-		}
-		else if	(tab.vetorBaus[yMed-1][xMed+1]!= null) {
-			yBau = yMed-1;
-			xBau = xMed+1;
-		}
-		if((yBau >= 0)&&(xBau>=0)&&(Math.abs(yMed-yBau) <2 && Math.abs(xMed-xBau) < 2)) {
-			tab.vetorBaus[yBau][xBau].transferirItens(med, tab);
-			
+		
+		for(int i = -1; i<2; i++) {
+			for(int j = -1; j<2; j++) {
+				if(xMed+j < 0 || xMed+j > 16) continue;
+				if	(tab.vetorBaus[yMed+i][xMed+j]!= null) {
+					tab.vetorBaus[yBau][xBau].transferirItens(med, tab);
+				}	
+			}
+			if(yMed+i < 0 || yMed+i > 16) continue;
 		}
 	}
+	
+	public void atacar(PecasMoveis inimigo, Tabuleiro tab) {
+		if (inimigo == null) return;
+		if(this.algemas == 0) return;
+			
+		tab.atacar(inimigo, tab);
+	}
+	
 }

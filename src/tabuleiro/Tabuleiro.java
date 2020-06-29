@@ -11,11 +11,12 @@ import entidades.PecasMoveis;
 import erros.ForaDeAlcance;
 import erros.MuitoDistante;
 import erros.NaoVazio;
+import interfaces.IAtaque;
 import interfaces.ICriaCha;
 import interfaces.IMovimento;
 import main.Jogo;
 
-public class Tabuleiro implements IMovimento, ICriaCha {
+public class Tabuleiro implements IMovimento, ICriaCha, IAtaque {
 	
 	// Constantes de Configuração
 	public static int DC = 16;		// dimensões de cada célula (16 x 16)
@@ -158,5 +159,21 @@ public class Tabuleiro implements IMovimento, ICriaCha {
 			vezJogador = 2;		// infectados
 		else if(vezJogador == 2)
 			vezJogador = 1;		// médicos
+	}
+	
+	public void atacar(PecasMoveis inimigo, Tabuleiro tab) {
+		if(inimigo instanceof PecaMedico) {
+				int yMed = inimigo.pos[0];
+				int xMed = inimigo.pos[1];
+				PecasMoveis infectado = new PecaInfectado(xMed,yMed,PecaInfectado.PECA_INFECTADO);
+				tab.vetorPecasMoveis[yMed][xMed] = infectado;
+		}
+		else {
+			if(inimigo.algemas > 0) {
+				int yMed = inimigo.pos[0];
+				int xMed = inimigo.pos[1];
+				tab.vetorPecasMoveis[yMed][xMed] = null;
+			}
+		}
 	}
 }
