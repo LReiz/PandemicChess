@@ -1,10 +1,14 @@
 package tabuleiro;
+import java.awt.Color;
+import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 
 import entidades.PecaBau;
+import entidades.PecaCha;
 import entidades.PecaInfectado;
 import entidades.PecaMedico;
 import entidades.PecasMoveis;
@@ -23,25 +27,101 @@ public class Tabuleiro implements IMovimento, ICriaCha, IAtaque {
 	public int larguraMapa;
 	public int alturaMapa;
 	public static int vezJogador = 1;			// medicos 1; infectados: 2
+	public static int rodada = 1;
+	public static int rodadaCriaCha = 24;
+	public static boolean chaCriado;
 	
 	// Vetores dos elementos do mapa
 	public PecasMoveis vetorPecasMoveis[][];
 	public PecaBau vetorBaus[][];
 	public Celulas vetorCelulas[][];
+	public PecaCha pecaCha;
+	
+	// Componentes
+	public static ArrayList<PecasMoveis> entidadesMedicos;
+	public static ArrayList<PecasMoveis> entidadesInfectados;
+	public static ArrayList<PecaBau> entidadesBau;
 	
 	// Controle da quantidade de Peças no mapa
 	private int maxMedicos = 8;
 	private int numMedicos = 0;
 	private int maxInfectados = 5;
 	private int numInfectados = 0;
+	private int maxBaus = 8;
+	private int numBaus = 0;
 	
 	public Tabuleiro(String endereco) {
-		numMedicos = maxMedicos;
-		numInfectados = maxInfectados;
+		this.numMedicos = this.maxMedicos;
+		this.numInfectados = this.maxInfectados;
+		this.numBaus = this.maxBaus;
+		
+		entidadesMedicos = new ArrayList<PecasMoveis>();
+		entidadesInfectados = new ArrayList<PecasMoveis>();
+		entidadesBau = new ArrayList<PecaBau>();
+		this.pecaCha = new PecaCha(0, 0, null);
 		
 		inicializarMapa(endereco);
+		inicializarPecasParadas();
 		inicializarPecasMoveis();
-		vetorBaus = new PecaBau[Jogo.ALTURA][Jogo.ALTURA];
+		
+		PecasMoveis.medicoAtual = entidadesMedicos.get(0);
+		PecasMoveis.infectadoAtual = entidadesInfectados.get(0);
+	}
+	
+	public void att() throws NaoVazio, ForaDeAlcance, MuitoDistante {
+		if(chaCriado)
+			pecaCha.att();
+		
+		criaCha();
+		
+		for(int i = 0; i < entidadesMedicos.size(); i++) {
+			entidadesMedicos.get(i).att();
+		}
+		
+		for(int i = 0; i < entidadesInfectados.size(); i++) {
+			entidadesInfectados.get(i).att();
+		}
+		
+		for(int i = 0; i < entidadesBau.size(); i++) {
+			entidadesBau.get(i).att();
+		}
+	}
+	
+	public void renderizar(Graphics g) {
+		for(int yy = 0; yy < alturaMapa; yy++) {
+			for(int xx = 0; xx < larguraMapa; xx++) {
+				vetorCelulas[yy][xx].renderizar(g);
+			}
+		}
+
+		
+		for(int i = 0; i < entidadesMedicos.size(); i++) {
+			entidadesMedicos.get(i).renderizar(g);
+		}
+		
+		for(int i = 0; i < entidadesInfectados.size(); i++) {
+			entidadesInfectados.get(i).renderizar(g);
+		}
+		for(int i = 0; i < entidadesBau.size(); i++) {
+			entidadesBau.get(i).renderizar(g);
+		}
+		if(chaCriado)
+			pecaCha.renderizar(g);
+
+		
+		if(PecasMoveis.medicoSelecionado) {
+			g.setColor(new Color(0xFFFF0000));			// vermelho (indica que a peça está selecionada)
+		} else {
+			g.setColor(new Color(0xFFFFAA00));			// amarelo (indica que a peça não está selecionada ainda)
+		}
+		g.drawRect(entidadesMedicos.get(PecasMoveis.indexMedico).pos[1], entidadesMedicos.get(PecasMoveis.indexMedico).pos[0], Tabuleiro.DC, Tabuleiro.DC);
+		
+		if(PecasMoveis.infectadoSelecionado) {
+			g.setColor(new Color(0xFFFF0000));			// vermelho
+		} else {
+			g.setColor(new Color(0xFFFFAA00));			// amarelo
+		}
+		g.drawRect(entidadesInfectados.get(PecasMoveis.indexInfectado).pos[1], entidadesInfectados.get(PecasMoveis.indexInfectado).pos[0], Tabuleiro.DC, Tabuleiro.DC);
 	}
 	
 	private void inicializarMapa(String endereco) {
@@ -76,8 +156,36 @@ public class Tabuleiro implements IMovimento, ICriaCha, IAtaque {
 				} else if(pixelsHexCelulas[xx + yy*larguraMapa] == 0xFFC9C9CC) {
 					this.vetorCelulas[yy][xx] = new ParedeHospital(xx*DC, yy*DC, Celulas.CELULA_PAREDE_HOSPITAL4);
 				} else {
-					System.out.println(xx+yy*larguraMapa + " " + pixelsHexCelulas[xx + yy*larguraMapa] + " " + 0x635F89FF);
 					this.vetorCelulas[yy][xx] = new ChaoRoxo(xx*DC, yy*DC, Celulas.CELULA_CHAO_ROXO);
+				}
+			}
+		}
+	}
+	
+	private void inicializarPecasParadas() {
+		vetorBaus = new PecaBau[alturaMapa][larguraMapa];
+
+		// inicialização dos Baus (metade superior do mapa)
+		int xx = larguraMapa-1;
+		int yy = (int)(alturaMapa/2);
+		
+		while(numBaus > 0) {
+			if(vetorBaus[yy][xx] == null
+					&& !vetorCelulas[yy][xx].colisao
+					&& Jogo.rand.nextInt(100) < 1) {
+				
+				PecaBau bau = new PecaBau(xx*DC, yy*DC, Jogo.rand.nextInt(6), Jogo.rand.nextInt(2), PecaBau.PECA_BAU);
+				
+				vetorBaus[yy][xx] = bau;
+				entidadesBau.add(bau);
+				numBaus--;
+			}
+			xx--;
+			if(xx < 0) {
+				xx = larguraMapa-1;
+				yy--;
+				if(yy < 0) {
+					yy = (int)(alturaMapa/2);
 				}
 			}
 		}
@@ -90,11 +198,14 @@ public class Tabuleiro implements IMovimento, ICriaCha, IAtaque {
 		int xx = larguraMapa-1;
 		int yy = (int)((alturaMapa-1)/3);
 		while(numInfectados > 0) {
-			if(vetorPecasMoveis[yy][xx] == null && Jogo.rand.nextInt(100) < 1) {
+			if(vetorPecasMoveis[yy][xx] == null 
+					&& vetorBaus[yy][xx] == null
+					&& !vetorCelulas[yy][xx].colisao
+					&& Jogo.rand.nextInt(100) < 1) {
 				 PecasMoveis inf = new PecaInfectado(xx*DC, yy*DC, PecaInfectado.PECA_INFECTADO);
 				
 				 vetorPecasMoveis[yy][xx] = inf;
-				 Jogo.entidadesInfectados.add(inf);
+				 entidadesInfectados.add(inf);
 				 numInfectados--;
 			}
 			xx--;
@@ -111,7 +222,10 @@ public class Tabuleiro implements IMovimento, ICriaCha, IAtaque {
 		xx = larguraMapa-1;
 		yy = (int)((alturaMapa-1)-(alturaMapa/3));
 		while(numMedicos > 0) {
-			if(vetorPecasMoveis[yy][xx] == null && Jogo.rand.nextInt(100) < 1) {
+			if(vetorPecasMoveis[yy][xx] == null 
+					&& vetorBaus[yy][xx] == null
+					&& !vetorCelulas[yy][xx].colisao
+					&& Jogo.rand.nextInt(100) < 1) {
 				PecasMoveis med;
 				if(Jogo.rand.nextInt(100) < 50) {
 					med = new PecaMedico(xx*DC, yy*DC, PecaMedico.PECA_MEDICO_B);
@@ -119,7 +233,7 @@ public class Tabuleiro implements IMovimento, ICriaCha, IAtaque {
 					med = new PecaMedico(xx*DC, yy*DC, PecaMedico.PECA_MEDICO_P);
 				}
 				vetorPecasMoveis[yy][xx] = med;					
-				Jogo.entidadesMedicos.add(med);
+				entidadesMedicos.add(med);
 				numMedicos--;
 			}
 			xx--;
@@ -135,8 +249,8 @@ public class Tabuleiro implements IMovimento, ICriaCha, IAtaque {
 
 	@Override
 	public boolean movimento(int x_final, int y_final, PecasMoveis peca, Tabuleiro tab) throws NaoVazio, ForaDeAlcance, MuitoDistante {
-		if((int)(y_final/DC) < 0 || (int)(y_final/DC) >= Jogo.ALTURA
-				|| (int)(x_final/DC) < 0 || (int)(x_final/DC) >= Jogo.LARGURA)
+		if((int)(y_final/DC) < 0 || (int)(y_final/DC) >= alturaMapa
+				|| (int)(x_final/DC) < 0 || (int)(x_final/DC) >= larguraMapa)
 		{
 			peca.movendo = false;
 			throw new ForaDeAlcance("Movimento para fora do Tabuleiro");
@@ -154,11 +268,21 @@ public class Tabuleiro implements IMovimento, ICriaCha, IAtaque {
 	}
 	
 	public static void trocarVez() {
-		System.out.println(vezJogador);
 		if(vezJogador == 1)
 			vezJogador = 2;		// infectados
 		else if(vezJogador == 2)
 			vezJogador = 1;		// médicos
+		
+		rodada++;
+	}
+
+	@Override
+	public PecaCha criaCha() {
+		if(Tabuleiro.rodada > Tabuleiro.rodadaCriaCha && !chaCriado) {
+			pecaCha = pecaCha.criaCha();
+			chaCriado = true;
+		}
+		return null;
 	}
 	
 	public void atacar(PecasMoveis inimigo, Tabuleiro tab) {

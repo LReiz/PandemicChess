@@ -10,28 +10,65 @@ import tabuleiro.Tabuleiro;
 
 public class PecaMedico extends PecasMoveis implements ITransferir{
 
+	// sprites dos médicos
 	public static BufferedImage PECA_MEDICO_B = Jogo.spritesheet.getSprite(0*Tabuleiro.DC, 1*Tabuleiro.DC, Tabuleiro.DC, Tabuleiro.DC);
 	public static BufferedImage PECA_MEDICO_P = Jogo.spritesheet.getSprite(3*Tabuleiro.DC, 1*Tabuleiro.DC, Tabuleiro.DC, Tabuleiro.DC);
 	
-	public int mascaras;
+	// itens do médico
+	public int mascaras = 3;
 	public int algemas;
 	public boolean cha;
 
 	public PecaMedico(int x, int y, BufferedImage sprite) {
 		super(x, y, sprite);
-
+		if(sprite == PECA_MEDICO_B) {
+			animacaoEsquerda = new BufferedImage[3];
+			for(int i = 0; i < 3; i++)
+				animacaoEsquerda[i] = Jogo.spritesheet.getSprite(i*Tabuleiro.DC, 3*Tabuleiro.DC, Tabuleiro.DC, Tabuleiro.DC);
+			
+			animacaoDireita = new BufferedImage[3];
+			for(int i = 0; i < 3; i++)
+				animacaoDireita[i] = Jogo.spritesheet.getSprite(i*Tabuleiro.DC, 2*Tabuleiro.DC, Tabuleiro.DC, Tabuleiro.DC);
+			
+			animacaoCima = new BufferedImage[3];
+			for(int i = 0; i < 3; i++)
+				animacaoCima[i] = Jogo.spritesheet.getSprite(i*Tabuleiro.DC, 1*Tabuleiro.DC, Tabuleiro.DC, Tabuleiro.DC);
+			
+			animacaoBaixo = new BufferedImage[3];
+			for(int i = 0; i < 3; i++)
+				animacaoBaixo[i] = Jogo.spritesheet.getSprite(i*Tabuleiro.DC, 0*Tabuleiro.DC, Tabuleiro.DC, Tabuleiro.DC);
+		} else if(sprite == PECA_MEDICO_P) {
+			animacaoEsquerda = new BufferedImage[3];
+			for(int i = 0; i < 3; i++)
+				animacaoEsquerda[i] = Jogo.spritesheet.getSprite((i+3)*Tabuleiro.DC, 3*Tabuleiro.DC, Tabuleiro.DC, Tabuleiro.DC);
+			
+			animacaoDireita = new BufferedImage[3];
+			for(int i = 0; i < 3; i++)
+				animacaoDireita[i] = Jogo.spritesheet.getSprite((i+3)*Tabuleiro.DC, 2*Tabuleiro.DC, Tabuleiro.DC, Tabuleiro.DC);
+			
+			animacaoCima = new BufferedImage[3];
+			for(int i = 0; i < 3; i++)
+				animacaoCima[i] = Jogo.spritesheet.getSprite((i+3)*Tabuleiro.DC, 1*Tabuleiro.DC, Tabuleiro.DC, Tabuleiro.DC);
+			
+			animacaoBaixo = new BufferedImage[3];
+			for(int i = 0; i < 3; i++)
+				animacaoBaixo[i] = Jogo.spritesheet.getSprite((i+3)*Tabuleiro.DC, 0*Tabuleiro.DC, Tabuleiro.DC, Tabuleiro.DC);
+		}
 	}
 	
 	public void att() throws NaoVazio, ForaDeAlcance, MuitoDistante {
 		if(movendo) {
 			movendo = movimento(PecasMoveis.proxPosicaoMedicoX, PecasMoveis.proxPosicaoMedicoY, this, Jogo.tabuleiro);
 			if(!movendo) {
+				atualizarVetorBau(pos[1] - (Tabuleiro.DC*PecasMoveis.medicoAtualDirX), pos[0] - (Tabuleiro.DC*PecasMoveis.medicoAtualDirY));
 				PecasMoveis.infectadoAtualDirX = 0;
 				PecasMoveis.infectadoAtualDirY = 0;
 				Tabuleiro.trocarVez();
 				PecasMoveis.medicoSelecionado = false;
 			}
 		}
+		
+		transferirItens(this, Jogo.tabuleiro);
 	}
 	public PecasMoveis encontrarInimigo(Tabuleiro tab) {
 		int yMed = this.pos[0];
@@ -66,7 +103,7 @@ public class PecaMedico extends PecasMoveis implements ITransferir{
 	public void atacar(PecasMoveis inimigo, Tabuleiro tab) {
 		if (inimigo == null) return;
 		if(this.algemas == 0) return;
-			
+
 		tab.atacar(inimigo, tab);
 	}
 	

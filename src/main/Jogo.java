@@ -8,10 +8,16 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
-import java.util.ArrayList;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Random;
 
 import javax.swing.JFrame;
+
+import com.google.auth.oauth2.GoogleCredentials;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.FirebaseOptions;
 
 import entidades.PecasMoveis;
 import erros.ForaDeAlcance;
@@ -19,6 +25,7 @@ import erros.MuitoDistante;
 import erros.NaoVazio;
 import graficos.Spritesheet;
 import tabuleiro.Tabuleiro;
+
 
 
 public class Jogo extends Canvas implements KeyListener, Runnable {
@@ -44,19 +51,13 @@ public class Jogo extends Canvas implements KeyListener, Runnable {
 	
 	// Componentes
 	public static Tabuleiro tabuleiro;
-	public static ArrayList<PecasMoveis> entidadesMedicos;
-	public static ArrayList<PecasMoveis> entidadesInfectados;
 	
 	// inicia o jogo
 	private Jogo() {
 		imagemPrincipal = new BufferedImage(LARGURA, ALTURA, BufferedImage.TYPE_INT_RGB);
 		spritesheet = new Spritesheet("/spritesheet.png");
 		
-		entidadesMedicos = new ArrayList<PecasMoveis>();
-		entidadesInfectados = new ArrayList<PecasMoveis>();
 		tabuleiro = new Tabuleiro("/mapa1.png");
-		PecasMoveis.medicoAtual = entidadesMedicos.get(0);
-		PecasMoveis.infectadoAtual = entidadesInfectados.get(0);
 		
 		this.setPreferredSize(new Dimension(LARGURA*ESCALA, ALTURA*ESCALA));
 		addKeyListener(this);
@@ -65,19 +66,15 @@ public class Jogo extends Canvas implements KeyListener, Runnable {
 	
 	public static void main(String args[]) {
 		Jogo jogo = new Jogo();
+		
+		jogo.iniciarFB();
 		jogo.start();
 		jogo.stop();
 	}
 	
 	// atualiza informações do jogo
 	public void att() throws NaoVazio, ForaDeAlcance, MuitoDistante {
-		for(int i = 0; i < entidadesMedicos.size(); i++) {
-			entidadesMedicos.get(i).att();
-		}
-		
-		for(int i = 0; i < entidadesInfectados.size(); i++) {
-			entidadesInfectados.get(i).att();
-		}
+		tabuleiro.att();
 	}
 	
 	// renderiza gráficos
@@ -93,39 +90,38 @@ public class Jogo extends Canvas implements KeyListener, Runnable {
 		g.fillRect(0, 0, LARGURA, ALTURA);
 	
 		// Renderização dos elementos do tabuleiro
-		for(int yy = 0; yy < tabuleiro.alturaMapa; yy++) {
-			for(int xx = 0; xx < tabuleiro.larguraMapa; xx++) {
-				tabuleiro.vetorCelulas[yy][xx].renderizar(g);
-			}
-		}
-		
-		for(int yy = 0; yy < tabuleiro.alturaMapa; yy++) {
-			for(int xx = 0; xx < tabuleiro.larguraMapa; xx++) {
-				if(tabuleiro.vetorPecasMoveis[yy][xx] != null)
-					tabuleiro.vetorPecasMoveis[yy][xx].renderizar(g);
-			}
-		}
-		
-		if(PecasMoveis.medicoSelecionado) {
-			g.setColor(new Color(0xFFFF0000));			// vermelho (indica que a peça está selecionada)
-		} else {
-			g.setColor(new Color(0xFFFFAA00));			// amarelo (indica que a peça não está selecionada ainda)
-		}
-		g.drawRect(entidadesMedicos.get(PecasMoveis.indexMedico).pos[1], entidadesMedicos.get(PecasMoveis.indexMedico).pos[0], Tabuleiro.DC, Tabuleiro.DC);
-		
-		if(PecasMoveis.infectadoSelecionado) {
-			g.setColor(new Color(0xFFFF0000));			// vermelho
-		} else {
-			g.setColor(new Color(0xFFFFAA00));			// amarelo
-		}
-		g.drawRect(entidadesInfectados.get(PecasMoveis.indexInfectado).pos[1], entidadesInfectados.get(PecasMoveis.indexInfectado).pos[0], Tabuleiro.DC, Tabuleiro.DC);
-		/////
+		tabuleiro.renderizar(g);
 		
 		g.dispose();
 		g = bs.getDrawGraphics();
 		g.drawImage(imagemPrincipal, 0, 0, LARGURA*ESCALA, ALTURA*ESCALA, null);
 		
 		bs.show();
+	}
+	
+	private void iniciarFB() {
+		FileInputStream serviceAccount = null;
+		try {
+			serviceAccount = new FileInputStream("./serviceAccountKey.json");
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+
+				FirebaseOptions options = null;
+				try {
+					options = new FirebaseOptions.Builder()
+					  .setCredentials(GoogleCredentials.fromStream(serviceAccount))
+					  .setDatabaseUrl("https://pandemicchess-16070.firebaseio.com")
+					  .build();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+
+				FirebaseApp.initializeApp(options);
+	}
+	
+	private void attFB() {
+		
 	}
 	
 	private void iniciarFrame() {
@@ -203,9 +199,9 @@ public class Jogo extends Canvas implements KeyListener, Runnable {
 				if(key.getKeyCode() == KeyEvent.VK_ENTER) {
 					PecasMoveis.medicoSelecionado = true;
 				} else if(key.getKeyCode() == KeyEvent.VK_J) {
-					PecasMoveis.medicoAtual = PecasMoveis.mudarSelecaoDePeca(entidadesMedicos, 1, -1);			
+					PecasMoveis.medicoAtual = PecasMoveis.mudarSelecaoDePeca(Tabuleiro.entidadesMedicos, 1, -1);			
 				} else if(key.getKeyCode() == KeyEvent.VK_L) {
-					PecasMoveis.medicoAtual = PecasMoveis.mudarSelecaoDePeca(entidadesMedicos, 1, 1);
+					PecasMoveis.medicoAtual = PecasMoveis.mudarSelecaoDePeca(Tabuleiro.entidadesMedicos, 1, 1);
 				}
 			} else if(!PecasMoveis.medicoAtual.movendo){
 				if(key.getKeyCode() == KeyEvent.VK_ENTER) {
@@ -215,25 +211,28 @@ public class Jogo extends Canvas implements KeyListener, Runnable {
 					PecasMoveis.medicoAtualDirY = 0;
 					PecasMoveis.proxPosicaoMedicoX = PecasMoveis.medicoAtual.pos[1] + (PecasMoveis.medicoAtualDirX*Tabuleiro.DC);
 					PecasMoveis.proxPosicaoMedicoY = PecasMoveis.medicoAtual.pos[0] + (PecasMoveis.medicoAtualDirY*Tabuleiro.DC);
+					PecasMoveis.medicoAtual.dir = 0;
 					PecasMoveis.medicoAtual.movendo = true;
 				} else if(key.getKeyCode() == KeyEvent.VK_L) {
 					PecasMoveis.medicoAtualDirX = 1;
 					PecasMoveis.medicoAtualDirY = 0;
 					PecasMoveis.proxPosicaoMedicoX = PecasMoveis.medicoAtual.pos[1] + (PecasMoveis.medicoAtualDirX*Tabuleiro.DC);
 					PecasMoveis.proxPosicaoMedicoY = PecasMoveis.medicoAtual.pos[0] + (PecasMoveis.medicoAtualDirY*Tabuleiro.DC);
+					PecasMoveis.medicoAtual.dir = 1;
 					PecasMoveis.medicoAtual.movendo = true;
 				} else if(key.getKeyCode() == KeyEvent.VK_I) {
-					System.out.println(PecasMoveis.medicoAtual);
 					PecasMoveis.medicoAtualDirY = -1;
 					PecasMoveis.medicoAtualDirX = 0;
 					PecasMoveis.proxPosicaoMedicoX = PecasMoveis.medicoAtual.pos[1] + (PecasMoveis.medicoAtualDirX*Tabuleiro.DC);
 					PecasMoveis.proxPosicaoMedicoY = PecasMoveis.medicoAtual.pos[0] + (PecasMoveis.medicoAtualDirY*Tabuleiro.DC);
+					PecasMoveis.medicoAtual.dir = 2;
 					PecasMoveis.medicoAtual.movendo = true;
 				} else if(key.getKeyCode() == KeyEvent.VK_K) {
 					PecasMoveis.medicoAtualDirY = 1;
 					PecasMoveis.medicoAtualDirX = 0;
 					PecasMoveis.proxPosicaoMedicoX = PecasMoveis.medicoAtual.pos[1] + (PecasMoveis.medicoAtualDirX*Tabuleiro.DC);
 					PecasMoveis.proxPosicaoMedicoY = PecasMoveis.medicoAtual.pos[0] + (PecasMoveis.medicoAtualDirY*Tabuleiro.DC);
+					PecasMoveis.medicoAtual.dir = 3;
 					PecasMoveis.medicoAtual.movendo = true;
 				}
 			}
@@ -244,9 +243,9 @@ public class Jogo extends Canvas implements KeyListener, Runnable {
 				if(key.getKeyCode() == KeyEvent.VK_R) {
 					PecasMoveis.infectadoSelecionado = true;
 				} else if(key.getKeyCode() == KeyEvent.VK_A) {
-					PecasMoveis.infectadoAtual = PecasMoveis.mudarSelecaoDePeca(entidadesInfectados, 2, -1);			
+					PecasMoveis.infectadoAtual = PecasMoveis.mudarSelecaoDePeca(Tabuleiro.entidadesInfectados, 2, -1);			
 				} else if(key.getKeyCode() == KeyEvent.VK_D) {
-					PecasMoveis.infectadoAtual = PecasMoveis.mudarSelecaoDePeca(entidadesInfectados, 2, 1);
+					PecasMoveis.infectadoAtual = PecasMoveis.mudarSelecaoDePeca(Tabuleiro.entidadesInfectados, 2, 1);
 				}
 			} else if(!PecasMoveis.infectadoAtual.movendo){
 				if(key.getKeyCode() == KeyEvent.VK_R) {
@@ -256,24 +255,28 @@ public class Jogo extends Canvas implements KeyListener, Runnable {
 					PecasMoveis.infectadoAtualDirY = 0;
 					PecasMoveis.proxPosicaoInfectadoX = PecasMoveis.infectadoAtual.pos[1] + (PecasMoveis.infectadoAtualDirX*Tabuleiro.DC);
 					PecasMoveis.proxPosicaoInfectadoY = PecasMoveis.infectadoAtual.pos[0] + (PecasMoveis.infectadoAtualDirY*Tabuleiro.DC);
+					PecasMoveis.infectadoAtual.dir = 0;
 					PecasMoveis.infectadoAtual.movendo = true;
 				} else if(key.getKeyCode() == KeyEvent.VK_D) {
 					PecasMoveis.infectadoAtualDirX = 1;
 					PecasMoveis.infectadoAtualDirY = 0;
 					PecasMoveis.proxPosicaoInfectadoX = PecasMoveis.infectadoAtual.pos[1] + (PecasMoveis.infectadoAtualDirX*Tabuleiro.DC);
 					PecasMoveis.proxPosicaoInfectadoY = PecasMoveis.infectadoAtual.pos[0] + (PecasMoveis.infectadoAtualDirY*Tabuleiro.DC);
+					PecasMoveis.infectadoAtual.dir = 1;
 					PecasMoveis.infectadoAtual.movendo = true;
 				} else if(key.getKeyCode() == KeyEvent.VK_W) {
 					PecasMoveis.infectadoAtualDirY = -1;
 					PecasMoveis.infectadoAtualDirX = 0;
 					PecasMoveis.proxPosicaoInfectadoX = PecasMoveis.infectadoAtual.pos[1] + (PecasMoveis.infectadoAtualDirX*Tabuleiro.DC);
 					PecasMoveis.proxPosicaoInfectadoY = PecasMoveis.infectadoAtual.pos[0] + (PecasMoveis.infectadoAtualDirY*Tabuleiro.DC);
+					PecasMoveis.infectadoAtual.dir = 2;
 					PecasMoveis.infectadoAtual.movendo = true;
 				} else if(key.getKeyCode() == KeyEvent.VK_S) {
 					PecasMoveis.infectadoAtualDirY = 1;
 					PecasMoveis.infectadoAtualDirX = 0;
 					PecasMoveis.proxPosicaoInfectadoX = PecasMoveis.infectadoAtual.pos[1] + (PecasMoveis.infectadoAtualDirX*Tabuleiro.DC);
 					PecasMoveis.proxPosicaoInfectadoY = PecasMoveis.infectadoAtual.pos[0] + (PecasMoveis.infectadoAtualDirY*Tabuleiro.DC);
+					PecasMoveis.infectadoAtual.dir = 3;
 					PecasMoveis.infectadoAtual.movendo = true;
 				}
 			}
