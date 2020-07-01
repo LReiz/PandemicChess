@@ -1,5 +1,8 @@
 package entidades;
 import java.awt.image.BufferedImage;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Graphics;
 
 import erros.BauVazio;
 import erros.ForaDeAlcance;
@@ -14,6 +17,8 @@ public class PecaMedico extends PecasMoveis implements ITransferir{
 	// sprites dos médicos
 	public static BufferedImage PECA_MEDICO_B = Jogo.spritesheet.getSprite(0*Tabuleiro.DC, 1*Tabuleiro.DC, Tabuleiro.DC, Tabuleiro.DC);
 	public static BufferedImage PECA_MEDICO_P = Jogo.spritesheet.getSprite(3*Tabuleiro.DC, 1*Tabuleiro.DC, Tabuleiro.DC, Tabuleiro.DC);
+	public static BufferedImage ITENS_MEDICOS_SEM_CHA = Jogo.spritesheet.getSprite(8*Tabuleiro.DC, 8*Tabuleiro.DC, Tabuleiro.DC, Tabuleiro.DC-7);
+	public static BufferedImage ITENS_MEDICOS_COM_CHA = Jogo.spritesheet.getSprite(8*Tabuleiro.DC, 8*Tabuleiro.DC, Tabuleiro.DC, Tabuleiro.DC);
 	
 	// itens do médico
 	public int mascaras = 3;
@@ -91,6 +96,25 @@ public class PecaMedico extends PecasMoveis implements ITransferir{
 		
 		transferirItens(this, Jogo.tabuleiro);
 	}
+	
+	public void renderizar(Graphics g) {
+		super.renderizar(g);
+
+		if(!cha)
+			g.drawImage(ITENS_MEDICOS_SEM_CHA, pos[1]+14, pos[0], Tabuleiro.DC, Tabuleiro.DC-7, null);
+		else if(cha)
+			g.drawImage(ITENS_MEDICOS_COM_CHA, pos[1]+14, pos[0], Tabuleiro.DC, Tabuleiro.DC, null);
+			
+	}
+	
+	public void renderizarSemPixelizar(Graphics g) {
+		g.setColor(new Color(0xFFFFFF));
+		g.setFont(new Font("arial", 1, 12));
+		g.drawString(String.valueOf(mascaras), (pos[1]+24)*Jogo.ESCALA, (pos[0]+2)*Jogo.ESCALA);
+		g.drawString(String.valueOf(algemas), (pos[1]+24)*Jogo.ESCALA, (pos[0]+8)*Jogo.ESCALA);
+
+	}
+	
 	public PecasMoveis encontrarInimigo(Tabuleiro tab) {
 		int yMed = this.pos[0];
 		int xMed = this.pos[1];

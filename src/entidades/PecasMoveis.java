@@ -97,6 +97,10 @@ public abstract class PecasMoveis implements IAtaque, IMovimento {
 		}
 	}
 	
+	public void renderizarSemPixelizar(Graphics g) {
+		
+	}
+	
 	public static PecasMoveis mudarSelecaoDePeca(List<PecasMoveis> vetorPecas, int jogador, int dir) {
 		if(jogador == 1) {				// médico
 			indexMedico += dir;
