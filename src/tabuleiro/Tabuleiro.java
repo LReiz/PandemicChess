@@ -363,12 +363,10 @@ public class Tabuleiro implements IMovimento, ICriaCha, IAtaque {
 				Tabuleiro.entidadesInfectados.add(infectado);
 		}
 		else if(inimigo instanceof PecaInfectado) {
-			if(inimigo.algemas > 0) {
 				int xInf = (int)(inimigo.pos[1]/Tabuleiro.DC);
 				int yInf = (int)(inimigo.pos[0]/Tabuleiro.DC);
 				Tabuleiro.entidadesInfectados.remove(inimigo);
 				tab.vetorPecasMoveis[yInf][xInf] = null;
-			}
 		}
 	}
 	public void verificarVitoria() throws ChaNaoColetado{

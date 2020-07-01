@@ -154,7 +154,7 @@ public class PecaMedico extends PecasMoveis implements ITransferir{
 	public void atacar(PecasMoveis inimigo, Tabuleiro tab) {
 		if(inimigo == null) return;
 		if(this.algemas == 0) return;
-
+		this.algemas --;
 		tab.atacar(inimigo, tab);
 	}
 	
