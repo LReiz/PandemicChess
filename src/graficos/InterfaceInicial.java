@@ -11,10 +11,12 @@ public class InterfaceInicial {
 	public static String vetorModosDeJogo[] = {"local", "remoto"};
 	public static int modoDeJogo;
 	
-	private static int maxRGB = 255;
+	private static int maxRGB = 240;
 	private static int R;
 	private static int G = maxRGB;
 	private static int B;
+	
+	private static boolean VerdeParaRosa = true;
 	
 	public static void att() {		
 		if(modoDeJogo >= vetorModosDeJogo.length) {
@@ -31,17 +33,18 @@ public class InterfaceInicial {
 	}
 	
 	public static void renderizar(Graphics g) {
-		R++;
-		G--;
-		B++;
-		if(R > maxRGB) {
-			R = 0;
-		} 
-		if(G < 0) {
-			G = maxRGB;
-		} 
-		if(B > maxRGB) {
-			B = 0;
+		if(VerdeParaRosa) {
+			R++;
+			G--;
+			if(R >= maxRGB) {
+				VerdeParaRosa = false;
+			}
+		} else {
+			R--;
+			G++;
+			if(R <= 0) {
+				VerdeParaRosa = true;
+			}
 		}
 		
 		g.setColor(new Color(R, G, B));
@@ -53,11 +56,13 @@ public class InterfaceInicial {
 		g.drawString("Multiplayer (local)", (Jogo.LARGURA-140)/2, 150);
 		g.drawString("Multiplayer (remoto)", (Jogo.LARGURA-140)/2, 170);
 		
-		g.setColor(new Color(0x0055EE));
+		g.setColor(new Color(0xAAEEAA));
 		
-		if(vetorModosDeJogo[modoDeJogo] == "local")
-			g.drawString(">>", (Jogo.LARGURA-180)/2, 150);
-		else if(vetorModosDeJogo[modoDeJogo] == "remoto")
-			g.drawString(">>", (Jogo.LARGURA-180)/2, 170);
+		if(!(modoDeJogo < 0) && !(modoDeJogo >=vetorModosDeJogo.length)) {			
+			if(vetorModosDeJogo[modoDeJogo] == "local")
+				g.drawString(">>", (Jogo.LARGURA-180)/2, 150);
+			else if(vetorModosDeJogo[modoDeJogo] == "remoto")
+				g.drawString(">>", (Jogo.LARGURA-180)/2, 170);
+		}
 	}
 }
