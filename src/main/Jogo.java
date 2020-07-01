@@ -26,6 +26,7 @@ import entidades.PecasMoveis;
 import erros.ForaDeAlcance;
 import erros.MuitoDistante;
 import erros.NaoVazio;
+import graficos.InterfaceInicial;
 import graficos.Spritesheet;
 import tabuleiro.Tabuleiro;
 
@@ -41,6 +42,7 @@ public class Jogo extends Canvas implements KeyListener, Runnable {
 	// Estados do Jogo
 	public boolean jogoRodando = false;
 	public static boolean multiplayer = false;
+	public String estadoDoJogo = "telaInicial";		// 1: "telaInicial"; 2: "jogando"
 	
 	// Ferramentas
 	private Thread thread;
@@ -87,9 +89,13 @@ public class Jogo extends Canvas implements KeyListener, Runnable {
 	
 	// atualiza informações do jogo
 	public void att() throws NaoVazio, ForaDeAlcance, MuitoDistante {
-		tabuleiro.att();
-		if(multiplayer)
-			attFireBase();
+		if(estadoDoJogo == "telaInicial") {
+			InterfaceInicial.att();
+		} else if(estadoDoJogo == "jogando") {
+			tabuleiro.att();
+			if(multiplayer)
+				attFireBase();			
+		}
 	}
 	
 	// renderiza gráficos
@@ -104,16 +110,24 @@ public class Jogo extends Canvas implements KeyListener, Runnable {
 		g.setColor(Color.BLACK);
 		g.fillRect(0, 0, LARGURA, ALTURA);
 	
-		// Renderização dos elementos do tabuleiro
-		tabuleiro.renderizar(g);
-		
-		g.dispose();
-		g = bs.getDrawGraphics();
-		g.drawImage(imagemPrincipal, 0, 0, LARGURA*ESCALA, ALTURA*ESCALA, null);
-		
-		// Renderização sem pixelização
-		for(int i = 0; i < Tabuleiro.entidadesMedicos.size(); i++) {
-			Tabuleiro.entidadesMedicos.get(i).renderizarSemPixelizar(g);
+		if(estadoDoJogo == "telaInicial") {
+			InterfaceInicial.renderizar(g);
+
+			g.dispose();
+			g = bs.getDrawGraphics();
+			g.drawImage(imagemPrincipal, 0, 0, LARGURA*ESCALA, ALTURA*ESCALA, null);
+		} else if(estadoDoJogo == "jogando") {
+			// Renderização dos elementos do tabuleiro
+			tabuleiro.renderizar(g);
+			
+			g.dispose();
+			g = bs.getDrawGraphics();
+			g.drawImage(imagemPrincipal, 0, 0, LARGURA*ESCALA, ALTURA*ESCALA, null);
+			
+			// Renderização sem pixelização
+			for(int i = 0; i < Tabuleiro.entidadesMedicos.size(); i++) {
+				Tabuleiro.entidadesMedicos.get(i).renderizarSemPixelizar(g);
+			}
 		}
 		
 		bs.show();
@@ -226,90 +240,100 @@ public class Jogo extends Canvas implements KeyListener, Runnable {
 	public void keyPressed(KeyEvent key) {
 		// TODO Auto-generated method stub
 
-		if(Tabuleiro.vezJogador == 1) {
-			if(!PecasMoveis.medicoSelecionado) {
-				if(key.getKeyCode() == KeyEvent.VK_ENTER) {
-					PecasMoveis.medicoSelecionado = true;
-				} else if(key.getKeyCode() == KeyEvent.VK_J) {
-					PecasMoveis.medicoAtual = PecasMoveis.mudarSelecaoDePeca(Tabuleiro.entidadesMedicos, 1, -1);			
-				} else if(key.getKeyCode() == KeyEvent.VK_L) {
-					PecasMoveis.medicoAtual = PecasMoveis.mudarSelecaoDePeca(Tabuleiro.entidadesMedicos, 1, 1);
-				}
-			} else if(!PecasMoveis.medicoAtual.movendo){
-				if(key.getKeyCode() == KeyEvent.VK_ENTER) {
-					PecasMoveis.medicoSelecionado = false;
-				} else if(key.getKeyCode() == KeyEvent.VK_J) {
-					PecasMoveis.medicoAtualDirX = -1;
-					PecasMoveis.medicoAtualDirY = 0;
-					PecasMoveis.proxPosicaoMedicoX = PecasMoveis.medicoAtual.pos[1] + (PecasMoveis.medicoAtualDirX*Tabuleiro.DC);
-					PecasMoveis.proxPosicaoMedicoY = PecasMoveis.medicoAtual.pos[0] + (PecasMoveis.medicoAtualDirY*Tabuleiro.DC);
-					PecasMoveis.medicoAtual.dir = 0;
-					PecasMoveis.medicoAtual.movendo = true;
-				} else if(key.getKeyCode() == KeyEvent.VK_L) {
-					PecasMoveis.medicoAtualDirX = 1;
-					PecasMoveis.medicoAtualDirY = 0;
-					PecasMoveis.proxPosicaoMedicoX = PecasMoveis.medicoAtual.pos[1] + (PecasMoveis.medicoAtualDirX*Tabuleiro.DC);
-					PecasMoveis.proxPosicaoMedicoY = PecasMoveis.medicoAtual.pos[0] + (PecasMoveis.medicoAtualDirY*Tabuleiro.DC);
-					PecasMoveis.medicoAtual.dir = 1;
-					PecasMoveis.medicoAtual.movendo = true;
-				} else if(key.getKeyCode() == KeyEvent.VK_I) {
-					PecasMoveis.medicoAtualDirY = -1;
-					PecasMoveis.medicoAtualDirX = 0;
-					PecasMoveis.proxPosicaoMedicoX = PecasMoveis.medicoAtual.pos[1] + (PecasMoveis.medicoAtualDirX*Tabuleiro.DC);
-					PecasMoveis.proxPosicaoMedicoY = PecasMoveis.medicoAtual.pos[0] + (PecasMoveis.medicoAtualDirY*Tabuleiro.DC);
-					PecasMoveis.medicoAtual.dir = 2;
-					PecasMoveis.medicoAtual.movendo = true;
-				} else if(key.getKeyCode() == KeyEvent.VK_K) {
-					PecasMoveis.medicoAtualDirY = 1;
-					PecasMoveis.medicoAtualDirX = 0;
-					PecasMoveis.proxPosicaoMedicoX = PecasMoveis.medicoAtual.pos[1] + (PecasMoveis.medicoAtualDirX*Tabuleiro.DC);
-					PecasMoveis.proxPosicaoMedicoY = PecasMoveis.medicoAtual.pos[0] + (PecasMoveis.medicoAtualDirY*Tabuleiro.DC);
-					PecasMoveis.medicoAtual.dir = 3;
-					PecasMoveis.medicoAtual.movendo = true;
+		if(estadoDoJogo == "telaInicial") {
+			if(key.getKeyCode() == KeyEvent.VK_ENTER) {
+				estadoDoJogo = "jogando";
+			} else if(key.getKeyCode() == KeyEvent.VK_W) {
+				InterfaceInicial.modoDeJogo--;
+			} else if(key.getKeyCode() == KeyEvent.VK_S) {
+				InterfaceInicial.modoDeJogo++;
+			}
+		} else if(estadoDoJogo == "jogando") {
+			if(Tabuleiro.vezJogador == 1) {
+				if(!PecasMoveis.medicoSelecionado) {
+					if(key.getKeyCode() == KeyEvent.VK_ENTER) {
+						PecasMoveis.medicoSelecionado = true;
+					} else if(key.getKeyCode() == KeyEvent.VK_J) {
+						PecasMoveis.medicoAtual = PecasMoveis.mudarSelecaoDePeca(Tabuleiro.entidadesMedicos, 1, -1);			
+					} else if(key.getKeyCode() == KeyEvent.VK_L) {
+						PecasMoveis.medicoAtual = PecasMoveis.mudarSelecaoDePeca(Tabuleiro.entidadesMedicos, 1, 1);
+					}
+				} else if(!PecasMoveis.medicoAtual.movendo){
+					if(key.getKeyCode() == KeyEvent.VK_ENTER) {
+						PecasMoveis.medicoSelecionado = false;
+					} else if(key.getKeyCode() == KeyEvent.VK_J) {
+						PecasMoveis.medicoAtualDirX = -1;
+						PecasMoveis.medicoAtualDirY = 0;
+						PecasMoveis.proxPosicaoMedicoX = PecasMoveis.medicoAtual.pos[1] + (PecasMoveis.medicoAtualDirX*Tabuleiro.DC);
+						PecasMoveis.proxPosicaoMedicoY = PecasMoveis.medicoAtual.pos[0] + (PecasMoveis.medicoAtualDirY*Tabuleiro.DC);
+						PecasMoveis.medicoAtual.dir = 0;
+						PecasMoveis.medicoAtual.movendo = true;
+					} else if(key.getKeyCode() == KeyEvent.VK_L) {
+						PecasMoveis.medicoAtualDirX = 1;
+						PecasMoveis.medicoAtualDirY = 0;
+						PecasMoveis.proxPosicaoMedicoX = PecasMoveis.medicoAtual.pos[1] + (PecasMoveis.medicoAtualDirX*Tabuleiro.DC);
+						PecasMoveis.proxPosicaoMedicoY = PecasMoveis.medicoAtual.pos[0] + (PecasMoveis.medicoAtualDirY*Tabuleiro.DC);
+						PecasMoveis.medicoAtual.dir = 1;
+						PecasMoveis.medicoAtual.movendo = true;
+					} else if(key.getKeyCode() == KeyEvent.VK_I) {
+						PecasMoveis.medicoAtualDirY = -1;
+						PecasMoveis.medicoAtualDirX = 0;
+						PecasMoveis.proxPosicaoMedicoX = PecasMoveis.medicoAtual.pos[1] + (PecasMoveis.medicoAtualDirX*Tabuleiro.DC);
+						PecasMoveis.proxPosicaoMedicoY = PecasMoveis.medicoAtual.pos[0] + (PecasMoveis.medicoAtualDirY*Tabuleiro.DC);
+						PecasMoveis.medicoAtual.dir = 2;
+						PecasMoveis.medicoAtual.movendo = true;
+					} else if(key.getKeyCode() == KeyEvent.VK_K) {
+						PecasMoveis.medicoAtualDirY = 1;
+						PecasMoveis.medicoAtualDirX = 0;
+						PecasMoveis.proxPosicaoMedicoX = PecasMoveis.medicoAtual.pos[1] + (PecasMoveis.medicoAtualDirX*Tabuleiro.DC);
+						PecasMoveis.proxPosicaoMedicoY = PecasMoveis.medicoAtual.pos[0] + (PecasMoveis.medicoAtualDirY*Tabuleiro.DC);
+						PecasMoveis.medicoAtual.dir = 3;
+						PecasMoveis.medicoAtual.movendo = true;
+					}
 				}
 			}
-		}
-		
-		else if(Tabuleiro.vezJogador == 2) {
-			if(!PecasMoveis.infectadoSelecionado) {
-				if(key.getKeyCode() == KeyEvent.VK_R) {
-					PecasMoveis.infectadoSelecionado = true;
-				} else if(key.getKeyCode() == KeyEvent.VK_A) {
-					PecasMoveis.infectadoAtual = PecasMoveis.mudarSelecaoDePeca(Tabuleiro.entidadesInfectados, 2, -1);			
-				} else if(key.getKeyCode() == KeyEvent.VK_D) {
-					PecasMoveis.infectadoAtual = PecasMoveis.mudarSelecaoDePeca(Tabuleiro.entidadesInfectados, 2, 1);
-				}
-			} else if(!PecasMoveis.infectadoAtual.movendo){
-				if(key.getKeyCode() == KeyEvent.VK_R) {
-					PecasMoveis.infectadoSelecionado = false;
-				} else if(key.getKeyCode() == KeyEvent.VK_A) {
-					PecasMoveis.infectadoAtualDirX = -1;
-					PecasMoveis.infectadoAtualDirY = 0;
-					PecasMoveis.proxPosicaoInfectadoX = PecasMoveis.infectadoAtual.pos[1] + (PecasMoveis.infectadoAtualDirX*Tabuleiro.DC);
-					PecasMoveis.proxPosicaoInfectadoY = PecasMoveis.infectadoAtual.pos[0] + (PecasMoveis.infectadoAtualDirY*Tabuleiro.DC);
-					PecasMoveis.infectadoAtual.dir = 0;
-					PecasMoveis.infectadoAtual.movendo = true;
-				} else if(key.getKeyCode() == KeyEvent.VK_D) {
-					PecasMoveis.infectadoAtualDirX = 1;
-					PecasMoveis.infectadoAtualDirY = 0;
-					PecasMoveis.proxPosicaoInfectadoX = PecasMoveis.infectadoAtual.pos[1] + (PecasMoveis.infectadoAtualDirX*Tabuleiro.DC);
-					PecasMoveis.proxPosicaoInfectadoY = PecasMoveis.infectadoAtual.pos[0] + (PecasMoveis.infectadoAtualDirY*Tabuleiro.DC);
-					PecasMoveis.infectadoAtual.dir = 1;
-					PecasMoveis.infectadoAtual.movendo = true;
-				} else if(key.getKeyCode() == KeyEvent.VK_W) {
-					PecasMoveis.infectadoAtualDirY = -1;
-					PecasMoveis.infectadoAtualDirX = 0;
-					PecasMoveis.proxPosicaoInfectadoX = PecasMoveis.infectadoAtual.pos[1] + (PecasMoveis.infectadoAtualDirX*Tabuleiro.DC);
-					PecasMoveis.proxPosicaoInfectadoY = PecasMoveis.infectadoAtual.pos[0] + (PecasMoveis.infectadoAtualDirY*Tabuleiro.DC);
-					PecasMoveis.infectadoAtual.dir = 2;
-					PecasMoveis.infectadoAtual.movendo = true;
-				} else if(key.getKeyCode() == KeyEvent.VK_S) {
-					PecasMoveis.infectadoAtualDirY = 1;
-					PecasMoveis.infectadoAtualDirX = 0;
-					PecasMoveis.proxPosicaoInfectadoX = PecasMoveis.infectadoAtual.pos[1] + (PecasMoveis.infectadoAtualDirX*Tabuleiro.DC);
-					PecasMoveis.proxPosicaoInfectadoY = PecasMoveis.infectadoAtual.pos[0] + (PecasMoveis.infectadoAtualDirY*Tabuleiro.DC);
-					PecasMoveis.infectadoAtual.dir = 3;
-					PecasMoveis.infectadoAtual.movendo = true;
+			
+			else if(Tabuleiro.vezJogador == 2) {
+				if(!PecasMoveis.infectadoSelecionado) {
+					if(key.getKeyCode() == KeyEvent.VK_R) {
+						PecasMoveis.infectadoSelecionado = true;
+					} else if(key.getKeyCode() == KeyEvent.VK_A) {
+						PecasMoveis.infectadoAtual = PecasMoveis.mudarSelecaoDePeca(Tabuleiro.entidadesInfectados, 2, -1);			
+					} else if(key.getKeyCode() == KeyEvent.VK_D) {
+						PecasMoveis.infectadoAtual = PecasMoveis.mudarSelecaoDePeca(Tabuleiro.entidadesInfectados, 2, 1);
+					}
+				} else if(!PecasMoveis.infectadoAtual.movendo){
+					if(key.getKeyCode() == KeyEvent.VK_R) {
+						PecasMoveis.infectadoSelecionado = false;
+					} else if(key.getKeyCode() == KeyEvent.VK_A) {
+						PecasMoveis.infectadoAtualDirX = -1;
+						PecasMoveis.infectadoAtualDirY = 0;
+						PecasMoveis.proxPosicaoInfectadoX = PecasMoveis.infectadoAtual.pos[1] + (PecasMoveis.infectadoAtualDirX*Tabuleiro.DC);
+						PecasMoveis.proxPosicaoInfectadoY = PecasMoveis.infectadoAtual.pos[0] + (PecasMoveis.infectadoAtualDirY*Tabuleiro.DC);
+						PecasMoveis.infectadoAtual.dir = 0;
+						PecasMoveis.infectadoAtual.movendo = true;
+					} else if(key.getKeyCode() == KeyEvent.VK_D) {
+						PecasMoveis.infectadoAtualDirX = 1;
+						PecasMoveis.infectadoAtualDirY = 0;
+						PecasMoveis.proxPosicaoInfectadoX = PecasMoveis.infectadoAtual.pos[1] + (PecasMoveis.infectadoAtualDirX*Tabuleiro.DC);
+						PecasMoveis.proxPosicaoInfectadoY = PecasMoveis.infectadoAtual.pos[0] + (PecasMoveis.infectadoAtualDirY*Tabuleiro.DC);
+						PecasMoveis.infectadoAtual.dir = 1;
+						PecasMoveis.infectadoAtual.movendo = true;
+					} else if(key.getKeyCode() == KeyEvent.VK_W) {
+						PecasMoveis.infectadoAtualDirY = -1;
+						PecasMoveis.infectadoAtualDirX = 0;
+						PecasMoveis.proxPosicaoInfectadoX = PecasMoveis.infectadoAtual.pos[1] + (PecasMoveis.infectadoAtualDirX*Tabuleiro.DC);
+						PecasMoveis.proxPosicaoInfectadoY = PecasMoveis.infectadoAtual.pos[0] + (PecasMoveis.infectadoAtualDirY*Tabuleiro.DC);
+						PecasMoveis.infectadoAtual.dir = 2;
+						PecasMoveis.infectadoAtual.movendo = true;
+					} else if(key.getKeyCode() == KeyEvent.VK_S) {
+						PecasMoveis.infectadoAtualDirY = 1;
+						PecasMoveis.infectadoAtualDirX = 0;
+						PecasMoveis.proxPosicaoInfectadoX = PecasMoveis.infectadoAtual.pos[1] + (PecasMoveis.infectadoAtualDirX*Tabuleiro.DC);
+						PecasMoveis.proxPosicaoInfectadoY = PecasMoveis.infectadoAtual.pos[0] + (PecasMoveis.infectadoAtualDirY*Tabuleiro.DC);
+						PecasMoveis.infectadoAtual.dir = 3;
+						PecasMoveis.infectadoAtual.movendo = true;
+					}
 				}
 			}
 		}
