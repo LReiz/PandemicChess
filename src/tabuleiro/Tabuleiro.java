@@ -278,7 +278,9 @@ public class Tabuleiro implements IMovimento, ICriaCha, IAtaque {
 			peca.movendo = false;
 			throw new NaoVazio("Célula Ocupada");
 		}
-
+		if(peca instanceof PecaMedico) {
+			System.out.println("O medico que esta sendo movido está com "+peca.mascaras+" mascaras");
+		}
 		return true;
 	}
 	
@@ -302,6 +304,10 @@ public class Tabuleiro implements IMovimento, ICriaCha, IAtaque {
 	
 	public void atacar(PecasMoveis inimigo, Tabuleiro tab) {
 		if(inimigo instanceof PecaMedico) {
+				if(inimigo.mascaras > 0) {
+					inimigo.mascaras--;
+					return;
+				}
 				int xMed = (int)(inimigo.pos[1]/Tabuleiro.DC);
 				int yMed = (int)(inimigo.pos[0]/Tabuleiro.DC);
 				Tabuleiro.entidadesMedicos.remove(inimigo);
@@ -337,7 +343,7 @@ public class Tabuleiro implements IMovimento, ICriaCha, IAtaque {
 			if((vetorPecasMoveis[15][8] instanceof PecaMedico && vetorPecasMoveis[15][8].cha == true) ||
 				(vetorPecasMoveis[15][9] instanceof PecaMedico && vetorPecasMoveis[15][9].cha == true)){
 				System.out.println("VITÓRIA DOS MÉDICOS");
-				System.out.println("Cura encontrada: Os cientistas descobriram que a cura para a doença era um pouco de repuso e um chazinho de boldo!");
+				System.out.println("Cura encontrada: Os cientistas descobriram que a cura para a doença era um pouco de repouso e um chazinho de boldo!");
 			}
 			else if((vetorPecasMoveis[15][8] instanceof PecaMedico && vetorPecasMoveis[15][8].cha == false) ||
 					(vetorPecasMoveis[15][9] instanceof PecaMedico && vetorPecasMoveis[15][9].cha == false)){

@@ -84,7 +84,7 @@ public class PecaInfectado extends PecasMoveis {
 					
 					// CASO EM QUE HÁ UMA PAREDE ENTRE OS DOIS
 					
-					else if(i % 2 == 0 && j % 2 == 0) {
+					else if(Math.abs(i) % 2 == 0 && Math.abs(j) % 2 == 0) {
 						xParede = (xInfec+(xInfec+j))/2;
 						yParede = (yInfec+(yInfec+i))/2;
 					}
@@ -101,9 +101,10 @@ public class PecaInfectado extends PecasMoveis {
 							else xParede = yInfec + j + 1;
 						}
 					}
-					if(tab.vetorPecasMoveis[yParede][xParede]!= null && 
+					if(!(tab.vetorPecasMoveis[yParede][xParede]!= null && 
 						!(tab.vetorPecasMoveis[yParede][xParede] instanceof PecasMoveis)
-						&&!(tab.vetorBaus[yParede][xParede] instanceof PecaBau)) {
+						&&!(tab.vetorBaus[yParede][xParede] instanceof PecaBau))) {
+						System.out.println("o medico encontrado tem " + tab.vetorPecasMoveis[yInfec+i][xInfec+j].mascaras);
 						return tab.vetorPecasMoveis[yInfec+i][xInfec+j];
 					}
 				}
@@ -116,9 +117,12 @@ public class PecaInfectado extends PecasMoveis {
 	
 	public void atacar(PecasMoveis inimigo,Tabuleiro tab) {
 		if (inimigo == null) return;
-		
-		if((inimigo).mascaras > 0) 
+		System.out.println("inimigo encontrado - numero de mascaras:"+ inimigo.mascaras);
+		if(inimigo.mascaras > 0) {
+
 			inimigo.mascaras -= 1;
+			return;
+		}
 		else
 			tab.atacar(inimigo, tab);		
 	}

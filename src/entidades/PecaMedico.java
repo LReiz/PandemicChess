@@ -22,8 +22,8 @@ public class PecaMedico extends PecasMoveis implements ITransferir{
 	
 	// itens do médico
 	public int mascaras = 3;
-	public int algemas;
-	public boolean cha;
+	public int algemas = 0;
+	public boolean cha = false;
 
 	public PecaMedico(int x, int y, BufferedImage sprite) {
 		super(x, y, sprite);
@@ -121,9 +121,9 @@ public class PecaMedico extends PecasMoveis implements ITransferir{
 		int xMed = (int)(this.pos[1]/Tabuleiro.DC);
 	
 		for(int yy = -1;yy<2;yy++) {
-			if(yMed+yy < 0 || yMed+yy > 16) continue;
+			if(yMed+yy < 0 || yMed+yy > Tabuleiro.DC) continue;
 			for(int xx = -1;xx<2;xx++) {
-				if(xMed+xx < 0 || xMed+xx > 16) continue;
+				if(xMed+xx < 0 || xMed+xx > Tabuleiro.DC) continue;
 				if(tab.vetorPecasMoveis[yMed+yy][xMed+xx]instanceof PecaInfectado) {
 					return tab.vetorPecasMoveis[yMed+yy][xMed+xx];
 				}
