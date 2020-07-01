@@ -94,6 +94,7 @@ public class PecaMedico extends PecasMoveis implements ITransferir{
 			}
 		}
 		
+		super.att();
 		transferirItens(this, Jogo.tabuleiro);
 	}
 	
@@ -116,15 +117,15 @@ public class PecaMedico extends PecasMoveis implements ITransferir{
 	}
 	
 	public PecasMoveis encontrarInimigo(Tabuleiro tab) {
-		int yMed = this.pos[0];
-		int xMed = this.pos[1];
+		int yMed = (int)(this.pos[0]/Tabuleiro.DC);
+		int xMed = (int)(this.pos[1]/Tabuleiro.DC);
 	
-		for(int i = -1;i<2;i++) {
-			if(yMed+i < 0 || yMed+i > 16) continue;
-			for(int j = -1;j<2;j++) {
-				if(xMed+j < 0 || xMed+j > 16) continue;
-				if(tab.vetorPecasMoveis[yMed+i][xMed+j]instanceof PecaInfectado) {
-					return tab.vetorPecasMoveis[yMed+i][xMed+j];
+		for(int yy = -1;yy<2;yy++) {
+			if(yMed+yy < 0 || yMed+yy > 16) continue;
+			for(int xx = -1;xx<2;xx++) {
+				if(xMed+xx < 0 || xMed+xx > 16) continue;
+				if(tab.vetorPecasMoveis[yMed+yy][xMed+xx]instanceof PecaInfectado) {
+					return tab.vetorPecasMoveis[yMed+yy][xMed+xx];
 				}
 			}
 		}
@@ -149,7 +150,7 @@ public class PecaMedico extends PecasMoveis implements ITransferir{
 	}
 	
 	public void atacar(PecasMoveis inimigo, Tabuleiro tab) {
-		if (inimigo == null) return;
+		if(inimigo == null) return;
 		if(this.algemas == 0) return;
 
 		tab.atacar(inimigo, tab);

@@ -9,7 +9,7 @@ public class PecaCha implements ICriaCha, IGuardaCha{
 	
 	// Atributos do cha
 	public int pos[];
-	public PecaMedico med;
+	public PecaMedico medicoPortadorDoCha;
 	private BufferedImage sprite;
 	
 	// sprites do cha
@@ -26,9 +26,10 @@ public class PecaCha implements ICriaCha, IGuardaCha{
 		if(!Tabuleiro.chaCriado)
 			criaCha();
 		verificarBau(Jogo.tabuleiro);
-		if(med!= null) {
-			this.pos[0] = med.pos[0];
-			this.pos[1] = med.pos[1];
+		
+		if(medicoPortadorDoCha != null) {
+			this.pos[0] = medicoPortadorDoCha.pos[0];
+			this.pos[1] = medicoPortadorDoCha.pos[1];
 		}
 	}
 	

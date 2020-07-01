@@ -44,7 +44,7 @@ public class Tabuleiro implements IMovimento, ICriaCha, IAtaque {
 	public static ArrayList<PecasMoveis> entidadesInfectados;
 	public static ArrayList<PecaBau> entidadesBau;
 	
-	// Controle da quantidade de Peças no mapa
+	// Controle da quantidade de Peças para inicializar no mapa
 	private int maxMedicos = 8;
 	private int numMedicos = 0;
 	private int maxInfectados = 5;
@@ -70,7 +70,7 @@ public class Tabuleiro implements IMovimento, ICriaCha, IAtaque {
 		PecasMoveis.infectadoAtual = entidadesInfectados.get(0);
 	}
 	
-	public void att() throws NaoVazio, ForaDeAlcance, MuitoDistante, BauVazio {
+	public void att() throws NaoVazio, ForaDeAlcance, MuitoDistante, BauVazio, ChaNaoColetado {
 		// atualiza chá
 		if(chaCriado)
 			pecaCha.att();
@@ -93,6 +93,8 @@ public class Tabuleiro implements IMovimento, ICriaCha, IAtaque {
 		for(int i = 0; i < entidadesBau.size(); i++) {
 			entidadesBau.get(i).att();
 		}
+		
+		verificarVitoria();
 	}
 	
 	public void renderizar(Graphics g) {
@@ -300,32 +302,34 @@ public class Tabuleiro implements IMovimento, ICriaCha, IAtaque {
 	
 	public void atacar(PecasMoveis inimigo, Tabuleiro tab) {
 		if(inimigo instanceof PecaMedico) {
-				int yMed = inimigo.pos[0];
-				int xMed = inimigo.pos[1];
-				PecasMoveis infectado = new PecaInfectado(xMed,yMed,PecaInfectado.PECA_INFECTADO);
+				int xMed = (int)(inimigo.pos[1]/Tabuleiro.DC);
+				int yMed = (int)(inimigo.pos[0]/Tabuleiro.DC);
+				Tabuleiro.entidadesMedicos.remove(inimigo);
+				
 				if(inimigo.cha == true) {
-					tab.pecaCha.med = null;
+					tab.pecaCha.medicoPortadorDoCha = null;
 				}
+				
+				PecasMoveis infectado = new PecaInfectado(xMed*Tabuleiro.DC, yMed*Tabuleiro.DC,PecaInfectado.PECA_INFECTADO);
 				tab.vetorPecasMoveis[yMed][xMed] = infectado;
-				numMedicos --;
-				numInfectados ++;
+				Tabuleiro.entidadesInfectados.add(infectado);
 		}
-		else {
+		else if(inimigo instanceof PecaInfectado) {
 			if(inimigo.algemas > 0) {
-				int yMed = inimigo.pos[0];
-				int xMed = inimigo.pos[1];
-				tab.vetorPecasMoveis[yMed][xMed] = null;
-				numInfectados --;
+				int xInf = (int)(inimigo.pos[1]/Tabuleiro.DC);
+				int yInf = (int)(inimigo.pos[0]/Tabuleiro.DC);
+				Tabuleiro.entidadesInfectados.remove(inimigo);
+				tab.vetorPecasMoveis[yInf][xInf] = null;
 			}
 		}
 	}
 	public void verificarVitoria() throws ChaNaoColetado{
-		if(numMedicos == 0) {
+		if(entidadesMedicos.size() <= 0) {
 			System.out.println("VITÓRIA DOS INFECTADOS");
 			System.out.println("Genocídio: O vírus venceu a humanidade!");
 			return;
 		}
-		else if(numInfectados == 0) {
+		else if(entidadesInfectados.size() <= 0) {
 			System.out.println("VITÓRIA DOS MÉDICOS");
 			System.out.println("Lockdown: Todos os infectados foram colocados em quarentena!");
 		}

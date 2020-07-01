@@ -2,6 +2,7 @@ package entidades;
 
 import java.awt.image.BufferedImage;
 
+import erros.BauVazio;
 import erros.ForaDeAlcance;
 import erros.MuitoDistante;
 import erros.NaoVazio;
@@ -33,7 +34,7 @@ public class PecaInfectado extends PecasMoveis {
 
 	}
 	
-	public void att() throws NaoVazio, ForaDeAlcance, MuitoDistante {
+	public void att() throws NaoVazio, ForaDeAlcance, MuitoDistante, BauVazio {
 		if(!Jogo.multiplayer) {
 			if(movendo) {
 				movendo = movimento(PecasMoveis.proxPosicaoInfectadoX, PecasMoveis.proxPosicaoInfectadoY, this, Jogo.tabuleiro);
@@ -61,14 +62,16 @@ public class PecaInfectado extends PecasMoveis {
 				}
 			}
 		}
+		
+		super.att();
 	}
 	
 	public PecasMoveis encontrarInimigo(Tabuleiro tab) {
-		int yInfec = this.pos[0];
-		int xInfec = this.pos[1];
+		int xInfec = (int)(this.pos[1]/Tabuleiro.DC);
+		int yInfec = (int)(this.pos[0]/Tabuleiro.DC);
 		// yParede e xParede são as coordenadas de uma possível parede entre os dois
-		int yParede = 0;
 		int xParede = 0;
+		int yParede = 0;
 		for(int i = -2;i<3;i++) {
 			if(yInfec+i < 0 || yInfec+i > 16) continue;
 			for(int j = -2;j<3;j++) {
@@ -82,8 +85,8 @@ public class PecaInfectado extends PecasMoveis {
 					// CASO EM QUE HÁ UMA PAREDE ENTRE OS DOIS
 					
 					else if(i % 2 == 0 && j % 2 == 0) {
-						yParede = (yInfec+(yInfec+i))/2;
 						xParede = (xInfec+(xInfec+j))/2;
+						yParede = (yInfec+(yInfec+i))/2;
 					}
 					else if((Math.abs(i) == 2 && Math.abs(j) == 1)
 							||Math.abs(i) == 1 && Math.abs(j) == 2) {
@@ -108,15 +111,16 @@ public class PecaInfectado extends PecasMoveis {
 
 		}
 		
-		
 		return null;
 	}
+	
 	public void atacar(PecasMoveis inimigo,Tabuleiro tab) {
 		if (inimigo == null) return;
 		
-		if((inimigo).mascaras > 0) inimigo.mascaras -= 1;
-		
-		else tab.atacar(inimigo, tab);		
+		if((inimigo).mascaras > 0) 
+			inimigo.mascaras -= 1;
+		else
+			tab.atacar(inimigo, tab);		
 	}
 
 }

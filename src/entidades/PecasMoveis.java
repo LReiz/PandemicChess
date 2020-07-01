@@ -65,7 +65,7 @@ public abstract class PecasMoveis implements IAtaque, IMovimento {
 	}
 	
 	public void att() throws NaoVazio, ForaDeAlcance, MuitoDistante, BauVazio {
-
+		atacar(encontrarInimigo(Jogo.tabuleiro), Jogo.tabuleiro);
 	}
 	
 	public void renderizar(Graphics g) {
@@ -171,12 +171,10 @@ public abstract class PecasMoveis implements IAtaque, IMovimento {
 		}
 		return false;
 	}
-	public PecasMoveis encontrarInimigo(Tabuleiro tab) {
-		return null;
-	}
-	public void atacar(PecasMoveis inimigo,Tabuleiro tab) {
-		
-	}
+	
+	public abstract PecasMoveis encontrarInimigo(Tabuleiro tab);
+	
+	public abstract void atacar(PecasMoveis inimigo,Tabuleiro tab);
 
 	
 	protected void atualizarVetorBau(int x_inicial, int y_inicial) {

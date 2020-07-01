@@ -38,7 +38,7 @@ public class PecaBau implements IGuardaCha, ITransferir {
 		med.algemas += this.algemas;
 		if(this.cha == true) {
 			med.cha = true;
-			tab.pecaCha.med = med;
+			tab.pecaCha.medicoPortadorDoCha = med;
 			this.cha = false;
 		}
 		
