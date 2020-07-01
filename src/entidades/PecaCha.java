@@ -5,12 +5,10 @@ import java.awt.image.BufferedImage;
 import interfaces.*;
 import main.Jogo;
 import tabuleiro.Tabuleiro;
-public class PecaCha implements ICriaCha, IGuardaCha{
+public class PecaCha extends Peca implements ICriaCha, IGuardaCha{
 	
 	// Atributos do cha
-	public int pos[];
 	public PecaMedico medicoPortadorDoCha;
-	private BufferedImage sprite;
 	
 	// sprites do cha
 	public static BufferedImage PECA_CHA = Jogo.spritesheet.getSprite(7*Tabuleiro.DC, 8*Tabuleiro.DC, Tabuleiro.DC, Tabuleiro.DC);

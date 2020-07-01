@@ -63,8 +63,8 @@ public class PecaMedico extends PecasMoveis implements ITransferir{
 	}
 	
 	public void att() throws NaoVazio, ForaDeAlcance, MuitoDistante, BauVazio {
-		// atualização da peça no modo singleplayer
-		if(!Jogo.multiplayer) {
+		// atualização da peça no modo multiplayer local
+		if(!Jogo.multiplayerRemoto) {
 			if(movendo) {
 				movendo = movimento(PecasMoveis.proxPosicaoMedicoX, PecasMoveis.proxPosicaoMedicoY, this, Jogo.tabuleiro);
 				if(!movendo) {
@@ -76,13 +76,16 @@ public class PecaMedico extends PecasMoveis implements ITransferir{
 				}
 			}
 			
-		// atualização da peça no modo multiplayer
-		} else if(Jogo.multiplayer) {
+		// atualização da peça no modo multiplayer remoto
+		} else 
+			if(Jogo.multiplayerRemoto) {
 			if(Jogo.medDoc.vetor.get(String.valueOf(indexNoVetor)).movendo == "true") {
-				if(movimento(Integer.parseInt(Jogo.medDoc.proxX), Integer.parseInt(Jogo.medDoc.proxY), this, Jogo.tabuleiro)) {
-					movendo = true;
-				} else {
-					movendo = false;
+				if(Jogo.medDoc.proxX != "null" && Jogo.medDoc.proxY != "null") {
+					if(movimento(Integer.parseInt(Jogo.medDoc.proxX), Integer.parseInt(Jogo.medDoc.proxY), this, Jogo.tabuleiro)) {
+						movendo = true;
+					} else {
+						movendo = false;
+					}					
 				}
 				if(!movendo) {
 					atualizarVetorBau(pos[1] - (Tabuleiro.DC*PecasMoveis.medicoAtualDirX), pos[0] - (Tabuleiro.DC*PecasMoveis.medicoAtualDirY));
@@ -121,10 +124,10 @@ public class PecaMedico extends PecasMoveis implements ITransferir{
 		int xMed = (int)(this.pos[1]/Tabuleiro.DC);
 	
 		for(int yy = -1;yy<2;yy++) {
-			if(yMed+yy < 0 || yMed+yy > 16) continue;
+			if(yMed+yy < 0 || yMed+yy >= Tabuleiro.DC) continue;
 			for(int xx = -1;xx<2;xx++) {
-				if(xMed+xx < 0 || xMed+xx > 16) continue;
-				if(tab.vetorPecasMoveis[yMed+yy][xMed+xx]instanceof PecaInfectado) {
+				if(xMed+xx < 0 || xMed+xx >= Tabuleiro.DC) continue;
+				if(tab.vetorPecasMoveis[yMed+yy][xMed+xx] instanceof PecaInfectado) {
 					return tab.vetorPecasMoveis[yMed+yy][xMed+xx];
 				}
 			}

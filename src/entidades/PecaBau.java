@@ -6,11 +6,9 @@ import erros.BauVazio;
 import interfaces.*;
 import main.Jogo;
 import tabuleiro.Tabuleiro;
-public class PecaBau implements IGuardaCha, ITransferir {
+public class PecaBau extends Peca implements IGuardaCha, ITransferir {
 	
 	// Atributos individuais dos baus
-	public int pos[];
-	public BufferedImage sprite;
 	public int mascaras;
 	public int algemas;
 	public boolean cha;
