@@ -42,6 +42,7 @@ public class PecaBau implements IGuardaCha, ITransferir {
 		this.mascaras = 0;
 		aberto = true;
 		
+		
 	}
 	
 	public void verificarBau(Tabuleiro tab) {

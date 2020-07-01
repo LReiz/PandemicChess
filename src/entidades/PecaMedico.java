@@ -130,16 +130,16 @@ public class PecaMedico extends PecasMoveis implements ITransferir{
 		return null;
 	}
 	public void transferirItens(PecaMedico med, Tabuleiro tab) {
-		int yMed = med.pos[0];
-		int xMed = med.pos[1];
-		int yBau = -1; int xBau = -1;
+		int xMed = (int)(med.pos[1]/Tabuleiro.DC);
+		int yMed = (int)(med.pos[0]/Tabuleiro.DC); 
 		
-		for(int i = -1; i<2; i++) {
-			if(yMed+i < 0 || yMed+i > 16) continue;
-			for(int j = -1; j<2; j++) {
-				if(xMed+j < 0 || xMed+j > 16) continue;
-				if	(tab.vetorBaus[yMed+i][xMed+j]!= null) {
-					tab.vetorBaus[yBau][xBau].transferirItens(med, tab);
+		for(int yy = -1; yy<2; yy++) {
+			if(yMed+yy < 0 || yMed+yy >= Tabuleiro.DC) continue;
+			
+			for(int xx = -1; xx<2; xx++) {
+				if(xMed+xx < 0 || xMed+xx >= Tabuleiro.DC) continue;
+				if(tab.vetorBaus[yMed+yy][xMed+xx] != null) {
+					tab.vetorBaus[yMed+yy][xMed+xx].transferirItens(med, tab);
 				}	
 			}
 		}
