@@ -2,6 +2,7 @@ package entidades;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
+import erros.BauVazio;
 import interfaces.*;
 import main.Jogo;
 import tabuleiro.Tabuleiro;
@@ -28,12 +29,16 @@ public class PecaBau implements IGuardaCha, ITransferir {
 		this.algemas = algemas;
 	}
 	
-	public void transferirItens(PecaMedico med, Tabuleiro tab) {
+	public void transferirItens(PecaMedico med, Tabuleiro tab) throws BauVazio {
 		// acrescenta os itens no médico correspondente
+		if(this.mascaras == 0 && this.algemas == 0 && this.cha == false) {
+			throw new BauVazio("O Baú está vazio!");
+		}
 		med.mascaras += this.mascaras;
 		med.algemas += this.algemas;
 		if(this.cha == true) {
 			med.cha = true;
+			tab.pecaCha.med = med;
 			this.cha = false;
 		}
 		

@@ -1,6 +1,7 @@
 package entidades;
 import java.awt.image.BufferedImage;
 
+import erros.BauVazio;
 import erros.ForaDeAlcance;
 import erros.MuitoDistante;
 import erros.NaoVazio;
@@ -56,7 +57,7 @@ public class PecaMedico extends PecasMoveis implements ITransferir{
 		}
 	}
 	
-	public void att() throws NaoVazio, ForaDeAlcance, MuitoDistante {
+	public void att() throws NaoVazio, ForaDeAlcance, MuitoDistante, BauVazio {
 		// atualização da peça no modo singleplayer
 		if(!Jogo.multiplayer) {
 			if(movendo) {
@@ -105,7 +106,7 @@ public class PecaMedico extends PecasMoveis implements ITransferir{
 		}
 		return null;
 	}
-	public void transferirItens(PecaMedico med, Tabuleiro tab) {
+	public void transferirItens(PecaMedico med, Tabuleiro tab) throws BauVazio {
 		int yMed = med.pos[0];
 		int xMed = med.pos[1];
 		int yBau = -1; int xBau = -1;

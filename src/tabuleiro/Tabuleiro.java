@@ -12,6 +12,8 @@ import entidades.PecaCha;
 import entidades.PecaInfectado;
 import entidades.PecaMedico;
 import entidades.PecasMoveis;
+import erros.BauVazio;
+import erros.ChaNaoColetado;
 import erros.ForaDeAlcance;
 import erros.MuitoDistante;
 import erros.NaoVazio;
@@ -68,7 +70,7 @@ public class Tabuleiro implements IMovimento, ICriaCha, IAtaque {
 		PecasMoveis.infectadoAtual = entidadesInfectados.get(0);
 	}
 	
-	public void att() throws NaoVazio, ForaDeAlcance, MuitoDistante {
+	public void att() throws NaoVazio, ForaDeAlcance, MuitoDistante, BauVazio {
 		// atualiza chá
 		if(chaCriado)
 			pecaCha.att();
@@ -301,6 +303,9 @@ public class Tabuleiro implements IMovimento, ICriaCha, IAtaque {
 				int yMed = inimigo.pos[0];
 				int xMed = inimigo.pos[1];
 				PecasMoveis infectado = new PecaInfectado(xMed,yMed,PecaInfectado.PECA_INFECTADO);
+				if(inimigo.cha == true) {
+					tab.pecaCha.med = null;
+				}
 				tab.vetorPecasMoveis[yMed][xMed] = infectado;
 				numMedicos --;
 				numInfectados ++;
@@ -314,7 +319,7 @@ public class Tabuleiro implements IMovimento, ICriaCha, IAtaque {
 			}
 		}
 	}
-	public void verificarVitoria() {
+	public void verificarVitoria() throws ChaNaoColetado{
 		if(numMedicos == 0) {
 			System.out.println("VITÓRIA DOS INFECTADOS");
 			System.out.println("Genocídio: O vírus venceu a humanidade!");
@@ -326,9 +331,13 @@ public class Tabuleiro implements IMovimento, ICriaCha, IAtaque {
 		}
 		else {
 			if((vetorPecasMoveis[15][8] instanceof PecaMedico && vetorPecasMoveis[15][8].cha == true) ||
-				(vetorPecasMoveis[15][9] instanceof PecaMedico && vetorPecasMoveis[15][8].cha == true)){
+				(vetorPecasMoveis[15][9] instanceof PecaMedico && vetorPecasMoveis[15][9].cha == true)){
 				System.out.println("VITÓRIA DOS MÉDICOS");
 				System.out.println("Cura encontrada: Os cientistas descobriram que a cura para a doença era um pouco de repuso e um chazinho de boldo!");
+			}
+			else if((vetorPecasMoveis[15][8] instanceof PecaMedico && vetorPecasMoveis[15][8].cha == false) ||
+					(vetorPecasMoveis[15][9] instanceof PecaMedico && vetorPecasMoveis[15][9].cha == false)){
+				throw new ChaNaoColetado("O medico chegou ao hospital sem a cura");
 			}
 		}
 	}

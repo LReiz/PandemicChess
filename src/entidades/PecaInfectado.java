@@ -66,15 +66,38 @@ public class PecaInfectado extends PecasMoveis {
 	public PecasMoveis encontrarInimigo(Tabuleiro tab) {
 		int yInfec = this.pos[0];
 		int xInfec = this.pos[1];
-		int yParede;
-		int xParede;
+		// yParede e xParede são as coordenadas de uma possível parede entre os dois
+		int yParede = 0;
+		int xParede = 0;
 		for(int i = -2;i<3;i++) {
 			if(yInfec+i < 0 || yInfec+i > 16) continue;
 			for(int j = -2;j<3;j++) {
 				if(xInfec+j < 0 || xInfec+j > 16) continue;
 				if(tab.vetorPecasMoveis[yInfec+i][xInfec+j]instanceof PecaMedico) {
-					yParede = (yInfec+(yInfec+i))/2;
-					xParede = (xInfec+(xInfec+j))/2;
+					
+					// CASO EM QUE OS DOIS ESTÃO A MENOS DE DUAS CASA DE DISTANCIA
+					
+					if(Math.abs(i) <= 1 && Math.abs(j) <= 1) return tab.vetorPecasMoveis[yInfec+i][xInfec+j];
+					
+					// CASO EM QUE HÁ UMA PAREDE ENTRE OS DOIS
+					
+					else if(i % 2 == 0 && j % 2 == 0) {
+						yParede = (yInfec+(yInfec+i))/2;
+						xParede = (xInfec+(xInfec+j))/2;
+					}
+					else if((Math.abs(i) == 2 && Math.abs(j) == 1)
+							||Math.abs(i) == 1 && Math.abs(j) == 2) {
+						if(Math.abs(i)>Math.abs(j)) {
+							if(i>0) yParede = yInfec + i - 1;
+							else yParede = yInfec + i + 1;
+							xParede = yInfec + j;
+						}
+						else {
+							yParede = yInfec + i;
+							if(j>0) xParede = yInfec + j - 1;
+							else xParede = yInfec + j + 1;
+						}
+					}
 					if(tab.vetorPecasMoveis[yParede][xParede]!= null && 
 						!(tab.vetorPecasMoveis[yParede][xParede] instanceof PecasMoveis)
 						&&!(tab.vetorBaus[yParede][xParede] instanceof PecaBau)) {

@@ -23,6 +23,8 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import database.Time;
 import entidades.PecasMoveis;
+import erros.BauVazio;
+import erros.ChaNaoColetado;
 import erros.ForaDeAlcance;
 import erros.MuitoDistante;
 import erros.NaoVazio;
@@ -86,7 +88,7 @@ public class Jogo extends Canvas implements KeyListener, Runnable {
 	}
 	
 	// atualiza informações do jogo
-	public void att() throws NaoVazio, ForaDeAlcance, MuitoDistante {
+	public void att() throws NaoVazio, ForaDeAlcance, MuitoDistante, BauVazio, ChaNaoColetado {
 		tabuleiro.att();
 		if(multiplayer)
 			attFB();
@@ -199,7 +201,7 @@ public class Jogo extends Canvas implements KeyListener, Runnable {
 			if(delta >= 1) {
 				try {
 					att();
-				} catch (NaoVazio | ForaDeAlcance | MuitoDistante e) {
+				} catch (NaoVazio | ForaDeAlcance | MuitoDistante | BauVazio | ChaNaoColetado e) {
 					e.printStackTrace();
 				}
 				renderizar();

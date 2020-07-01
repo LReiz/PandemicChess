@@ -3,6 +3,7 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.util.List;
 
+import erros.BauVazio;
 import erros.ForaDeAlcance;
 import erros.MuitoDistante;
 import erros.NaoVazio;
@@ -63,7 +64,7 @@ public abstract class PecasMoveis implements IAtaque, IMovimento {
 		this.sprite = sprite;
 	}
 	
-	public void att() throws NaoVazio, ForaDeAlcance, MuitoDistante {
+	public void att() throws NaoVazio, ForaDeAlcance, MuitoDistante, BauVazio {
 
 	}
 	
