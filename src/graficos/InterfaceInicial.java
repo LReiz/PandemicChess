@@ -26,9 +26,9 @@ public class InterfaceInicial {
 		}
 		
 		if(vetorModosDeJogo[modoDeJogo] == "local") {
-			Jogo.multiplayer = false;
+			Jogo.multiplayerRemoto = false;
 		} else if(vetorModosDeJogo[modoDeJogo] == "remoto") {
-			Jogo.multiplayer = true;			
+			Jogo.multiplayerRemoto = true;
 		}
 	}
 	

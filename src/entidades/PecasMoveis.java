@@ -11,19 +11,17 @@ import interfaces.*;
 import main.Jogo;
 import tabuleiro.Tabuleiro;
 
-public abstract class PecasMoveis implements IAtaque, IMovimento {
+public abstract class PecasMoveis extends Peca implements IAtaque, IMovimento {
 
 	// Atributos individuais de peças
-	public int pos[];
 	public int mascaras;
 	public int algemas;
 	public boolean cha;
-
 	public int dir;					// 0: esquerda; 1: direita; 2: cima; 3: baixo
-
 	public double speed = 1;
 	public boolean movendo = false;
 	private BufferedImage sprite;
+	public boolean turnoDeAtaque;
 	
 	// Atributos para Multiplayer
 	public int indexNoVetor;
@@ -65,7 +63,10 @@ public abstract class PecasMoveis implements IAtaque, IMovimento {
 	}
 	
 	public void att() throws NaoVazio, ForaDeAlcance, MuitoDistante, BauVazio {
-		atacar(encontrarInimigo(Jogo.tabuleiro), Jogo.tabuleiro);
+		if(turnoDeAtaque) {
+			atacar(encontrarInimigo(Jogo.tabuleiro), Jogo.tabuleiro);
+			turnoDeAtaque = false;
+		}
 	}
 	
 	public void renderizar(Graphics g) {

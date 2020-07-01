@@ -7,6 +7,8 @@ import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 
+import com.google.firebase.database.DataSnapshot;
+
 import entidades.PecaBau;
 import entidades.PecaCha;
 import entidades.PecaInfectado;
@@ -68,6 +70,31 @@ public class Tabuleiro implements IMovimento, ICriaCha, IAtaque {
 		
 		PecasMoveis.medicoAtual = entidadesMedicos.get(0);
 		PecasMoveis.infectadoAtual = entidadesInfectados.get(0);
+	}
+	
+	// construtor para multiplayer
+	public void reiniciarTabuleiro(DataSnapshot snapshot) {
+		vetorPecasMoveis = new PecasMoveis[alturaMapa][larguraMapa];
+		vetorBaus = new PecaBau[alturaMapa][larguraMapa];
+		
+		for(int i = 0; i < entidadesMedicos.size(); i++) {
+			entidadesMedicos.get(i).pos[1] = Integer.parseInt(String.valueOf(snapshot.child("pecasmedicos").child("vetor").child(String.valueOf(i)).child("x").getValue()));
+			entidadesMedicos.get(i).pos[0] = Integer.parseInt(String.valueOf(snapshot.child("pecasmedicos").child("vetor").child(String.valueOf(i)).child("y").getValue()));
+			vetorPecasMoveis[(int)(entidadesMedicos.get(i).pos[0]/Tabuleiro.DC)][(int)(entidadesMedicos.get(i).pos[1]/Tabuleiro.DC)] = entidadesMedicos.get(i);
+		}
+		
+		for(int i = 0; i < entidadesInfectados.size(); i++) {
+			entidadesInfectados.get(i).pos[1] = Integer.parseInt(String.valueOf(snapshot.child("pecasinfectados").child("vetor").child(String.valueOf(i)).child("x").getValue()));
+			entidadesInfectados.get(i).pos[0] = Integer.parseInt(String.valueOf(snapshot.child("pecasinfectados").child("vetor").child(String.valueOf(i)).child("y").getValue()));
+			vetorPecasMoveis[(int)(entidadesInfectados.get(i).pos[0]/Tabuleiro.DC)][(int)(entidadesInfectados.get(i).pos[1]/Tabuleiro.DC)] = entidadesInfectados.get(i);
+		}
+		
+		for(int i = 0; i < entidadesBau.size(); i++) {
+			entidadesBau.get(i).pos[1] = Integer.parseInt(String.valueOf(snapshot.child("pecasbaus").child("vetor").child(String.valueOf(i)).child("x").getValue()));
+			entidadesBau.get(i).pos[0] = Integer.parseInt(String.valueOf(snapshot.child("pecasbaus").child("vetor").child(String.valueOf(i)).child("y").getValue()));
+			vetorBaus[(int)(entidadesBau.get(i).pos[0]/Tabuleiro.DC)][(int)(entidadesBau.get(i).pos[1]/Tabuleiro.DC)] = entidadesBau.get(i);
+		}
+		
 	}
 	
 	public void att() throws NaoVazio, ForaDeAlcance, MuitoDistante, BauVazio, ChaNaoColetado {
@@ -285,12 +312,27 @@ public class Tabuleiro implements IMovimento, ICriaCha, IAtaque {
 	}
 	
 	public static void trocarVez() {
+		passarParaProximaRodada();
+		realizarTurnoDeAtaque();
+	}
+	
+	public static void passarParaProximaRodada() {
 		if(vezJogador == 1)
 			vezJogador = 2;		// infectados
 		else if(vezJogador == 2)
 			vezJogador = 1;		// médicos
 		
 		rodada++;
+	}
+	
+	public static void realizarTurnoDeAtaque() {
+		for(int i = 0; i < entidadesMedicos.size(); i++) {
+			entidadesMedicos.get(i).turnoDeAtaque = true;
+		}
+		for(int i = 0; i < entidadesInfectados.size(); i++) {
+			entidadesInfectados.get(i).turnoDeAtaque = true;
+			
+		}
 	}
 
 	@Override
