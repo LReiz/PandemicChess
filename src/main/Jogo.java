@@ -49,7 +49,7 @@ public class Jogo extends Canvas implements KeyListener, Runnable {
 	public static Random rand = new Random();
 	
 	// Constantes de Configuração
-	public static int LARGURA = Tabuleiro.DC*17;
+	public static int LARGURA = Tabuleiro.DC*18;
 	public static int ALTURA = Tabuleiro.DC*17;
 	public static int ESCALA = 3;
 	
@@ -80,7 +80,7 @@ public class Jogo extends Canvas implements KeyListener, Runnable {
 		Jogo jogo = new Jogo();
 		
 		if(multiplayer)
-			jogo.iniciarFB();
+			jogo.iniciarFireBase();
 		jogo.start();
 		jogo.stop();
 	}
@@ -89,7 +89,7 @@ public class Jogo extends Canvas implements KeyListener, Runnable {
 	public void att() throws NaoVazio, ForaDeAlcance, MuitoDistante {
 		tabuleiro.att();
 		if(multiplayer)
-			attFB();
+			attFireBase();
 	}
 	
 	// renderiza gráficos
@@ -111,10 +111,15 @@ public class Jogo extends Canvas implements KeyListener, Runnable {
 		g = bs.getDrawGraphics();
 		g.drawImage(imagemPrincipal, 0, 0, LARGURA*ESCALA, ALTURA*ESCALA, null);
 		
+		// Renderização sem pixelização
+		for(int i = 0; i < Tabuleiro.entidadesMedicos.size(); i++) {
+			Tabuleiro.entidadesMedicos.get(i).renderizarSemPixelizar(g);
+		}
+		
 		bs.show();
 	}
 	
-	private void iniciarFB() {
+	private void iniciarFireBase() {
 		FileInputStream serviceAccount = null;
 		try {
 			serviceAccount = new FileInputStream("./serviceAccountKey.json");
@@ -144,7 +149,7 @@ public class Jogo extends Canvas implements KeyListener, Runnable {
 		infRef.setValueAsync(infDoc);
 	}
 	
-	private void attFB() {
+	private void attFireBase() {
 		medDoc.att();
 		infDoc.att();
 		medRef.setValueAsync(medDoc);
@@ -184,7 +189,7 @@ public class Jogo extends Canvas implements KeyListener, Runnable {
 		requestFocus();
 		// Controle de FPS do Jogo	
 		int fps = 60;
-		double ns = 1000000000/fps;
+		double nanosegundosDeUmFrame = 1000000000/fps;
 		double delta = 0;
 		long nanoAnterior = System.nanoTime();
 		long nanoAtual;
@@ -194,7 +199,7 @@ public class Jogo extends Canvas implements KeyListener, Runnable {
 		
 		while(jogoRodando) {
 			nanoAtual = System.nanoTime();
-			delta += (nanoAtual - nanoAnterior)/ns;
+			delta += (nanoAtual - nanoAnterior)/nanosegundosDeUmFrame;
 			nanoAnterior = nanoAtual;
 			if(delta >= 1) {
 				try {

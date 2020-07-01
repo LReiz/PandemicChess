@@ -75,16 +75,16 @@ public class Tabuleiro implements IMovimento, ICriaCha, IAtaque {
 		else
 			criaCha();
 		
-		// atualiza médicos
-		for(int i = 0; i < entidadesMedicos.size(); i++) {
-			entidadesMedicos.get(i).att();
-			entidadesMedicos.get(i).indexNoVetor = i;
-		}
-		
 		// atualiza infectados
 		for(int i = 0; i < entidadesInfectados.size(); i++) {
 			entidadesInfectados.get(i).att();
 			entidadesInfectados.get(i).indexNoVetor = i;
+		}
+		
+		// atualiza médicos
+		for(int i = 0; i < entidadesMedicos.size(); i++) {
+			entidadesMedicos.get(i).att();
+			entidadesMedicos.get(i).indexNoVetor = i;
 		}
 		
 		// atualiza baús
@@ -101,14 +101,14 @@ public class Tabuleiro implements IMovimento, ICriaCha, IAtaque {
 			}
 		}
 
-		// renderiza médicos
-		for(int i = 0; i < entidadesMedicos.size(); i++) {
-			entidadesMedicos.get(i).renderizar(g);
-		}
-		
 		// renderiza infectados
 		for(int i = 0; i < entidadesInfectados.size(); i++) {
 			entidadesInfectados.get(i).renderizar(g);
+		}
+
+		// renderiza médicos
+		for(int i = 0; i < entidadesMedicos.size(); i++) {
+			entidadesMedicos.get(i).renderizar(g);
 		}
 		
 		// renderiza baús
