@@ -97,6 +97,7 @@ public class PecaMedico extends PecasMoveis implements ITransferir{
 		
 		super.att();
 		transferirItens(this, Jogo.tabuleiro);
+		pegarChaNoChao(Jogo.tabuleiro);
 	}
 	
 	public void renderizar(Graphics g) {
