@@ -305,9 +305,7 @@ public class Tabuleiro implements IMovimento, ICriaCha, IAtaque {
 			peca.movendo = false;
 			throw new NaoVazio("Célula Ocupada");
 		}
-		if(peca instanceof PecaMedico) {
-			System.out.println("O medico que esta sendo movido está com "+peca.mascaras+" mascaras");
-		}
+		
 		return true;
 	}
 	
@@ -346,10 +344,6 @@ public class Tabuleiro implements IMovimento, ICriaCha, IAtaque {
 	
 	public void atacar(PecasMoveis inimigo, Tabuleiro tab) {
 		if(inimigo instanceof PecaMedico) {
-				if(inimigo.mascaras > 0) {
-					inimigo.mascaras--;
-					return;
-				}
 				int xMed = (int)(inimigo.pos[1]/Tabuleiro.DC);
 				int yMed = (int)(inimigo.pos[0]/Tabuleiro.DC);
 				Tabuleiro.entidadesMedicos.remove(inimigo);
