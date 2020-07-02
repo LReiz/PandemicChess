@@ -24,6 +24,7 @@ public class PecaMedico extends PecasMoveis implements ITransferir{
 		super(x, y, sprite);
 		this.mascaras = 3;
 		
+
 		if(sprite == PECA_MEDICO_B) {
 			animacaoEsquerda = new BufferedImage[3];
 			for(int i = 0; i < 3; i++)
