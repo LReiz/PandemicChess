@@ -74,12 +74,7 @@ public class PecaInfectado extends PecasMoveis {
 			if(yInf+yy < 0 || yInf+yy >= Tabuleiro.DC) continue;
 			for(int xx = -2;xx<3;xx++) {
 				if(xInf+xx < 0 || xInf+xx >= Tabuleiro.DC) continue;
-				if(tab.vetorPecasMoveis[yInf+yy][xInf+xx] instanceof PecaMedico) {
-					
-					
-					
-					// CASO EM QUE HÁ UMA PAREDE ENTRE OS DOIS
-					
+				if(tab.vetorPecasMoveis[yInf+yy][xInf+xx] instanceof PecaMedico) {	
 
 					if(Math.abs(yy) % 2 == 0 && Math.abs(xx) % 2 == 0) {
 						xParede = (xInf+(xInf+xx))/2;
@@ -90,15 +85,16 @@ public class PecaInfectado extends PecasMoveis {
 							||Math.abs(yy) == 1 && Math.abs(xx) == 2) {
 						if(Math.abs(yy)>Math.abs(xx)) {
 							if(yy>0) yParede = yInf + yy - 1;
-							else yParede = yInf + yy + 1;
-							xParede = yInf + xx;
+							else yParede = xInf + yy + 1;
+							xParede = xInf;
 						}
 						else {
-							yParede = yInf + yy;
-							if(xx>0) xParede = yInf + xx - 1;
-							else xParede = yInf + xx + 1;
+							yParede = yInf;
+							if(xx>0) xParede = xInf + xx - 1;
+							else xParede = xInf + xx + 1;
 						}
 					}
+					
 					// CASO EM QUE OS DOIS ESTÃO A MENOS DE DUAS CASA DE DISTANCIA
 					
 					if(Math.abs(yy) <= 1 && Math.abs(xx) <= 1) {
@@ -106,14 +102,13 @@ public class PecaInfectado extends PecasMoveis {
 						len++;
 					}
 					
-					else if(!(tab.vetorPecasMoveis[yParede][xParede]!= null && 
-						!(tab.vetorPecasMoveis[yParede][xParede] instanceof PecasMoveis)
+					// CASO EM QUE HÁ UMA PAREDE ENTRE OS DOIS
+					else if(!(tab.vetorCelulas[yParede][xParede].colisao)) {
+							vetorInimigos[len] = (tab.vetorPecasMoveis[yInf+yy][xInf+xx]);
+							len++;
 
-						&&!(tab.vetorBaus[yParede][xParede] instanceof PecaBau))) {
-						vetorInimigos[len] = (tab.vetorPecasMoveis[yInf+yy][xInf+xx]);
-						len++;
-
-					}
+						}
+					
 				}
 			}
 		}
