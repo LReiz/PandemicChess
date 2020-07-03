@@ -317,9 +317,7 @@ public class Tabuleiro implements IMovimento, ICriaCha, IAtaque {
 				throw new NaoVazio("Célula Ocupada");
 			}
 		}
-		if(peca instanceof PecaMedico) {
-			System.out.println("O medico que esta sendo movido está com "+peca.mascaras+" mascaras");
-		}
+		
 		return true;
 	}
 	

@@ -65,7 +65,7 @@ public abstract class PecasMoveis extends Peca implements IAtaque, IMovimento {
 	
 	public void att() throws NaoVazio, ForaDeAlcance, MuitoDistante, BauVazio, ChaNaoColetado {
 		if(turnoDeAtaque) {
-			atacar(encontrarInimigo(Jogo.tabuleiro), Jogo.tabuleiro);
+			encontrarInimigo(Jogo.tabuleiro);
 			turnoDeAtaque = false;
 		}
 	}
@@ -182,7 +182,7 @@ public abstract class PecasMoveis extends Peca implements IAtaque, IMovimento {
 		return false;
 	}
 	
-	public abstract PecasMoveis encontrarInimigo(Tabuleiro tab);
+	public abstract void encontrarInimigo(Tabuleiro tab);
 	
 	public abstract void atacar(PecasMoveis inimigo,Tabuleiro tab);
 

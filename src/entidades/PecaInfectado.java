@@ -62,9 +62,11 @@ public class PecaInfectado extends PecasMoveis {
 		super.att();
 	}
 	
-	public PecasMoveis encontrarInimigo(Tabuleiro tab) {
+	public void encontrarInimigo(Tabuleiro tab) {
 		int xInf = (int)(this.pos[1]/Tabuleiro.DC);
 		int yInf = (int)(this.pos[0]/Tabuleiro.DC);
+		PecasMoveis[] vetorInimigos = new PecasMoveis[24];
+		int len = 0;
 		// yParede e xParede são as coordenadas de uma possível parede entre os dois
 		int xParede = 0;
 		int yParede = 0;
@@ -74,14 +76,12 @@ public class PecaInfectado extends PecasMoveis {
 				if(xInf+xx < 0 || xInf+xx >= Tabuleiro.DC) continue;
 				if(tab.vetorPecasMoveis[yInf+yy][xInf+xx] instanceof PecaMedico) {
 					
-					// CASO EM QUE OS DOIS ESTÃO A MENOS DE DUAS CASA DE DISTANCIA
 					
-					if(Math.abs(yy) <= 1 && Math.abs(xx) <= 1) return tab.vetorPecasMoveis[yInf+yy][xInf+xx];
 					
 					// CASO EM QUE HÁ UMA PAREDE ENTRE OS DOIS
 					
 
-					else if(Math.abs(yy) % 2 == 0 && Math.abs(xx) % 2 == 0) {
+					if(Math.abs(yy) % 2 == 0 && Math.abs(xx) % 2 == 0) {
 						xParede = (xInf+(xInf+xx))/2;
 						yParede = (yInf+(yInf+yy))/2;
 
@@ -99,19 +99,28 @@ public class PecaInfectado extends PecasMoveis {
 							else xParede = yInf + xx + 1;
 						}
 					}
-					if(!(tab.vetorPecasMoveis[yParede][xParede]!= null && 
+					// CASO EM QUE OS DOIS ESTÃO A MENOS DE DUAS CASA DE DISTANCIA
+					
+					if(Math.abs(yy) <= 1 && Math.abs(xx) <= 1) {
+						vetorInimigos[len] = (tab.vetorPecasMoveis[yInf+yy][xInf+xx]);
+						len++;
+					}
+					
+					else if(!(tab.vetorPecasMoveis[yParede][xParede]!= null && 
 						!(tab.vetorPecasMoveis[yParede][xParede] instanceof PecasMoveis)
 
 						&&!(tab.vetorBaus[yParede][xParede] instanceof PecaBau))) {
-						return tab.vetorPecasMoveis[yInf+yy][xInf+xx];
+						vetorInimigos[len] = (tab.vetorPecasMoveis[yInf+yy][xInf+xx]);
+						len++;
 
 					}
 				}
 			}
-
 		}
 		
-		return null;
+		for(int i = 0; i < len; i++) {
+			atacar(vetorInimigos[i],tab);
+		}
 	}
 	
 	public void atacar(PecasMoveis inimigo,Tabuleiro tab) {

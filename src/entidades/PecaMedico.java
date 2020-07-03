@@ -89,6 +89,7 @@ public class PecaMedico extends PecasMoveis implements ITransferir{
 		
 		super.att();
 		transferirItens(this, Jogo.tabuleiro);
+		pegarChaNoChao(Jogo.tabuleiro);
 	}
 	
 	public void renderizar(Graphics g) {
@@ -109,7 +110,7 @@ public class PecaMedico extends PecasMoveis implements ITransferir{
 
 	}
 	
-	public PecasMoveis encontrarInimigo(Tabuleiro tab) {
+	public void encontrarInimigo(Tabuleiro tab) {
 		int yMed = (int)(this.pos[0]/Tabuleiro.DC);
 		int xMed = (int)(this.pos[1]/Tabuleiro.DC);
 	
@@ -120,11 +121,11 @@ public class PecaMedico extends PecasMoveis implements ITransferir{
 				if(xMed+xx < 0 || xMed+xx >= Tabuleiro.DC) continue;
 				if(tab.vetorPecasMoveis[yMed+yy][xMed+xx] instanceof PecaInfectado) {
 
-					return tab.vetorPecasMoveis[yMed+yy][xMed+xx];
+					atacar(tab.vetorPecasMoveis[yMed+yy][xMed+xx],tab);
+					return;
 				}
 			}
 		}
-		return null;
 	}
 
 	public void transferirItens(PecaMedico med, Tabuleiro tab) throws BauVazio {
@@ -151,4 +152,14 @@ public class PecaMedico extends PecasMoveis implements ITransferir{
 		tab.atacar(inimigo, tab);
 	}
 	
+	public void pegarChaNoChao(Tabuleiro tab) {
+		int yMed = (int)(this.pos[0]/Tabuleiro.DC);
+		int xMed = (int)(this.pos[1]/Tabuleiro.DC);
+		int yCha = (int)(tab.pecaCha.pos[0]/Tabuleiro.DC);
+		int xCha = (int)(tab.pecaCha.pos[1]/Tabuleiro.DC);
+		if(Math.abs(yMed-yCha) <= 1 && Math.abs(xMed-xCha) <= 1 && tab.pecaCha.medicoPortadorDoCha == null) {
+			this.cha = true;
+			tab.pecaCha.medicoPortadorDoCha = this;
+		}
+	}
 }
