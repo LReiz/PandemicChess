@@ -32,8 +32,9 @@ public class Tabuleiro implements IMovimento, ICriaCha, IAtaque {
 	public int larguraMapa;
 	public int alturaMapa;
 	public static int vezJogador = 1;			// medicos 1; infectados: 2
+	public boolean trocarVez;
 	public static int rodada = 1;
-	public static int rodadaCriaCha = 48;
+	public static int rodadaCriaCha = 4;
 	public static boolean chaCriado;
 	
 	// Vetores dos elementos do mapa
@@ -48,9 +49,9 @@ public class Tabuleiro implements IMovimento, ICriaCha, IAtaque {
 	public static ArrayList<PecaBau> entidadesBau;
 	
 	// Controle da quantidade de Peças para inicializar no mapa
-	private int maxMedicos = 1;
+	private int maxMedicos = 19;
 	private int numMedicos = 0;
-	private int maxInfectados = 12;
+	private int maxInfectados = 2;
 	private int numInfectados = 0;
 	private int maxBaus = 8;
 	private int numBaus = 0;
@@ -129,6 +130,10 @@ public class Tabuleiro implements IMovimento, ICriaCha, IAtaque {
 			entidadesBau.get(i).att();
 		}
 		
+		if(trocarVez) {
+			trocarVez = false;
+			trocarVez();
+		}
 	}
 	
 	public void renderizar(Graphics g) {
@@ -164,14 +169,16 @@ public class Tabuleiro implements IMovimento, ICriaCha, IAtaque {
 		} else {
 			g.setColor(new Color(0xFFFFAA00));			// amarelo (indica que a peça não está selecionada ainda)
 		}
-		g.drawRect(entidadesMedicos.get(PecasMoveis.indexMedico).pos[1], entidadesMedicos.get(PecasMoveis.indexMedico).pos[0], Tabuleiro.DC, Tabuleiro.DC);
+		if(entidadesMedicos.size() > 0)
+			g.drawRect(entidadesMedicos.get(PecasMoveis.indexMedico).pos[1], entidadesMedicos.get(PecasMoveis.indexMedico).pos[0], Tabuleiro.DC, Tabuleiro.DC);
 		
 		if(PecasMoveis.infectadoSelecionado) {
 			g.setColor(new Color(0xFFFF0000));			// vermelho
 		} else {
 			g.setColor(new Color(0xFFFFAA00));			// amarelo
 		}
-		g.drawRect(entidadesInfectados.get(PecasMoveis.indexInfectado).pos[1], entidadesInfectados.get(PecasMoveis.indexInfectado).pos[0], Tabuleiro.DC, Tabuleiro.DC);
+		if(entidadesInfectados.size() > 0)
+			g.drawRect(entidadesInfectados.get(PecasMoveis.indexInfectado).pos[1], entidadesInfectados.get(PecasMoveis.indexInfectado).pos[0], Tabuleiro.DC, Tabuleiro.DC);
 	}
 	
 	private void inicializarMapa(String endereco) {
@@ -336,10 +343,10 @@ public class Tabuleiro implements IMovimento, ICriaCha, IAtaque {
 		return true;
 	}
 	
-	public static void trocarVez() throws ChaNaoColetado {
+	public void trocarVez() throws ChaNaoColetado {
 		passarParaProximaRodada();
 		realizarTurnoDeAtaque();
-		Jogo.tabuleiro.verificarVitoria();
+		verificarVitoria();
 	}
 	
 	public static void passarParaProximaRodada() {
@@ -424,17 +431,19 @@ public class Tabuleiro implements IMovimento, ICriaCha, IAtaque {
 		if(entidadesMedicos.size() <= 0) {
 			System.out.println("VITÓRIA DOS INFECTADOS");
 			System.out.println("Genocídio: O vírus venceu a humanidade!");
-			return;
+			Jogo.estadoDoJogo = "vitoriaInfectados";
 		}
 		else if(entidadesInfectados.size() <= 0) {
 			System.out.println("VITÓRIA DOS MÉDICOS");
 			System.out.println("Lockdown: Todos os infectados foram colocados em quarentena!");
+			Jogo.estadoDoJogo = "vitoriaMedicosLock";
 		}
 		else {
 			if((vetorPecasMoveis[15][8] instanceof PecaMedico && vetorPecasMoveis[15][8].cha == true) ||
 				(vetorPecasMoveis[15][9] instanceof PecaMedico && vetorPecasMoveis[15][9].cha == true)){
 				System.out.println("VITÓRIA DOS MÉDICOS");
 				System.out.println("Cura encontrada: Os cientistas descobriram que a cura para a doença era um pouco de repouso e um chazinho de boldo!");
+				Jogo.estadoDoJogo = "vitoriaMedicosCura";
 			}
 			else if(((vetorPecasMoveis[15][8] instanceof PecaMedico && vetorPecasMoveis[15][8].cha == false) ||
 					(vetorPecasMoveis[15][9] instanceof PecaMedico && vetorPecasMoveis[15][9].cha == false))

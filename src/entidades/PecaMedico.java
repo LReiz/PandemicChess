@@ -69,7 +69,7 @@ public class PecaMedico extends PecasMoveis implements ITransferir, ICapturaCha{
 				if(!movendo) {
 					atualizarVetorBau(pos[1] - (Tabuleiro.DC*PecasMoveis.medicoAtualDirX), pos[0] - (Tabuleiro.DC*PecasMoveis.medicoAtualDirY));
 					PecasMoveis.medicoSelecionado = false;
-					Tabuleiro.trocarVez();
+					Jogo.tabuleiro.trocarVez = true;
 				}
 			}
 			
@@ -79,10 +79,11 @@ public class PecaMedico extends PecasMoveis implements ITransferir, ICapturaCha{
 			if(movendo) {
 				movendo = movimento(PecasMoveis.proxPosicaoMedicoX, PecasMoveis.proxPosicaoMedicoY, this, Jogo.tabuleiro);
 				
-				if(!movendo) {
+				if(!movendo && finalizouMovimento) {
 					atualizarVetorBau(pos[1] - (Tabuleiro.DC*PecasMoveis.medicoAtualDirX), pos[0] - (Tabuleiro.DC*PecasMoveis.medicoAtualDirY));
 					PecasMoveis.medicoSelecionado = false;
-					Tabuleiro.trocarVez();
+					finalizouMovimento = false;
+					Jogo.tabuleiro.trocarVez = true;
 				}
 			}
 		}
