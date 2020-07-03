@@ -32,7 +32,7 @@ public class Tabuleiro implements IMovimento, ICriaCha, IAtaque {
 	public int alturaMapa;
 	public static int vezJogador = 1;			// medicos 1; infectados: 2
 	public static int rodada = 1;
-	public static int rodadaCriaCha = 24;
+	public static int rodadaCriaCha = 48;
 	public static boolean chaCriado;
 	
 	// Vetores dos elementos do mapa
@@ -95,8 +95,13 @@ public class Tabuleiro implements IMovimento, ICriaCha, IAtaque {
 			vetorBaus[(int)(entidadesBau.get(i).pos[0]/Tabuleiro.DC)][(int)(entidadesBau.get(i).pos[1]/Tabuleiro.DC)] = entidadesBau.get(i);
 		}
 		
+		rodada = 1;
+		vezJogador = 1;
+		
 	}
 	
+	int f = 0;
+
 	public void att() throws NaoVazio, ForaDeAlcance, MuitoDistante, BauVazio, ChaNaoColetado {
 		// atualiza chá
 		if(chaCriado)
@@ -104,24 +109,23 @@ public class Tabuleiro implements IMovimento, ICriaCha, IAtaque {
 		else
 			criaCha();
 		
+		
 		// atualiza infectados
 		for(int i = 0; i < entidadesInfectados.size(); i++) {
 			entidadesInfectados.get(i).att();
 			entidadesInfectados.get(i).indexNoVetor = i;
 		}
-		
 		// atualiza médicos
 		for(int i = 0; i < entidadesMedicos.size(); i++) {
 			entidadesMedicos.get(i).att();
 			entidadesMedicos.get(i).indexNoVetor = i;
 		}
-		
+
 		// atualiza baús
 		for(int i = 0; i < entidadesBau.size(); i++) {
 			entidadesBau.get(i).att();
 		}
 		
-		verificarVitoria();
 	}
 	
 	public void renderizar(Graphics g) {
@@ -294,16 +298,24 @@ public class Tabuleiro implements IMovimento, ICriaCha, IAtaque {
 		if((int)(y_final/DC) < 0 || (int)(y_final/DC) >= alturaMapa
 				|| (int)(x_final/DC) < 0 || (int)(x_final/DC) >= larguraMapa)
 		{
-			peca.movendo = false;
-			throw new ForaDeAlcance("Movimento para fora do Tabuleiro");
+			if(Jogo.multiplayerRemoto) {
+				return false;
+			} else {
+				peca.movendo = false;
+				throw new ForaDeAlcance("Movimento para fora do Tabuleiro");
+			}
 		}
 			
 		if(vetorPecasMoveis[(int)(y_final/DC)][(int)(x_final/DC)] != null 
 				|| vetorBaus[(int)(y_final/DC)][(int)(x_final/DC)] != null
 				|| vetorCelulas[(int)(y_final/DC)][(int)(x_final/DC)].colisao) 
 		{
-			peca.movendo = false;
-			throw new NaoVazio("Célula Ocupada");
+			if(Jogo.multiplayerRemoto) {
+				return false;
+			} else {
+				peca.movendo = false;
+				throw new NaoVazio("Célula Ocupada");
+			}
 		}
 		if(peca instanceof PecaMedico) {
 			System.out.println("O medico que esta sendo movido está com "+peca.mascaras+" mascaras");
@@ -311,9 +323,10 @@ public class Tabuleiro implements IMovimento, ICriaCha, IAtaque {
 		return true;
 	}
 	
-	public static void trocarVez() {
+	public static void trocarVez() throws ChaNaoColetado {
 		passarParaProximaRodada();
 		realizarTurnoDeAtaque();
+		Jogo.tabuleiro.verificarVitoria();
 	}
 	
 	public static void passarParaProximaRodada() {
@@ -345,14 +358,16 @@ public class Tabuleiro implements IMovimento, ICriaCha, IAtaque {
 	}
 	
 	public void atacar(PecasMoveis inimigo, Tabuleiro tab) {
+
 		if(inimigo instanceof PecaMedico) {
 				if(inimigo.mascaras > 0) {
 					inimigo.mascaras--;
 					return;
 				}
+
 				int xMed = (int)(inimigo.pos[1]/Tabuleiro.DC);
 				int yMed = (int)(inimigo.pos[0]/Tabuleiro.DC);
-				Tabuleiro.entidadesMedicos.remove(inimigo);
+				removerInimigoDoTabuleiro(inimigo, 2);
 				
 				if(inimigo.cha == true) {
 					tab.pecaCha.medicoPortadorDoCha = null;
@@ -362,13 +377,34 @@ public class Tabuleiro implements IMovimento, ICriaCha, IAtaque {
 				tab.vetorPecasMoveis[yMed][xMed] = infectado;
 				Tabuleiro.entidadesInfectados.add(infectado);
 		}
-		else if(inimigo instanceof PecaInfectado) {
+
+		else if(inimigo instanceof PecaInfectado) {		// médicos atacam
+			if(inimigo.algemas > 0) {
+
 				int xInf = (int)(inimigo.pos[1]/Tabuleiro.DC);
 				int yInf = (int)(inimigo.pos[0]/Tabuleiro.DC);
-				Tabuleiro.entidadesInfectados.remove(inimigo);
+				removerInimigoDoTabuleiro(inimigo, 1);
 				tab.vetorPecasMoveis[yInf][xInf] = null;
+			}
 		}
 	}
+	
+	private void removerInimigoDoTabuleiro(PecasMoveis inimigo, int timeAtacante) {
+		if(timeAtacante == 1) {				// médicos atacando
+			Tabuleiro.entidadesInfectados.remove(inimigo);
+			if(Tabuleiro.entidadesInfectados.size() > 0) {
+				PecasMoveis.indexInfectado = 0;
+				PecasMoveis.infectadoAtual = Tabuleiro.entidadesInfectados.get(0);
+			}
+		} else if(timeAtacante == 2) {		// infectados atacando
+			entidadesMedicos.remove(inimigo);
+			if(Tabuleiro.entidadesMedicos.size() > 0) {
+				PecasMoveis.indexMedico = 0;
+				PecasMoveis.medicoAtual = Tabuleiro.entidadesMedicos.get(0);					
+			}
+		}
+	}
+	
 	public void verificarVitoria() throws ChaNaoColetado{
 		if(entidadesMedicos.size() <= 0) {
 			System.out.println("VITÓRIA DOS INFECTADOS");
@@ -385,8 +421,9 @@ public class Tabuleiro implements IMovimento, ICriaCha, IAtaque {
 				System.out.println("VITÓRIA DOS MÉDICOS");
 				System.out.println("Cura encontrada: Os cientistas descobriram que a cura para a doença era um pouco de repouso e um chazinho de boldo!");
 			}
-			else if((vetorPecasMoveis[15][8] instanceof PecaMedico && vetorPecasMoveis[15][8].cha == false) ||
-					(vetorPecasMoveis[15][9] instanceof PecaMedico && vetorPecasMoveis[15][9].cha == false)){
+			else if(((vetorPecasMoveis[15][8] instanceof PecaMedico && vetorPecasMoveis[15][8].cha == false) ||
+					(vetorPecasMoveis[15][9] instanceof PecaMedico && vetorPecasMoveis[15][9].cha == false))
+					&& !Jogo.multiplayerRemoto){
 				throw new ChaNaoColetado("O medico chegou ao hospital sem a cura");
 			}
 		}

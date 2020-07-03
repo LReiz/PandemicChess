@@ -29,7 +29,7 @@ public class PecaBau extends Peca implements IGuardaCha, ITransferir {
 	
 	public void transferirItens(PecaMedico med, Tabuleiro tab) throws BauVazio {
 		// acrescenta os itens no médico correspondente
-		if(this.mascaras == 0 && this.algemas == 0 && this.cha == false) {
+		if(this.aberto && !Jogo.multiplayerRemoto) {
 			throw new BauVazio("O Baú está vazio!");
 		}
 		med.mascaras += this.mascaras;
