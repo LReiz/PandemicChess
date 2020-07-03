@@ -9,6 +9,7 @@ import javax.imageio.ImageIO;
 
 import com.google.firebase.database.DataSnapshot;
 
+import database.DocCha;
 import entidades.PecaBau;
 import entidades.PecaCha;
 import entidades.PecaInfectado;
@@ -365,6 +366,10 @@ public class Tabuleiro implements IMovimento, ICriaCha, IAtaque {
 		if(Tabuleiro.rodada > Tabuleiro.rodadaCriaCha) {
 			pecaCha = pecaCha.criaCha();
 			chaCriado = true;
+			if(Jogo.multiplayerRemoto && Jogo.timeDoMultiplayerRemoto == 1) {
+				Jogo.chaConj = new DocCha(pecaCha.pos[1], pecaCha.pos[2]);
+				Jogo.iniciarChaFireBase();
+			}
 		}
 		return null;
 	}

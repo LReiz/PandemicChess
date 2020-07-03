@@ -26,6 +26,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import database.ConjuntoBau;
 import database.ConjuntoPeca;
+import database.DocCha;
 import database.Time;
 import entidades.PecasMoveis;
 import erros.BauVazio;
@@ -74,11 +75,13 @@ public class Jogo extends Canvas implements KeyListener, Runnable {
 	public static DatabaseReference pecaMedRef;
 	public static DatabaseReference pecaInfRef;
 	public static DatabaseReference pecaBauRef;
+	public static DatabaseReference pecaChaRef;
 	public static Time medDoc;
 	public static Time infDoc;
 	public static ConjuntoPeca medConj;
 	public static ConjuntoPeca infConj;
 	public static ConjuntoBau bauConj;
+	public static DocCha chaConj;
 	
 	// inicia o jogo
 	private Jogo() {
@@ -210,6 +213,11 @@ public class Jogo extends Canvas implements KeyListener, Runnable {
 
 	}
 	
+	public static void iniciarChaFireBase() {
+		pecaChaRef = ref.child("conjuntos/cha");
+		pecaChaRef.setValueAsync(chaConj);
+	}
+	
 	private void observadorFirebase() {
 		ref.child("conjuntos").addValueEventListener(new ValueEventListener() {
 			
@@ -270,6 +278,22 @@ public class Jogo extends Canvas implements KeyListener, Runnable {
 							Tabuleiro.entidadesMedicos.get(i).movendo = true;
 						}
 					}
+				}
+				
+				@Override
+				public void onCancelled(DatabaseError error) {
+					
+					
+				}
+				
+			});
+			
+			ref.child("conjuntos/cha").addValueEventListener(new ValueEventListener() {
+				
+				@Override
+				public void onDataChange(DataSnapshot snapshot) {
+					tabuleiro.pecaCha.pos[1] = Integer.parseInt(String.valueOf(snapshot.child("x").getValue()));
+					tabuleiro.pecaCha.pos[0] = Integer.parseInt(String.valueOf(snapshot.child("y").getValue()));
 				}
 				
 				@Override
