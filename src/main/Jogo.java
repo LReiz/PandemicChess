@@ -84,7 +84,7 @@ public class Jogo extends Canvas implements KeyListener, Runnable {
 		imagemPrincipal = new BufferedImage(LARGURA, ALTURA, BufferedImage.TYPE_INT_RGB);
 		spritesheet = new Spritesheet("/spritesheet.png");
 		
-		tabuleiro = new Tabuleiro("/mapa1.png");
+		tabuleiro = new Tabuleiro("/mapa2.png");
 		
 		this.setPreferredSize(new Dimension(LARGURA*ESCALA, ALTURA*ESCALA));
 		addKeyListener(this);
