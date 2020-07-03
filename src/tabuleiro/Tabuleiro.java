@@ -192,7 +192,7 @@ public class Tabuleiro implements IMovimento, ICriaCha, IAtaque {
 		for(int yy = 0; yy < alturaMapa; yy++) {
 			for(int xx = 0; xx < larguraMapa; xx++) {
 				if(pixelsHexCelulas[xx + yy*larguraMapa] == 0xFF635F89) {		// Roxo (Chão Roxo)
-					this.vetorCelulas[yy][xx] = new ChaoRoxo(xx*DC, yy*DC, Celulas.CELULA_CHAO_ROXO);
+					this.vetorCelulas[yy][xx] = new Chao(xx*DC, yy*DC, Celulas.CELULA_CHAO_ROXO);
 				} else if(pixelsHexCelulas[xx + yy*larguraMapa] == 0xFFC15A26) {
 					this.vetorCelulas[yy][xx] = new ParedeTijolos(xx*DC, yy*DC, Celulas.CELULA_PAREDE_TIJOLOS);
 				} else if(pixelsHexCelulas[xx + yy*larguraMapa] == 0xFFE8E8EA) {
@@ -203,8 +203,20 @@ public class Tabuleiro implements IMovimento, ICriaCha, IAtaque {
 					this.vetorCelulas[yy][xx] = new ParedeHospital(xx*DC, yy*DC, Celulas.CELULA_PAREDE_HOSPITAL3);
 				} else if(pixelsHexCelulas[xx + yy*larguraMapa] == 0xFFC9C9CC) {
 					this.vetorCelulas[yy][xx] = new ParedeHospital(xx*DC, yy*DC, Celulas.CELULA_PAREDE_HOSPITAL4);
+				} else if(pixelsHexCelulas[xx + yy*larguraMapa] == 0xFF199B00) {
+					if(Jogo.rand.nextInt(100) < 70) {
+						this.vetorCelulas[yy][xx] = new Chao(xx*DC, yy*DC, Celulas.CELULA_CHAO_GRAMA_2);						
+					} else {
+						this.vetorCelulas[yy][xx] = new Chao(xx*DC, yy*DC, Celulas.CELULA_CHAO_GRAMA_1);
+					}
+				} else if(pixelsHexCelulas[xx + yy*larguraMapa] == 0xFF666666) {
+					if(Jogo.rand.nextInt(100) < 90) {
+						this.vetorCelulas[yy][xx] = new Chao(xx*DC, yy*DC, Celulas.CELULA_CHAO_MORTE_1);						
+					} else {
+						this.vetorCelulas[yy][xx] = new Chao(xx*DC, yy*DC, Celulas.CELULA_CHAO_MORTE_2);
+					}
 				} else {
-					this.vetorCelulas[yy][xx] = new ChaoRoxo(xx*DC, yy*DC, Celulas.CELULA_CHAO_ROXO);
+					this.vetorCelulas[yy][xx] = new Chao(xx*DC, yy*DC, Celulas.CELULA_CHAO_ROXO);
 				}
 			}
 		}
