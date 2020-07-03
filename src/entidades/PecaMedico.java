@@ -5,6 +5,7 @@ import java.awt.Font;
 import java.awt.Graphics;
 
 import erros.BauVazio;
+import erros.ChaNaoColetado;
 import erros.ForaDeAlcance;
 import erros.MuitoDistante;
 import erros.NaoVazio;
@@ -59,37 +60,28 @@ public class PecaMedico extends PecasMoveis implements ITransferir{
 		}
 	}
 	
-	public void att() throws NaoVazio, ForaDeAlcance, MuitoDistante, BauVazio {
+	public void att() throws NaoVazio, ForaDeAlcance, MuitoDistante, BauVazio, ChaNaoColetado {
 		// atualização da peça no modo multiplayer local
 		if(!Jogo.multiplayerRemoto) {
 			if(movendo) {
 				movendo = movimento(PecasMoveis.proxPosicaoMedicoX, PecasMoveis.proxPosicaoMedicoY, this, Jogo.tabuleiro);
 				if(!movendo) {
 					atualizarVetorBau(pos[1] - (Tabuleiro.DC*PecasMoveis.medicoAtualDirX), pos[0] - (Tabuleiro.DC*PecasMoveis.medicoAtualDirY));
-					PecasMoveis.medicoAtualDirX = 0;
-					PecasMoveis.medicoAtualDirY = 0;
-					Tabuleiro.trocarVez();
 					PecasMoveis.medicoSelecionado = false;
+					Tabuleiro.trocarVez();
 				}
 			}
 			
 		// atualização da peça no modo multiplayer remoto
 		} else 
 			if(Jogo.multiplayerRemoto) {
-			if(Jogo.medDoc.vetor.get(String.valueOf(indexNoVetor)).movendo == "true") {
-				if(Jogo.medDoc.proxX != "null" && Jogo.medDoc.proxY != "null") {
-					if(movimento(Integer.parseInt(Jogo.medDoc.proxX), Integer.parseInt(Jogo.medDoc.proxY), this, Jogo.tabuleiro)) {
-						movendo = true;
-					} else {
-						movendo = false;
-					}					
-				}
+			if(movendo) {
+				movendo = movimento(PecasMoveis.proxPosicaoMedicoX, PecasMoveis.proxPosicaoMedicoY, this, Jogo.tabuleiro);
+				
 				if(!movendo) {
 					atualizarVetorBau(pos[1] - (Tabuleiro.DC*PecasMoveis.medicoAtualDirX), pos[0] - (Tabuleiro.DC*PecasMoveis.medicoAtualDirY));
-					PecasMoveis.medicoAtualDirX = 0;
-					PecasMoveis.medicoAtualDirY = 0;
-					Tabuleiro.trocarVez();
 					PecasMoveis.medicoSelecionado = false;
+					Tabuleiro.trocarVez();
 				}
 			}
 		}

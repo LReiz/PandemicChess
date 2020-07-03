@@ -48,7 +48,7 @@ public class Jogo extends Canvas implements KeyListener, Runnable {
 	// Estados do Jogo
 	public boolean jogoRodando = false;
 	public static boolean multiplayerRemoto = false;
-	public static String estadoDoJogo = "telaInicial";		// 1: "telaInicial"; 2: "conectando"; 3: "jogando"
+	public static String estadoDoJogo = "telaInicial";		// 1: "telaInicial"; 2: escolherTime; 3: "conectando"; 4: "jogando"
 	
 	// Ferramentas
 	private Thread thread;
@@ -65,6 +65,7 @@ public class Jogo extends Canvas implements KeyListener, Runnable {
 	public static Tabuleiro tabuleiro;
 	
 	// Firebase (multiplayer)
+	public static int timeDoMultiplayerRemoto;
 	public static FirebaseDatabase db;
 	public static DatabaseReference ref;
 	public static DatabaseReference medRef;
@@ -102,9 +103,12 @@ public class Jogo extends Canvas implements KeyListener, Runnable {
 	public void att() throws NaoVazio, ForaDeAlcance, MuitoDistante, BauVazio, ChaNaoColetado {
 		if(estadoDoJogo == "telaInicial") {
 			InterfaceInicial.att();
-		}else if(estadoDoJogo == "conectando") {
-			if(multiplayerRemoto)
+		}else if(estadoDoJogo == "escolherTime") {
+			InterfaceInicial.att();
+		} else if(estadoDoJogo == "conectando") {
+			if(multiplayerRemoto) {
 				iniciarFireBase();
+			}
 			estadoDoJogo = "jogando";
 		}else if(estadoDoJogo == "pausado") {
 			
@@ -131,6 +135,12 @@ public class Jogo extends Canvas implements KeyListener, Runnable {
 		if(estadoDoJogo == "telaInicial") {
 			InterfaceInicial.renderizar(g);
 
+			g.dispose();
+			g = bs.getDrawGraphics();
+			g.drawImage(imagemPrincipal, 0, 0, LARGURA*ESCALA, ALTURA*ESCALA, null);
+		} else if(estadoDoJogo == "escolherTime") {
+			InterfaceInicial.renderizar(g);
+			
 			g.dispose();
 			g = bs.getDrawGraphics();
 			g.drawImage(imagemPrincipal, 0, 0, LARGURA*ESCALA, ALTURA*ESCALA, null);
@@ -181,8 +191,8 @@ public class Jogo extends Canvas implements KeyListener, Runnable {
 		// Banco de Dados usado durante o jogo
 		medRef = ref.child("medicos");
 		infRef = ref.child("infectados");
-		medDoc = new Time("1", Tabuleiro.entidadesMedicos.size());
-		infDoc = new Time("2", Tabuleiro.entidadesInfectados.size());
+		medDoc = new Time(Tabuleiro.entidadesMedicos.size());
+		infDoc = new Time(Tabuleiro.entidadesInfectados.size());
 		medRef.setValueAsync(medDoc);
 		infRef.setValueAsync(infDoc);
 		
@@ -216,56 +226,70 @@ public class Jogo extends Canvas implements KeyListener, Runnable {
 			
 		});
 		
-		ref.child("infectados").addValueEventListener(new ValueEventListener() {
-			
-			@Override
-			public void onDataChange(DataSnapshot snapshot) {
-				PecasMoveis.infectadoAtualDirX = Integer.parseInt(String.valueOf(snapshot.child("dirX").getValue()));
-				PecasMoveis.infectadoAtualDirY = Integer.parseInt(String.valueOf(snapshot.child("dirY").getValue()));
-				PecasMoveis.proxPosicaoInfectadoX = Integer.parseInt(String.valueOf(snapshot.child("proxX").getValue()));
-				PecasMoveis.proxPosicaoInfectadoY = Integer.parseInt(String.valueOf(snapshot.child("proxY").getValue()));
-				PecasMoveis.indexInfectado = Integer.parseInt(String.valueOf(snapshot.child("index").getValue()));
-				for(int i = 0; i < Tabuleiro.entidadesInfectados.size(); i++) {
-					infDoc.vetor.get(String.valueOf(i)).movendo = String.valueOf(snapshot.child("vetor").child(String.valueOf(i)).child("movendo").getValue());
+		if(Jogo.timeDoMultiplayerRemoto == 1) {
+			ref.child("infectados").addValueEventListener(new ValueEventListener() {
+				
+				@Override
+				public void onDataChange(DataSnapshot snapshot) {
+					PecasMoveis.infectadoAtualDirX = Integer.parseInt(String.valueOf(snapshot.child("dirX").getValue()));
+					PecasMoveis.infectadoAtualDirY = Integer.parseInt(String.valueOf(snapshot.child("dirY").getValue()));
+					PecasMoveis.proxPosicaoInfectadoX = Integer.parseInt(String.valueOf(snapshot.child("proxX").getValue()));
+					PecasMoveis.proxPosicaoInfectadoY = Integer.parseInt(String.valueOf(snapshot.child("proxY").getValue()));
+					PecasMoveis.indexInfectado = Integer.parseInt(String.valueOf(snapshot.child("index").getValue()));
+					for(int i = 0; i < Tabuleiro.entidadesInfectados.size(); i++) {
+						infDoc.vetor.get(String.valueOf(i)).movendo = String.valueOf(snapshot.child("vetor").child(String.valueOf(i)).child("movendo").getValue());
+						if(Integer.parseInt(infDoc.vetor.get(String.valueOf(i)).movendo) == 1) {
+							Tabuleiro.entidadesInfectados.get(i).movendo = true;
+						}
+					}
 				}
-			}
-			
-			@Override
-			public void onCancelled(DatabaseError error) {
 				
+				@Override
+				public void onCancelled(DatabaseError error) {
+					
+					
+				}
 				
-			}
-			
-		});
+			});
+		}
 		
-		ref.child("medicos").addValueEventListener(new ValueEventListener() {
-			
-			@Override
-			public void onDataChange(DataSnapshot snapshot) {
-				PecasMoveis.medicoAtualDirX = Integer.parseInt(String.valueOf(snapshot.child("dirX").getValue()));
-				PecasMoveis.medicoAtualDirY = Integer.parseInt(String.valueOf(snapshot.child("dirY").getValue()));
-				PecasMoveis.proxPosicaoMedicoX = Integer.parseInt(String.valueOf(snapshot.child("proxX").getValue()));
-				PecasMoveis.proxPosicaoMedicoY = Integer.parseInt(String.valueOf(snapshot.child("proxY").getValue()));
-				PecasMoveis.indexMedico = Integer.parseInt(String.valueOf(snapshot.child("index").getValue()));
-				for(int i = 0; i < Tabuleiro.entidadesMedicos.size(); i++) {
-					medDoc.vetor.get(String.valueOf(i)).movendo = String.valueOf(snapshot.child("vetor").child(String.valueOf(i)).child("movendo").getValue());
+		if(Jogo.timeDoMultiplayerRemoto == 2) {
+			ref.child("medicos").addValueEventListener(new ValueEventListener() {
+				
+				@Override
+				public void onDataChange(DataSnapshot snapshot) {
+					PecasMoveis.medicoAtualDirX = Integer.parseInt(String.valueOf(snapshot.child("dirX").getValue()));
+					PecasMoveis.medicoAtualDirY = Integer.parseInt(String.valueOf(snapshot.child("dirY").getValue()));
+					PecasMoveis.proxPosicaoMedicoX = Integer.parseInt(String.valueOf(snapshot.child("proxX").getValue()));
+					PecasMoveis.proxPosicaoMedicoY = Integer.parseInt(String.valueOf(snapshot.child("proxY").getValue()));
+					PecasMoveis.indexMedico = Integer.parseInt(String.valueOf(snapshot.child("index").getValue()));
+					for(int i = 0; i < Tabuleiro.entidadesMedicos.size(); i++) {
+						medDoc.vetor.get(String.valueOf(i)).movendo = String.valueOf(snapshot.child("vetor").child(String.valueOf(i)).child("movendo").getValue());
+						if(Integer.parseInt(medDoc.vetor.get(String.valueOf(i)).movendo) == 1) {
+							Tabuleiro.entidadesMedicos.get(i).movendo = true;
+						}
+					}
 				}
-			}
-			
-			@Override
-			public void onCancelled(DatabaseError error) {
 				
+				@Override
+				public void onCancelled(DatabaseError error) {
+					
+					
+				}
 				
-			}
-			
-		});
+			});
+		}
 	}
 	
 	private void attFireBase() {
-		medDoc.att();
-		infDoc.att();
-		medRef.setValueAsync(medDoc);
-		infRef.setValueAsync(infDoc);
+		if(Jogo.timeDoMultiplayerRemoto == 1) {
+			medDoc.att();
+			medRef.setValueAsync(medDoc);
+		}
+		if(Jogo.timeDoMultiplayerRemoto == 2) {
+			infDoc.att();
+			infRef.setValueAsync(infDoc);			
+		}
 	}
 	
 	private void iniciarFrame() {
@@ -339,13 +363,25 @@ public class Jogo extends Canvas implements KeyListener, Runnable {
 
 		if(estadoDoJogo == "telaInicial") {
 			if(key.getKeyCode() == KeyEvent.VK_ENTER) {
-				estadoDoJogo = "conectando";
+				if(Jogo.multiplayerRemoto)
+					estadoDoJogo = "escolherTime";
+				else
+					estadoDoJogo = "conectando";
 			} else if(key.getKeyCode() == KeyEvent.VK_W) {
 				InterfaceInicial.modoDeJogo--;
 			} else if(key.getKeyCode() == KeyEvent.VK_S) {
 				InterfaceInicial.modoDeJogo++;
 			}
-		} else if(estadoDoJogo == "jogando" && !Jogo.multiplayerRemoto) {
+		} else if(estadoDoJogo == "escolherTime") {
+			if(key.getKeyCode() == KeyEvent.VK_ENTER) {
+				estadoDoJogo = "conectando";
+			} else if(key.getKeyCode() == KeyEvent.VK_W) {
+				InterfaceInicial.time--;
+			} else if(key.getKeyCode() == KeyEvent.VK_S) {
+				InterfaceInicial.time++;
+			}
+		}
+		else if(estadoDoJogo == "jogando" && !Jogo.multiplayerRemoto) {
 			// MOVIMENTO DO TIME DOS MÉDICOS
 			if(Tabuleiro.vezJogador == 1) {		
 				if(!PecasMoveis.medicoSelecionado) {
@@ -364,28 +400,24 @@ public class Jogo extends Canvas implements KeyListener, Runnable {
 						PecasMoveis.medicoAtualDirY = 0;
 						PecasMoveis.proxPosicaoMedicoX = PecasMoveis.medicoAtual.pos[1] + (PecasMoveis.medicoAtualDirX*Tabuleiro.DC);
 						PecasMoveis.proxPosicaoMedicoY = PecasMoveis.medicoAtual.pos[0] + (PecasMoveis.medicoAtualDirY*Tabuleiro.DC);
-						PecasMoveis.medicoAtual.dir = 0;
 						PecasMoveis.medicoAtual.movendo = true;
 					} else if(key.getKeyCode() == KeyEvent.VK_L) {
 						PecasMoveis.medicoAtualDirX = 1;
 						PecasMoveis.medicoAtualDirY = 0;
 						PecasMoveis.proxPosicaoMedicoX = PecasMoveis.medicoAtual.pos[1] + (PecasMoveis.medicoAtualDirX*Tabuleiro.DC);
 						PecasMoveis.proxPosicaoMedicoY = PecasMoveis.medicoAtual.pos[0] + (PecasMoveis.medicoAtualDirY*Tabuleiro.DC);
-						PecasMoveis.medicoAtual.dir = 1;
 						PecasMoveis.medicoAtual.movendo = true;
 					} else if(key.getKeyCode() == KeyEvent.VK_I) {
 						PecasMoveis.medicoAtualDirY = -1;
 						PecasMoveis.medicoAtualDirX = 0;
 						PecasMoveis.proxPosicaoMedicoX = PecasMoveis.medicoAtual.pos[1] + (PecasMoveis.medicoAtualDirX*Tabuleiro.DC);
 						PecasMoveis.proxPosicaoMedicoY = PecasMoveis.medicoAtual.pos[0] + (PecasMoveis.medicoAtualDirY*Tabuleiro.DC);
-						PecasMoveis.medicoAtual.dir = 2;
 						PecasMoveis.medicoAtual.movendo = true;
 					} else if(key.getKeyCode() == KeyEvent.VK_K) {
 						PecasMoveis.medicoAtualDirY = 1;
 						PecasMoveis.medicoAtualDirX = 0;
 						PecasMoveis.proxPosicaoMedicoX = PecasMoveis.medicoAtual.pos[1] + (PecasMoveis.medicoAtualDirX*Tabuleiro.DC);
 						PecasMoveis.proxPosicaoMedicoY = PecasMoveis.medicoAtual.pos[0] + (PecasMoveis.medicoAtualDirY*Tabuleiro.DC);
-						PecasMoveis.medicoAtual.dir = 3;
 						PecasMoveis.medicoAtual.movendo = true;
 					}
 				}
@@ -409,35 +441,31 @@ public class Jogo extends Canvas implements KeyListener, Runnable {
 						PecasMoveis.infectadoAtualDirY = 0;
 						PecasMoveis.proxPosicaoInfectadoX = PecasMoveis.infectadoAtual.pos[1] + (PecasMoveis.infectadoAtualDirX*Tabuleiro.DC);
 						PecasMoveis.proxPosicaoInfectadoY = PecasMoveis.infectadoAtual.pos[0] + (PecasMoveis.infectadoAtualDirY*Tabuleiro.DC);
-						PecasMoveis.infectadoAtual.dir = 0;
 						PecasMoveis.infectadoAtual.movendo = true;
 					} else if(key.getKeyCode() == KeyEvent.VK_D) {
 						PecasMoveis.infectadoAtualDirX = 1;
 						PecasMoveis.infectadoAtualDirY = 0;
 						PecasMoveis.proxPosicaoInfectadoX = PecasMoveis.infectadoAtual.pos[1] + (PecasMoveis.infectadoAtualDirX*Tabuleiro.DC);
 						PecasMoveis.proxPosicaoInfectadoY = PecasMoveis.infectadoAtual.pos[0] + (PecasMoveis.infectadoAtualDirY*Tabuleiro.DC);
-						PecasMoveis.infectadoAtual.dir = 1;
 						PecasMoveis.infectadoAtual.movendo = true;
 					} else if(key.getKeyCode() == KeyEvent.VK_W) {
 						PecasMoveis.infectadoAtualDirY = -1;
 						PecasMoveis.infectadoAtualDirX = 0;
 						PecasMoveis.proxPosicaoInfectadoX = PecasMoveis.infectadoAtual.pos[1] + (PecasMoveis.infectadoAtualDirX*Tabuleiro.DC);
 						PecasMoveis.proxPosicaoInfectadoY = PecasMoveis.infectadoAtual.pos[0] + (PecasMoveis.infectadoAtualDirY*Tabuleiro.DC);
-						PecasMoveis.infectadoAtual.dir = 2;
 						PecasMoveis.infectadoAtual.movendo = true;
 					} else if(key.getKeyCode() == KeyEvent.VK_S) {
 						PecasMoveis.infectadoAtualDirY = 1;
 						PecasMoveis.infectadoAtualDirX = 0;
 						PecasMoveis.proxPosicaoInfectadoX = PecasMoveis.infectadoAtual.pos[1] + (PecasMoveis.infectadoAtualDirX*Tabuleiro.DC);
 						PecasMoveis.proxPosicaoInfectadoY = PecasMoveis.infectadoAtual.pos[0] + (PecasMoveis.infectadoAtualDirY*Tabuleiro.DC);
-						PecasMoveis.infectadoAtual.dir = 3;
 						PecasMoveis.infectadoAtual.movendo = true;
 					}
 				}
 			}
 		} else if(estadoDoJogo == "jogando" && Jogo.multiplayerRemoto) {
 			// MOVIMENTO DO TIME DOS MÉDICOS
-						if(Tabuleiro.vezJogador == 1) {		
+						if(Tabuleiro.vezJogador == 1 && timeDoMultiplayerRemoto == 1) {		
 							if(!PecasMoveis.medicoSelecionado) {
 								if(key.getKeyCode() == KeyEvent.VK_ENTER) {
 									PecasMoveis.medicoSelecionado = true;
@@ -454,34 +482,30 @@ public class Jogo extends Canvas implements KeyListener, Runnable {
 									PecasMoveis.medicoAtualDirY = 0;
 									PecasMoveis.proxPosicaoMedicoX = PecasMoveis.medicoAtual.pos[1] + (PecasMoveis.medicoAtualDirX*Tabuleiro.DC);
 									PecasMoveis.proxPosicaoMedicoY = PecasMoveis.medicoAtual.pos[0] + (PecasMoveis.medicoAtualDirY*Tabuleiro.DC);
-									PecasMoveis.medicoAtual.dir = 0;
 									PecasMoveis.medicoAtual.movendo = true;
 								} else if(key.getKeyCode() == KeyEvent.VK_L) {
 									PecasMoveis.medicoAtualDirX = 1;
 									PecasMoveis.medicoAtualDirY = 0;
 									PecasMoveis.proxPosicaoMedicoX = PecasMoveis.medicoAtual.pos[1] + (PecasMoveis.medicoAtualDirX*Tabuleiro.DC);
 									PecasMoveis.proxPosicaoMedicoY = PecasMoveis.medicoAtual.pos[0] + (PecasMoveis.medicoAtualDirY*Tabuleiro.DC);
-									PecasMoveis.medicoAtual.dir = 1;
 									PecasMoveis.medicoAtual.movendo = true;
 								} else if(key.getKeyCode() == KeyEvent.VK_I) {
 									PecasMoveis.medicoAtualDirY = -1;
 									PecasMoveis.medicoAtualDirX = 0;
 									PecasMoveis.proxPosicaoMedicoX = PecasMoveis.medicoAtual.pos[1] + (PecasMoveis.medicoAtualDirX*Tabuleiro.DC);
 									PecasMoveis.proxPosicaoMedicoY = PecasMoveis.medicoAtual.pos[0] + (PecasMoveis.medicoAtualDirY*Tabuleiro.DC);
-									PecasMoveis.medicoAtual.dir = 2;
 									PecasMoveis.medicoAtual.movendo = true;
 								} else if(key.getKeyCode() == KeyEvent.VK_K) {
 									PecasMoveis.medicoAtualDirY = 1;
 									PecasMoveis.medicoAtualDirX = 0;
 									PecasMoveis.proxPosicaoMedicoX = PecasMoveis.medicoAtual.pos[1] + (PecasMoveis.medicoAtualDirX*Tabuleiro.DC);
 									PecasMoveis.proxPosicaoMedicoY = PecasMoveis.medicoAtual.pos[0] + (PecasMoveis.medicoAtualDirY*Tabuleiro.DC);
-									PecasMoveis.medicoAtual.dir = 3;
 									PecasMoveis.medicoAtual.movendo = true;
 								}
 							}
 						}
 						
-						else if(Tabuleiro.vezJogador == 2) {
+						else if(Tabuleiro.vezJogador == 2 && timeDoMultiplayerRemoto == 2) {
 							// MOVIMENTO DO TIME DOS INFECTADOS
 							if(!PecasMoveis.infectadoSelecionado) {
 								if(key.getKeyCode() == KeyEvent.VK_R) {
@@ -499,28 +523,24 @@ public class Jogo extends Canvas implements KeyListener, Runnable {
 									PecasMoveis.infectadoAtualDirY = 0;
 									PecasMoveis.proxPosicaoInfectadoX = PecasMoveis.infectadoAtual.pos[1] + (PecasMoveis.infectadoAtualDirX*Tabuleiro.DC);
 									PecasMoveis.proxPosicaoInfectadoY = PecasMoveis.infectadoAtual.pos[0] + (PecasMoveis.infectadoAtualDirY*Tabuleiro.DC);
-									PecasMoveis.infectadoAtual.dir = 0;
 									PecasMoveis.infectadoAtual.movendo = true;
 								} else if(key.getKeyCode() == KeyEvent.VK_D) {
 									PecasMoveis.infectadoAtualDirX = 1;
 									PecasMoveis.infectadoAtualDirY = 0;
 									PecasMoveis.proxPosicaoInfectadoX = PecasMoveis.infectadoAtual.pos[1] + (PecasMoveis.infectadoAtualDirX*Tabuleiro.DC);
 									PecasMoveis.proxPosicaoInfectadoY = PecasMoveis.infectadoAtual.pos[0] + (PecasMoveis.infectadoAtualDirY*Tabuleiro.DC);
-									PecasMoveis.infectadoAtual.dir = 1;
 									PecasMoveis.infectadoAtual.movendo = true;
 								} else if(key.getKeyCode() == KeyEvent.VK_W) {
 									PecasMoveis.infectadoAtualDirY = -1;
 									PecasMoveis.infectadoAtualDirX = 0;
 									PecasMoveis.proxPosicaoInfectadoX = PecasMoveis.infectadoAtual.pos[1] + (PecasMoveis.infectadoAtualDirX*Tabuleiro.DC);
 									PecasMoveis.proxPosicaoInfectadoY = PecasMoveis.infectadoAtual.pos[0] + (PecasMoveis.infectadoAtualDirY*Tabuleiro.DC);
-									PecasMoveis.infectadoAtual.dir = 2;
 									PecasMoveis.infectadoAtual.movendo = true;
 								} else if(key.getKeyCode() == KeyEvent.VK_S) {
 									PecasMoveis.infectadoAtualDirY = 1;
 									PecasMoveis.infectadoAtualDirX = 0;
 									PecasMoveis.proxPosicaoInfectadoX = PecasMoveis.infectadoAtual.pos[1] + (PecasMoveis.infectadoAtualDirX*Tabuleiro.DC);
 									PecasMoveis.proxPosicaoInfectadoY = PecasMoveis.infectadoAtual.pos[0] + (PecasMoveis.infectadoAtualDirY*Tabuleiro.DC);
-									PecasMoveis.infectadoAtual.dir = 3;
 									PecasMoveis.infectadoAtual.movendo = true;
 								}
 							}

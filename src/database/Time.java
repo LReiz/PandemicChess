@@ -4,22 +4,21 @@ import java.util.HashMap;
 import java.util.Map;
 
 import entidades.PecasMoveis;
+import main.Jogo;
 import tabuleiro.Tabuleiro;
 
 public class Time {
 
-	public String time = "";
-	public String selecionado = "";
-	public String atual = "";
-	public String dirX = "";
-	public String dirY = "";
-	public String proxX = "";
-	public String proxY = "";
-	public String index = "";
+	public String selecionado = "0";
+	public String atual = "0";
+	public String dirX = "0";
+	public String dirY = "0";
+	public String proxX = "0";
+	public String proxY = "0";
+	public String index = "0";
 	public Map<String, DocPeca> vetor;
 	
-	public Time(String time, int size) {
-		this.time = time;
+	public Time(int size) {
 		
 		this.vetor = new HashMap<>();
 		for(int i = 0; i < size; i++) {
@@ -29,7 +28,7 @@ public class Time {
 	
 	public void att() {
 		
-		if(time == "1") {			// atualiza banco de dados dos médicos
+		if(Jogo.timeDoMultiplayerRemoto == 1) {			// atualiza banco de dados dos médicos
 			this.selecionado = String.valueOf(PecasMoveis.medicoSelecionado);
 			this.atual = String.valueOf(PecasMoveis.medicoAtual);
 			this.dirX = String.valueOf(PecasMoveis.medicoAtualDirX);
@@ -38,10 +37,14 @@ public class Time {
 			this.proxY = String.valueOf(PecasMoveis.proxPosicaoMedicoY);
 			this.index = String.valueOf(PecasMoveis.indexMedico);
 			for(int i = 0; i < Tabuleiro.entidadesMedicos.size(); i++) {
-				vetor.get(String.valueOf(i)).movendo = String.valueOf(Tabuleiro.entidadesMedicos.get(i).movendo);
+				if(Tabuleiro.entidadesMedicos.get(i).movendo) {
+					vetor.get(String.valueOf(i)).movendo = "1";					
+				} else {
+					vetor.get(String.valueOf(i)).movendo = "0";										
+				}
 			}
 			
-		} else if(time == "2") {	// atualiza banco de dados dos infectados
+		} else if(Jogo.timeDoMultiplayerRemoto == 2) {	// atualiza banco de dados dos infectados
 			this.selecionado = String.valueOf(PecasMoveis.medicoSelecionado);
 			this.atual = String.valueOf(PecasMoveis.infectadoAtual);
 			this.dirX = String.valueOf(PecasMoveis.infectadoAtualDirX);
@@ -50,7 +53,11 @@ public class Time {
 			this.proxY = String.valueOf(PecasMoveis.proxPosicaoInfectadoY);
 			this.index = String.valueOf(PecasMoveis.indexInfectado);
 			for(int i = 0; i < Tabuleiro.entidadesInfectados.size(); i++) {
-				vetor.get(String.valueOf(i)).movendo = String.valueOf(Tabuleiro.entidadesInfectados.get(i).movendo);
+				if(Tabuleiro.entidadesInfectados.get(i).movendo) {
+					vetor.get(String.valueOf(i)).movendo = "1";
+				} else {
+					vetor.get(String.valueOf(i)).movendo = "0";					
+				}
 			}
 		}
 	}

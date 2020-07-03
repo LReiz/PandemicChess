@@ -4,6 +4,7 @@ import java.awt.image.BufferedImage;
 import java.util.List;
 
 import erros.BauVazio;
+import erros.ChaNaoColetado;
 import erros.ForaDeAlcance;
 import erros.MuitoDistante;
 import erros.NaoVazio;
@@ -62,7 +63,7 @@ public abstract class PecasMoveis extends Peca implements IAtaque, IMovimento {
 		this.sprite = sprite;
 	}
 	
-	public void att() throws NaoVazio, ForaDeAlcance, MuitoDistante, BauVazio {
+	public void att() throws NaoVazio, ForaDeAlcance, MuitoDistante, BauVazio, ChaNaoColetado {
 		if(turnoDeAtaque) {
 			atacar(encontrarInimigo(Jogo.tabuleiro), Jogo.tabuleiro);
 			turnoDeAtaque = false;
@@ -131,8 +132,12 @@ public abstract class PecasMoveis extends Peca implements IAtaque, IMovimento {
 		if(Math.abs(x_dir) > Tabuleiro.DC || Math.abs(y_dir) > Tabuleiro.DC 
 				|| (Math.abs(x_dir) > 0 && Math.abs(y_dir) > 0)) 
 		{
-			peca.movendo = false;
-			throw new MuitoDistante("Movimento muito longo");
+			if(Jogo.multiplayerRemoto) {
+				return false;
+			} else {
+				peca.movendo = false;
+				throw new MuitoDistante("Movimento muito longo");
+			}
 		}
 		
 		if(x_final == pos[1] && y_final == pos[0])
@@ -142,6 +147,7 @@ public abstract class PecasMoveis extends Peca implements IAtaque, IMovimento {
 			// execução do movimento
 			if(x_dir < 0) {
 				pos[1] -= speed;
+				dir = 0;
 				if(pos[1] <= x_final) {
 					pos[1] = x_final;
 					return false;
@@ -149,6 +155,7 @@ public abstract class PecasMoveis extends Peca implements IAtaque, IMovimento {
 				return true;
 			} else if(x_dir > 0) {
 				pos[1] += speed;
+				dir = 1;
 				if(pos[1] >= x_final) {
 					pos[1] = x_final;
 					return false;
@@ -156,6 +163,7 @@ public abstract class PecasMoveis extends Peca implements IAtaque, IMovimento {
 				return true;
 			} else if(y_dir < 0) {
 				pos[0] -= speed;
+				dir = 2;
 				if(pos[0] <= y_final) {
 					pos[0] = y_final;
 					return false;
@@ -163,6 +171,7 @@ public abstract class PecasMoveis extends Peca implements IAtaque, IMovimento {
 				return true;
 			} else if(y_dir > 0) {
 				pos[0] += speed;
+				dir = 3;
 				if(pos[0] >= y_final) {
 					pos[0] = y_final;
 					return false;

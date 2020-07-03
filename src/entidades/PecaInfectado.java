@@ -3,6 +3,7 @@ package entidades;
 import java.awt.image.BufferedImage;
 
 import erros.BauVazio;
+import erros.ChaNaoColetado;
 import erros.ForaDeAlcance;
 import erros.MuitoDistante;
 import erros.NaoVazio;
@@ -33,35 +34,27 @@ public class PecaInfectado extends PecasMoveis {
 			animacaoBaixo[i] = Jogo.spritesheet.getSprite(i*Tabuleiro.DC, 4*Tabuleiro.DC, Tabuleiro.DC, Tabuleiro.DC);
 
 	}
-	
-	public void att() throws NaoVazio, ForaDeAlcance, MuitoDistante, BauVazio {
+	int f=0;
+	public void att() throws NaoVazio, ForaDeAlcance, MuitoDistante, BauVazio, ChaNaoColetado {
 		// atualização da peça no modo multiplayer local
 		if(!Jogo.multiplayerRemoto) {
 			if(movendo) {
 				movendo = movimento(PecasMoveis.proxPosicaoInfectadoX, PecasMoveis.proxPosicaoInfectadoY, this, Jogo.tabuleiro);
 				if(!movendo) {
 					atualizarVetorBau(pos[1] - (Tabuleiro.DC*PecasMoveis.infectadoAtualDirX), pos[0] - (Tabuleiro.DC*PecasMoveis.infectadoAtualDirY));
-					PecasMoveis.infectadoAtualDirX = 0;
-					PecasMoveis.infectadoAtualDirY = 0;
-					Tabuleiro.trocarVez();
 					PecasMoveis.infectadoSelecionado = false;
+					Tabuleiro.trocarVez();
 				}
 			}
+		// atualização da peça no modo multiplayer remoto
 		} else 
 			if(Jogo.multiplayerRemoto) {
-			// atualização da peça no modo multiplayer remoto
-			if(Jogo.infDoc.vetor.get(String.valueOf(indexNoVetor)).movendo == "true") {
-				if(movimento(Integer.parseInt(Jogo.infDoc.proxX), Integer.parseInt(Jogo.infDoc.proxY), this, Jogo.tabuleiro)) {
-					movendo = true;
-				} else {
-					movendo = false;
-				}
+			if(movendo) {
+				movendo = movimento(PecasMoveis.proxPosicaoInfectadoX, PecasMoveis.proxPosicaoInfectadoY, this, Jogo.tabuleiro);
 				if(!movendo) {
 					atualizarVetorBau(pos[1] - (Tabuleiro.DC*PecasMoveis.infectadoAtualDirX), pos[0] - (Tabuleiro.DC*PecasMoveis.infectadoAtualDirY));
-					PecasMoveis.infectadoAtualDirX = 0;
-					PecasMoveis.infectadoAtualDirY = 0;
-					Tabuleiro.trocarVez();
 					PecasMoveis.infectadoSelecionado = false;
+					Tabuleiro.trocarVez();
 				}
 			}
 		}
