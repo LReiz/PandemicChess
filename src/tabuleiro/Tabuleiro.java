@@ -92,6 +92,8 @@ public class Tabuleiro implements IMovimento, ICriaCha, IAtaque {
 		for(int i = 0; i < entidadesBau.size(); i++) {
 			entidadesBau.get(i).pos[1] = Integer.parseInt(String.valueOf(snapshot.child("pecasbaus").child("vetor").child(String.valueOf(i)).child("x").getValue()));
 			entidadesBau.get(i).pos[0] = Integer.parseInt(String.valueOf(snapshot.child("pecasbaus").child("vetor").child(String.valueOf(i)).child("y").getValue()));
+			entidadesBau.get(i).mascaras = Integer.parseInt(String.valueOf(snapshot.child("pecasbaus").child("vetor").child(String.valueOf(i)).child("mascaras").getValue()));
+			entidadesBau.get(i).algemas = Integer.parseInt(String.valueOf(snapshot.child("pecasbaus").child("vetor").child(String.valueOf(i)).child("algemas").getValue()));
 			vetorBaus[(int)(entidadesBau.get(i).pos[0]/Tabuleiro.DC)][(int)(entidadesBau.get(i).pos[1]/Tabuleiro.DC)] = entidadesBau.get(i);
 		}
 		
