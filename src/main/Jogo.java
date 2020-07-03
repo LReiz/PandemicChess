@@ -34,6 +34,7 @@ import erros.ChaNaoColetado;
 import erros.ForaDeAlcance;
 import erros.MuitoDistante;
 import erros.NaoVazio;
+import graficos.InterfaceFinal;
 import graficos.InterfaceInicial;
 import graficos.Spritesheet;
 import tabuleiro.Tabuleiro;
@@ -139,27 +140,32 @@ public class Jogo extends Canvas implements KeyListener, Runnable {
 		if(estadoDoJogo == "telaInicial") {
 			InterfaceInicial.renderizar(g);
 
-			g.dispose();
-			g = bs.getDrawGraphics();
-			g.drawImage(imagemPrincipal, 0, 0, LARGURA*ESCALA, ALTURA*ESCALA, null);
 		} else if(estadoDoJogo == "escolherTime") {
 			InterfaceInicial.renderizar(g);
 			
-			g.dispose();
-			g = bs.getDrawGraphics();
-			g.drawImage(imagemPrincipal, 0, 0, LARGURA*ESCALA, ALTURA*ESCALA, null);
 		} else if(estadoDoJogo == "jogando") {
 			// Renderização dos elementos do tabuleiro
 			tabuleiro.renderizar(g);
 			
-			g.dispose();
-			g = bs.getDrawGraphics();
-			g.drawImage(imagemPrincipal, 0, 0, LARGURA*ESCALA, ALTURA*ESCALA, null);
-			
-			// Renderização sem pixelização
+		} else if(estadoDoJogo == "vitoriaInfectados") {
+			tabuleiro.renderizar(g);
+			InterfaceFinal.renderizar(g);
+		} else if(estadoDoJogo == "vitoriaMedicosLock") {
+			tabuleiro.renderizar(g);
+			InterfaceFinal.renderizar(g);
+		} else if (estadoDoJogo == "vitoriaMedicosCura") {
+			tabuleiro.renderizar(g);
+			InterfaceFinal.renderizar(g);			
+		}
+		g.dispose();
+		g = bs.getDrawGraphics();
+		g.drawImage(imagemPrincipal, 0, 0, LARGURA*ESCALA, ALTURA*ESCALA, null);
+		
+		// Renderização sem pixelização
+		if(estadoDoJogo == "jogando") {
 			for(int i = 0; i < Tabuleiro.entidadesMedicos.size(); i++) {
 				Tabuleiro.entidadesMedicos.get(i).renderizarSemPixelizar(g);
-			}
+			}			
 		}
 		
 		bs.show();
@@ -196,7 +202,7 @@ public class Jogo extends Canvas implements KeyListener, Runnable {
 		medRef = ref.child("medicos");
 		infRef = ref.child("infectados");
 		medDoc = new Time(Tabuleiro.entidadesMedicos.size());
-		infDoc = new Time(Tabuleiro.entidadesInfectados.size());
+		infDoc = new Time(Tabuleiro.entidadesInfectados.size() + Tabuleiro.entidadesMedicos.size());
 		medRef.setValueAsync(medDoc);
 		infRef.setValueAsync(infDoc);
 		
@@ -214,7 +220,7 @@ public class Jogo extends Canvas implements KeyListener, Runnable {
 	}
 	
 	public static void iniciarChaFireBase() {
-		pecaChaRef = ref.child("conjuntos/cha");
+		pecaChaRef = ref.child("cha");
 		pecaChaRef.setValueAsync(chaConj);
 	}
 	
@@ -288,12 +294,14 @@ public class Jogo extends Canvas implements KeyListener, Runnable {
 				
 			});
 			
-			ref.child("conjuntos/cha").addValueEventListener(new ValueEventListener() {
+			ref.child("cha").addValueEventListener(new ValueEventListener() {
 				
 				@Override
 				public void onDataChange(DataSnapshot snapshot) {
+					tabuleiro.vetorBaus[(int)(tabuleiro.pecaCha.pos[0]/Tabuleiro.DC)][(int)(tabuleiro.pecaCha.pos[1]/Tabuleiro.DC)].cha = false;
 					tabuleiro.pecaCha.pos[1] = Integer.parseInt(String.valueOf(snapshot.child("x").getValue()));
 					tabuleiro.pecaCha.pos[0] = Integer.parseInt(String.valueOf(snapshot.child("y").getValue()));
+					tabuleiro.vetorBaus[(int)(tabuleiro.pecaCha.pos[0]/Tabuleiro.DC)][(int)(tabuleiro.pecaCha.pos[1]/Tabuleiro.DC)].cha = true;
 				}
 				
 				@Override
