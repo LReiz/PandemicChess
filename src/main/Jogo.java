@@ -24,7 +24,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import database.Conjunto;
+import database.ConjuntoBau;
+import database.ConjuntoPeca;
 import database.Time;
 import entidades.PecasMoveis;
 import erros.BauVazio;
@@ -75,9 +76,9 @@ public class Jogo extends Canvas implements KeyListener, Runnable {
 	public static DatabaseReference pecaBauRef;
 	public static Time medDoc;
 	public static Time infDoc;
-	public static Conjunto medConj;
-	public static Conjunto infConj;
-	public static Conjunto bauConj;
+	public static ConjuntoPeca medConj;
+	public static ConjuntoPeca infConj;
+	public static ConjuntoBau bauConj;
 	
 	// inicia o jogo
 	private Jogo() {
@@ -200,9 +201,9 @@ public class Jogo extends Canvas implements KeyListener, Runnable {
 		pecaMedRef = ref.child("conjuntos/pecasmedicos");
 		pecaInfRef = ref.child("conjuntos/pecasinfectados");
 		pecaBauRef = ref.child("conjuntos/pecasbaus");
-		medConj = new Conjunto(Tabuleiro.entidadesMedicos);
-		infConj = new Conjunto(Tabuleiro.entidadesInfectados);
-		bauConj = new Conjunto(Tabuleiro.entidadesBau);
+		medConj = new ConjuntoPeca(Tabuleiro.entidadesMedicos);
+		infConj = new ConjuntoPeca(Tabuleiro.entidadesInfectados);
+		bauConj = new ConjuntoBau(Tabuleiro.entidadesBau);
 		pecaMedRef.setValueAsync(medConj);
 		pecaInfRef.setValueAsync(infConj);
 		pecaBauRef.setValueAsync(bauConj);
