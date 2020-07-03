@@ -13,7 +13,7 @@ import interfaces.*;
 import main.Jogo;
 import tabuleiro.Tabuleiro;
 
-public class PecaMedico extends PecasMoveis implements ITransferir{
+public class PecaMedico extends PecasMoveis implements ITransferir, ICapturaCha{
 
 	// sprites dos médicos
 	public static BufferedImage PECA_MEDICO_B = Jogo.spritesheet.getSprite(0*Tabuleiro.DC, 1*Tabuleiro.DC, Tabuleiro.DC, Tabuleiro.DC);
@@ -89,7 +89,7 @@ public class PecaMedico extends PecasMoveis implements ITransferir{
 		
 		super.att();
 		transferirItens(this, Jogo.tabuleiro);
-		pegarChaNoChao(Jogo.tabuleiro);
+		pegarChaNoChao(Jogo.tabuleiro,this);
 	}
 	
 	public void renderizar(Graphics g) {
@@ -152,14 +152,14 @@ public class PecaMedico extends PecasMoveis implements ITransferir{
 		tab.atacar(inimigo, tab);
 	}
 	
-	public void pegarChaNoChao(Tabuleiro tab) {
+	public void pegarChaNoChao(Tabuleiro tab, PecaMedico med) {
 		int yMed = (int)(this.pos[0]/Tabuleiro.DC);
 		int xMed = (int)(this.pos[1]/Tabuleiro.DC);
 		int yCha = (int)(tab.pecaCha.pos[0]/Tabuleiro.DC);
 		int xCha = (int)(tab.pecaCha.pos[1]/Tabuleiro.DC);
 		if(Math.abs(yMed-yCha) <= 1 && Math.abs(xMed-xCha) <= 1 && tab.pecaCha.medicoPortadorDoCha == null) {
-			this.cha = true;
-			tab.pecaCha.medicoPortadorDoCha = this;
+			med.cha = true;
+			tab.pecaCha.pegarChaNoChao(tab, med);
 		}
 	}
 }

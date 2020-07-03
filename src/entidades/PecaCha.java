@@ -5,7 +5,7 @@ import java.awt.image.BufferedImage;
 import interfaces.*;
 import main.Jogo;
 import tabuleiro.Tabuleiro;
-public class PecaCha extends Peca implements ICriaCha, IGuardaCha{
+public class PecaCha extends Peca implements ICriaCha, IGuardaCha, ICapturaCha{
 	
 	// Atributos do cha
 	public PecaMedico medicoPortadorDoCha;
@@ -78,7 +78,10 @@ public class PecaCha extends Peca implements ICriaCha, IGuardaCha{
 				}				
 			}
 		}
-
+		
 		return new PecaCha(xCha, yCha, null);
+	}
+	public void pegarChaNoChao(Tabuleiro tab, PecaMedico med) {
+		this.medicoPortadorDoCha = med;
 	}
 }

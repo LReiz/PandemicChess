@@ -377,13 +377,11 @@ public class Tabuleiro implements IMovimento, ICriaCha, IAtaque {
 		}
 
 		else if(inimigo instanceof PecaInfectado) {		// médicos atacam
-			if(inimigo.algemas > 0) {
 
 				int xInf = (int)(inimigo.pos[1]/Tabuleiro.DC);
 				int yInf = (int)(inimigo.pos[0]/Tabuleiro.DC);
 				removerInimigoDoTabuleiro(inimigo, 1);
 				tab.vetorPecasMoveis[yInf][xInf] = null;
-			}
 		}
 	}
 	
