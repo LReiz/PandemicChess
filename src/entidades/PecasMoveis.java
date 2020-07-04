@@ -21,6 +21,7 @@ public abstract class PecasMoveis extends Peca implements IAtaque, IMovimento {
 	public int dir;					// 0: esquerda; 1: direita; 2: cima; 3: baixo
 	public double speed = 1;
 	public boolean movendo = false;
+	public boolean finalizouMovimento;
 	private BufferedImage sprite;
 	public boolean turnoDeAtaque;
 	
@@ -150,6 +151,7 @@ public abstract class PecasMoveis extends Peca implements IAtaque, IMovimento {
 				dir = 0;
 				if(pos[1] <= x_final) {
 					pos[1] = x_final;
+					peca.finalizouMovimento = true;
 					return false;
 				}
 				return true;
@@ -158,6 +160,7 @@ public abstract class PecasMoveis extends Peca implements IAtaque, IMovimento {
 				dir = 1;
 				if(pos[1] >= x_final) {
 					pos[1] = x_final;
+					peca.finalizouMovimento = true;
 					return false;
 				}
 				return true;
@@ -166,6 +169,7 @@ public abstract class PecasMoveis extends Peca implements IAtaque, IMovimento {
 				dir = 2;
 				if(pos[0] <= y_final) {
 					pos[0] = y_final;
+					peca.finalizouMovimento = true;
 					return false;
 				}
 				return true;
@@ -174,6 +178,7 @@ public abstract class PecasMoveis extends Peca implements IAtaque, IMovimento {
 				dir = 3;
 				if(pos[0] >= y_final) {
 					pos[0] = y_final;
+					peca.finalizouMovimento = true;
 					return false;
 				}
 				return true;

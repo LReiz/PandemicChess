@@ -43,7 +43,7 @@ public class PecaInfectado extends PecasMoveis {
 				if(!movendo) {
 					atualizarVetorBau(pos[1] - (Tabuleiro.DC*PecasMoveis.infectadoAtualDirX), pos[0] - (Tabuleiro.DC*PecasMoveis.infectadoAtualDirY));
 					PecasMoveis.infectadoSelecionado = false;
-					Tabuleiro.trocarVez();
+					Jogo.tabuleiro.trocarVez = true;
 				}
 			}
 		// atualização da peça no modo multiplayer remoto
@@ -51,10 +51,11 @@ public class PecaInfectado extends PecasMoveis {
 			if(Jogo.multiplayerRemoto) {
 			if(movendo) {
 				movendo = movimento(PecasMoveis.proxPosicaoInfectadoX, PecasMoveis.proxPosicaoInfectadoY, this, Jogo.tabuleiro);
-				if(!movendo) {
+				if(!movendo && finalizouMovimento) {
 					atualizarVetorBau(pos[1] - (Tabuleiro.DC*PecasMoveis.infectadoAtualDirX), pos[0] - (Tabuleiro.DC*PecasMoveis.infectadoAtualDirY));
 					PecasMoveis.infectadoSelecionado = false;
-					Tabuleiro.trocarVez();
+					finalizouMovimento = false;
+					Jogo.tabuleiro.trocarVez = true;
 				}
 			}
 		}
