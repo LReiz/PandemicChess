@@ -117,9 +117,9 @@ public class PecaMedico extends PecasMoveis implements ITransferir, ICapturaCha{
 	
 		for(int yy = -1;yy<2;yy++) {
 
-			if(yMed+yy < 0 || yMed+yy >= Tabuleiro.DC) continue;
+			if(yMed+yy < 0 || yMed+yy > Tabuleiro.DC) continue;
 			for(int xx = -1;xx<2;xx++) {
-				if(xMed+xx < 0 || xMed+xx >= Tabuleiro.DC) continue;
+				if(xMed+xx < 0 || xMed+xx > Tabuleiro.DC) continue;
 				if(tab.vetorPecasMoveis[yMed+yy][xMed+xx] instanceof PecaInfectado) {
 
 					atacar(tab.vetorPecasMoveis[yMed+yy][xMed+xx],tab);
@@ -135,10 +135,10 @@ public class PecaMedico extends PecasMoveis implements ITransferir, ICapturaCha{
 
 		
 		for(int yy = -1; yy<2; yy++) {
-			if(yMed+yy < 0 || yMed+yy >= Tabuleiro.DC) continue;
+			if(yMed+yy < 0 || yMed+yy > Tabuleiro.DC) continue;
 			
 			for(int xx = -1; xx<2; xx++) {
-				if(xMed+xx < 0 || xMed+xx >= Tabuleiro.DC) continue;
+				if(xMed+xx < 0 || xMed+xx > Tabuleiro.DC) continue;
 				if(tab.vetorBaus[yMed+yy][xMed+xx] != null) {
 					tab.vetorBaus[yMed+yy][xMed+xx].transferirItens(med, tab);
 				}	
