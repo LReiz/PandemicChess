@@ -48,9 +48,9 @@ public class Tabuleiro implements IMovimento, ICriaCha, IAtaque {
 	public static ArrayList<PecaBau> entidadesBau;
 	
 	// Controle da quantidade de Peças para inicializar no mapa
-	private int maxMedicos = 1;
+	private int maxMedicos = 8;
 	private int numMedicos = 0;
-	private int maxInfectados = 12;
+	private int maxInfectados = 5;
 	private int numInfectados = 0;
 	private int maxBaus = 8;
 	private int numBaus = 0;
