@@ -120,7 +120,7 @@ public class Jogo extends Canvas implements KeyListener, Runnable {
 		} else if(estadoDoJogo == "jogando") {
 			tabuleiro.att();
 			if(multiplayerRemoto)
-				attFireBase();			
+				attFireBase();	
 		}
 
 	}

@@ -44,9 +44,9 @@ public class InterfaceFinal {
 			g.setColor(new Color(40, 210, 40));
 			g.drawString("VITÓRIA DOS MÉDICOS", (Jogo.LARGURA-140)/2, Jogo.ALTURA/2);
 			g.setFont(new Font("arial", 1, tamanhoDaFonteSubTitulo));
-			g.drawString("Cura encontrada: Os cientistas descobriram", (Jogo.LARGURA-220)/2, (Jogo.ALTURA+35)/2);			
-			g.drawString(" que a cura para a doença que a cura para a doença", (Jogo.LARGURA-260)/2, (Jogo.ALTURA+55)/2);			
-			g.drawString("era um pouco de repouso e um chazinho de boldo!", (Jogo.LARGURA-245)/2, (Jogo.ALTURA+75)/2);			
+			g.drawString("Cura encontrada: Os cientistas", (Jogo.LARGURA-160)/2, (Jogo.ALTURA+35)/2);			
+			g.drawString("descobriram que a cura para a doença era", (Jogo.LARGURA-220)/2, (Jogo.ALTURA+55)/2);			
+			g.drawString("um pouco de repouso e um chazinho de boldo!", (Jogo.LARGURA-240)/2, (Jogo.ALTURA+75)/2);			
 		}
 	}
 }
