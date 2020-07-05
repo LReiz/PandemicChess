@@ -4,7 +4,7 @@
 * João Vitor Baptista Moreira - RA: 237833
 
 ## Descrição
-Jogo de tabuleiro com um contexto de pandemia
+Multiplayer
 
 ## Objetivo 
 Dois jogadores competem com seus times pela vitória, cada um com seu objetivo. O time dos médicos procura controlar a doença e salvar toda a população, enquanto que o time dos Infectados tenta disseminar a doença a todo custo. 
@@ -25,23 +25,35 @@ Dois jogadores competem com seus times pela vitória, cada um com seu objetivo. 
 * **Lockdown:** Se só sobram médicos no mapa, os médicos ganham.
 * **Genocídio:** Se só sobram infectados no mapa, os Infectados ganham.
 
-## Tutorial
-**Infectados:**
-* As teclas "a" e "d" mudam a seleção do personagem **infectado**
-* Apertando "r", o infectado selecionado é escolhido para ser movido
-* Por meio das teclas "w","a","s","d", o personagem se movimenta uma casa na direção escolhida
-
-**Médicos:**
-* As teclas "j" e "l" mudam a seleção do personagem **medico**
-* Apertando "ENTER", o medico selecionado é escolhido para ser movido
-* Por meio das teclas "i","j","k","l", o personagem se movimenta uma casa na direção escolhida
-
-
-## Vídeo do Projeto
+# Vídeo do Projeto
+## Vídeo Prévia
 [Explicação do Projeto](https://www.youtube.com/watch?v=WkQB7zuo9eI)
 
-## Slides do Projeto
+## Vídeo do Jogo
+-
+
+# Slides do Projeto
+## Slides da Prévia
 [Link dos Slides](https://docs.google.com/presentation/d/1KDkpZwINmNoawVvCUoEiNdXEPe-MgW5p7afNmaXl2f0/edit#slide=id.p)
+
+## Slides da Apresentação Final
+-
+
+# Destaques de Código
+-
+
+# Destaques de Pattern
+## Diagrama do Pattern
+-
+
+## Código do Pattern
+-
+
+# Conclusões e Trabalhos Futuros
+-
+
+# Diagramas
+## Diagrama Geral do Projeto
 
 ## Diagrama Geral de Componentes
 ![Diagrama Geral](./assets/diagrama-componentes.png)
@@ -237,13 +249,13 @@ Método | Objetivo
 ------ | --------
 `criaCha` | Recebe o Tabuleiro e cria a PecaCha no jogo, que deve ser única. Retorna void
 
-## Modelo do Plano de Exceções
+# Plano de Exceções
 
-### Diagrama da hierarquia de exceções
+## Diagrama da hierarquia de exceções
 
 <img src="./assets/classes-erros-movimento.png" alt="interface-cria-cha" width="800" />
 
-### Descrição das classes de exceção
+## Descrição das classes de exceção
 
 Classe | Descrição 
 ------ | ---------
