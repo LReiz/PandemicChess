@@ -4,7 +4,7 @@
 * João Vitor Baptista Moreira - RA: 237833
 
 ## Descrição
-Jogo de Tabuleiro com um contexto de pandemia.
+Multiplayer
 
 ## Objetivo 
 Dois jogadores competem com seus times pela vitória, cada um com seu objetivo. O time dos médicos procura controlar a doença e salvar toda a população, enquanto que o time dos Infectados tenta disseminar a doença a todo custo. 
