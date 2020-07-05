@@ -50,6 +50,25 @@ Dois jogadores competem com seus times pela vitória, cada um com seu objetivo. 
 ## Slides da Apresentação Final
 [Link dos Slides](https://docs.google.com/presentation/d/1KDkpZwINmNoawVvCUoEiNdXEPe-MgW5p7afNmaXl2f0/edit#slide=id.p)
 
+## Relatório de Evolução
+Inicialmente, tivemos dificuldade com a forma de organizar o projeto a partir de interfaces, uma vez que não tínhamos entendido tão bem como utilizá-las na nossa proposta de jogo. O primeiro diagrama de componentes pode ser visto abaixo:
+
+(inserir imagem aqui)
+
+
+Após alterarmos os claros problemas de organização do código, buscamos projetar um diagrama de interfaces que relacionasse melhor as entidades do jogo entre si com base nas características que tivessem em comum. No final, construímos o seguinte diagrama, com todas as entidades conectadas entre si por meio de interfaces:
+
+(inserir imagem aqui)
+
+
+Em trabalhos anteriores, tivemos como um problema o uso de variáveis de difícil compreensão, o que complicou a leitura de código e a correção dele pelo colega de equipe. As imagens a seguir foram retiradas do Lab6: Damas 
+
+(inserir imagens aqui)
+
+Neste trabalho, buscamos utilizar variáveis mais autoexplicativas, mesmo que elas fossem grandes e cansativas de escrever repetidamente. Alguns exemplos podem ser vistos a seguir:
+
+(inserir imagens aqui)
+
 # Destaques de Código
 -
 
@@ -61,7 +80,7 @@ Dois jogadores competem com seus times pela vitória, cada um com seu objetivo. 
 -
 
 # Conclusões e Trabalhos Futuros
--
+No final do projeto, ficou evidente a importância de deixar o código sempre o mais limpo possível e com variáveis e comentários fáceis de serem compreendidos por terceiros. Além disso, o uso de funções que generalizam as interações entre os componentes gera uma organização bastante útil na hora de escrever e compreender o código. Para o futuro, seria interessante a utilização de design patterns para isolar uma função específica de um certo componente, para que futuras atualizações não interfiram nas funcionalidades de outras partes, além de facilitar o debugging do jogo.
 
 # Diagramas
 ## Diagrama Geral do Projeto
