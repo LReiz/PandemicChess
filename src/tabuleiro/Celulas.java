@@ -16,6 +16,7 @@ public class Celulas {
 	public static BufferedImage CELULA_CHAO_GRAMA_2 = Jogo.spritesheet.getSprite(2*Tabuleiro.DC, 8*Tabuleiro.DC, Tabuleiro.DC, Tabuleiro.DC);
 	public static BufferedImage CELULA_CHAO_MORTE_1 = Jogo.spritesheet.getSprite(3*Tabuleiro.DC, 8*Tabuleiro.DC, Tabuleiro.DC, Tabuleiro.DC);
 	public static BufferedImage CELULA_CHAO_MORTE_2 = Jogo.spritesheet.getSprite(4*Tabuleiro.DC, 8*Tabuleiro.DC, Tabuleiro.DC, Tabuleiro.DC);
+	public static BufferedImage CELULA_CHAO_VITORIA = Jogo.spritesheet.getSprite(5*Tabuleiro.DC, 8*Tabuleiro.DC, Tabuleiro.DC, Tabuleiro.DC);
 	
 	public static BufferedImage CELULA_PAREDE_TIJOLOS = Jogo.spritesheet.getSprite(0*Tabuleiro.DC, 9*Tabuleiro.DC, Tabuleiro.DC, Tabuleiro.DC);
 	public static BufferedImage CELULA_PAREDE_HOSPITAL1 = Jogo.spritesheet.getSprite(1*Tabuleiro.DC, 9*Tabuleiro.DC, Tabuleiro.DC, Tabuleiro.DC);

@@ -11,7 +11,7 @@ public class PecaCha extends Peca implements ICriaCha, IGuardaCha, ICapturaCha {
 	public PecaMedico medicoPortadorDoCha;
 	
 	// sprites do cha
-	public static BufferedImage PECA_CHA = Jogo.spritesheet.getSprite(7*Tabuleiro.DC, 8*Tabuleiro.DC, Tabuleiro.DC, Tabuleiro.DC);
+	public static BufferedImage PECA_CHA = Jogo.spritesheet.getSprite(7*Tabuleiro.DC, 9*Tabuleiro.DC, Tabuleiro.DC, Tabuleiro.DC);
 	
 	public PecaCha(int x, int y, BufferedImage sprite) {
 		this.pos = new int[2];
