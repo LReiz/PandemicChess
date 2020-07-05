@@ -18,8 +18,8 @@ public class PecaMedico extends PecasMoveis implements ITransferir, ICapturaCha{
 	// sprites dos médicos
 	public static BufferedImage PECA_MEDICO_B = Jogo.spritesheet.getSprite(0*Tabuleiro.DC, 1*Tabuleiro.DC, Tabuleiro.DC, Tabuleiro.DC);
 	public static BufferedImage PECA_MEDICO_P = Jogo.spritesheet.getSprite(3*Tabuleiro.DC, 1*Tabuleiro.DC, Tabuleiro.DC, Tabuleiro.DC);
-	public static BufferedImage ITENS_MEDICOS_SEM_CHA = Jogo.spritesheet.getSprite(8*Tabuleiro.DC, 8*Tabuleiro.DC, Tabuleiro.DC, Tabuleiro.DC-7);
-	public static BufferedImage ITENS_MEDICOS_COM_CHA = Jogo.spritesheet.getSprite(8*Tabuleiro.DC, 8*Tabuleiro.DC, Tabuleiro.DC, Tabuleiro.DC);
+	public static BufferedImage ITENS_MEDICOS_SEM_CHA = Jogo.spritesheet.getSprite(8*Tabuleiro.DC, 9*Tabuleiro.DC, Tabuleiro.DC, Tabuleiro.DC-7);
+	public static BufferedImage ITENS_MEDICOS_COM_CHA = Jogo.spritesheet.getSprite(8*Tabuleiro.DC, 9*Tabuleiro.DC, Tabuleiro.DC, Tabuleiro.DC);
 
 	public PecaMedico(int x, int y, BufferedImage sprite) {
 		super(x, y, sprite);

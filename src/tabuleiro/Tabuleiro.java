@@ -49,11 +49,11 @@ public class Tabuleiro implements IMovimento, ICriaCha, IAtaque {
 	public static ArrayList<PecaBau> entidadesBau;
 	
 	// Controle da quantidade de Peças para inicializar no mapa
-	private int maxMedicos = 8;
+	private int maxMedicos = 8;			// padrão: 8
 	private int numMedicos = 0;
-	private int maxInfectados = 5;
+	private int maxInfectados = 5;		// padrão: 5
 	private int numInfectados = 0;
-	private int maxBaus = 8;
+	private int maxBaus = 8;			// padrão: 8
 	private int numBaus = 0;
 	
 	public Tabuleiro(String endereco) {
@@ -223,6 +223,8 @@ public class Tabuleiro implements IMovimento, ICriaCha, IAtaque {
 					} else {
 						this.vetorCelulas[yy][xx] = new Chao(xx*DC, yy*DC, Celulas.CELULA_CHAO_MORTE_2);
 					}
+				} else if(pixelsHexCelulas[xx + yy*larguraMapa] == 0xFFFFDE07) {
+					this.vetorCelulas[yy][xx] = new Chao(xx*DC, yy*DC, Celulas.CELULA_CHAO_VITORIA);					
 				} else {
 					this.vetorCelulas[yy][xx] = new Chao(xx*DC, yy*DC, Celulas.CELULA_CHAO_ROXO);
 				}

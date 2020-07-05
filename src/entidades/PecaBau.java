@@ -15,8 +15,8 @@ public class PecaBau extends Peca implements IGuardaCha, ITransferir {
 	public boolean aberto;
 	
 	// sprites dos baus
-	public static BufferedImage PECA_BAU = Jogo.spritesheet.getSprite(5*Tabuleiro.DC, 8*Tabuleiro.DC, Tabuleiro.DC, Tabuleiro.DC);
-	public static BufferedImage PECA_BAU_ABERTO = Jogo.spritesheet.getSprite(6*Tabuleiro.DC, 8*Tabuleiro.DC, Tabuleiro.DC, Tabuleiro.DC);
+	public static BufferedImage PECA_BAU = Jogo.spritesheet.getSprite(5*Tabuleiro.DC, 9*Tabuleiro.DC, Tabuleiro.DC, Tabuleiro.DC);
+	public static BufferedImage PECA_BAU_ABERTO = Jogo.spritesheet.getSprite(6*Tabuleiro.DC, 9*Tabuleiro.DC, Tabuleiro.DC, Tabuleiro.DC);
 	
 	public PecaBau(int x, int y, int mascaras, int algemas,  BufferedImage sprite) {
 		this.pos = new int[2];
