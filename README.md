@@ -4,7 +4,7 @@
 * João Vitor Baptista Moreira - RA: 237833
 
 ## Descrição
-Multiplayer
+Jogo de tabuleiro com um contexto de pandemia
 
 ## Objetivo 
 Dois jogadores competem com seus times pela vitória, cada um com seu objetivo. O time dos médicos procura controlar a doença e salvar toda a população, enquanto que o time dos Infectados tenta disseminar a doença a todo custo. 
@@ -24,6 +24,18 @@ Dois jogadores competem com seus times pela vitória, cada um com seu objetivo. 
 * **Cura do vírus:** Se um jogador chegar ao hospital com a cura do vírus(chá de boldo), o time dos médicos ganha.
 * **Lockdown:** Se só sobram médicos no mapa, os médicos ganham.
 * **Genocídio:** Se só sobram infectados no mapa, os Infectados ganham.
+
+## Tutorial
+**Infectados:**
+* As teclas "a" e "d" mudam a seleção do personagem infectado
+* Apertando "r", o infectado selecionado é escolhido para ser movido
+* Por meio das teclas "w","a","s","d", o personagem se movimenta uma casa na direção escolhida
+
+**Infectados:**
+* As teclas "a" e "d" mudam a seleção do personagem infectado
+* Apertando "r", o infectado selecionado é escolhido para ser movido
+* Por meio das teclas "w","a","s","d", o personagem se movimenta uma casa na direção escolhida
+
 
 ## Vídeo do Projeto
 [Explicação do Projeto](https://www.youtube.com/watch?v=WkQB7zuo9eI)
