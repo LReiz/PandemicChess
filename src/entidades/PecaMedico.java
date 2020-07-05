@@ -123,7 +123,6 @@ public class PecaMedico extends PecasMoveis implements ITransferir, ICapturaCha{
 				if(tab.vetorPecasMoveis[yMed+yy][xMed+xx] instanceof PecaInfectado) {
 
 					atacar(tab.vetorPecasMoveis[yMed+yy][xMed+xx],tab);
-					return;
 				}
 			}
 		}
