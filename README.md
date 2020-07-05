@@ -45,7 +45,7 @@ Dois jogadores competem com seus times pela vitória, cada um com seu objetivo. 
 
 # Slides do Projeto
 ## Slides da Prévia
--
+[Link da Prévia dos Slides](https://docs.google.com/presentation/d/17pTjVT8FDkaQrVg6ztnDF_Xvrid9u82tG4S9LGsOXoo/edit#slide=id.g8ba9af6037_0_342)
 
 ## Slides da Apresentação Final
 [Link dos Slides](https://docs.google.com/presentation/d/1KDkpZwINmNoawVvCUoEiNdXEPe-MgW5p7afNmaXl2f0/edit#slide=id.p)
