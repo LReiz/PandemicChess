@@ -164,7 +164,9 @@ public class Tabuleiro implements IMovimento, ICriaCha, IAtaque {
 		
 		// renderiza chá
 		if(chaCriado)
-			pecaCha.renderizar(g);
+			if(pecaCha.medicoPortadorDoCha == null) {
+				pecaCha.renderizar(g);
+			}
 
 		// renderiza indicador de seleção de peça
 		if(PecasMoveis.medicoSelecionado) {
