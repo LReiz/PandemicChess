@@ -56,7 +56,7 @@ public class Tabuleiro implements IMovimento, ICriaCha, IAtaque {
 	private int numInfectados = 0;
 	private int maxBaus = 10;			// padrão: 10
 	private int numBaus = 0;
-	private int maxAlgemasPorBau = 3;	// padrão: 2
+	private int maxAlgemasPorBau = 2;	// padrão: 2
 	private int maxMascarasPorBau = 6;	// padrão: 6
 	
 	public Tabuleiro(String endereco) {
