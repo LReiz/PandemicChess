@@ -59,7 +59,7 @@ public class Tabuleiro implements IMovimento, ICriaCha, IAtaque {
 	private int maxAlgemasPorBau = 2;	// padrão: 2
 	private int maxMascarasPorBau = 6;	// padrão: 6
 	
-	public Tabuleiro(String endereco) {
+	public Tabuleiro(String mapa) {
 		this.numMedicos = this.maxMedicos;
 		this.numInfectados = this.maxInfectados;
 		this.numBaus = this.maxBaus;
@@ -69,7 +69,7 @@ public class Tabuleiro implements IMovimento, ICriaCha, IAtaque {
 		entidadesBau = new ArrayList<PecaBau>();
 		this.pecaCha = new PecaCha(0, 0, null);
 		
-		inicializarMapa(endereco);
+		inicializarMapa(formularNomeDoMapa(mapa));
 		inicializarPecasParadas();
 		inicializarPecasMoveis();
 		
@@ -460,5 +460,10 @@ public class Tabuleiro implements IMovimento, ICriaCha, IAtaque {
 				throw new ChaNaoColetado("O medico chegou ao hospital sem a cura");
 			}
 		}
+	}
+	
+	private String formularNomeDoMapa(String mapa) {
+		String nomeDoArquivo = "/mapa" + mapa + ".png";
+		return nomeDoArquivo;
 	}
 }
