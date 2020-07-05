@@ -23,7 +23,7 @@ public class PecaMedico extends PecasMoveis implements ITransferir, ICapturaCha{
 
 	public PecaMedico(int x, int y, BufferedImage sprite) {
 		super(x, y, sprite);
-		this.mascaras = 3;
+		this.mascaras = 6;
 		
 
 		if(sprite == PECA_MEDICO_B) {

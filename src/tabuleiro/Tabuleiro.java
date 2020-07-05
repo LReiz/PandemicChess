@@ -53,7 +53,7 @@ public class Tabuleiro implements IMovimento, ICriaCha, IAtaque {
 	private int numMedicos = 0;
 	private int maxInfectados = 5;		// padrão: 5
 	private int numInfectados = 0;
-	private int maxBaus = 8;			// padrão: 8
+	private int maxBaus = 10;			// padrão: 8
 	private int numBaus = 0;
 	
 	public Tabuleiro(String endereco) {
@@ -235,9 +235,9 @@ public class Tabuleiro implements IMovimento, ICriaCha, IAtaque {
 	private void inicializarPecasParadas() {
 		vetorBaus = new PecaBau[alturaMapa][larguraMapa];
 
-		// inicialização dos Baus (metade superior do mapa)
+		// inicialização dos Baus
 		int xx = larguraMapa-1;
-		int yy = (int)(alturaMapa/2);
+		int yy = (int)((alturaMapa/4)*3);
 		
 		while(numBaus > 0) {
 			if(vetorBaus[yy][xx] == null
@@ -255,7 +255,7 @@ public class Tabuleiro implements IMovimento, ICriaCha, IAtaque {
 				xx = larguraMapa-1;
 				yy--;
 				if(yy < 0) {
-					yy = (int)(alturaMapa/2);
+					yy = (int)((alturaMapa/4)*3);
 				}
 			}
 		}
