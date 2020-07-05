@@ -88,7 +88,6 @@ public class PecaMedico extends PecasMoveis implements ITransferir, ICapturaCha{
 			}
 		}
 		
-		super.att();
 		transferirItens(this, Jogo.tabuleiro);
 		pegarChaNoChao(Jogo.tabuleiro,this);
 	}

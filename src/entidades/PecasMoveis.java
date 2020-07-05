@@ -23,7 +23,6 @@ public abstract class PecasMoveis extends Peca implements IAtaque, IMovimento {
 	public boolean movendo = false;
 	public boolean finalizouMovimento;
 	private BufferedImage sprite;
-	public boolean turnoDeAtaque;
 	
 	// Atributos para Multiplayer
 	public int indexNoVetor;
@@ -65,10 +64,7 @@ public abstract class PecasMoveis extends Peca implements IAtaque, IMovimento {
 	}
 	
 	public void att() throws NaoVazio, ForaDeAlcance, MuitoDistante, BauVazio, ChaNaoColetado {
-		if(turnoDeAtaque) {
-			encontrarInimigo(Jogo.tabuleiro);
-			turnoDeAtaque = false;
-		}
+
 	}
 	
 	public void renderizar(Graphics g) {

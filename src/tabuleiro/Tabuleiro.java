@@ -360,10 +360,10 @@ public class Tabuleiro implements IMovimento, ICriaCha, IAtaque {
 	
 	public static void realizarTurnoDeAtaque() {
 		for(int i = 0; i < entidadesMedicos.size(); i++) {
-			entidadesMedicos.get(i).turnoDeAtaque = true;
+			entidadesMedicos.get(i).encontrarInimigo(Jogo.tabuleiro);
 		}
 		for(int i = 0; i < entidadesInfectados.size(); i++) {
-			entidadesInfectados.get(i).turnoDeAtaque = true;
+			entidadesInfectados.get(i).encontrarInimigo(Jogo.tabuleiro);
 			
 		}
 	}

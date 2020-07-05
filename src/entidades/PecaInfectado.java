@@ -60,7 +60,7 @@ public class PecaInfectado extends PecasMoveis {
 			}
 		}
 		
-		super.att();
+
 	}
 	
 	public void encontrarInimigo(Tabuleiro tab) {
