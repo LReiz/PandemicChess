@@ -106,13 +106,13 @@ Objetivo | Organizar as Celulas e Pecas em vetores
 Interface | `<interface em Java do componente>`
 ```java
 public interface IMovimento{
-	boolean verificarMovimento(int x_final, int y_final);
+	boolean verificarMovimento(int x_final, int y_final, PecasMoveis peca, Tabuleiro tab);
 }
 public interface IAtaque{
-	void atacar(Peca inimigo);
+	void atacar(PecasMoveis inimigo, Tabuleiro tab);
 }
 public interface ICriaCha{
-	void criaCha(Tabuleiro tab);
+	void criaCha();
 }
 ```
 
@@ -122,21 +122,21 @@ public interface ICriaCha{
 Interface que lida com os movimento no Tabuleiro
 Método | Objetivo
 ------ | --------
-`movimento` | Recebe como parâmetro as coordenadas do posição final e retorna true se for possível fazer o movimento ou false caso contrário.
+`movimento` | Recebe como parâmetro as coordenadas do posição final, a peça a ser movida e o tabuleiro e retorna true se for possível fazer o movimento ou false caso contrário.
 
 * **Interface IAtaque**
 
 Interface que lida com as mecânicas de ataque entre peças
 Método | Objetivo
 ------ | --------
-`atacar` | Recebe a peça inimiga como parâmetro e realiza o ataque à essa peça e retorna void
+`atacar` | Recebe a peça inimiga e o tabuleiro como parâmetro e realiza o ataque à essa peça. Retorna void
 
 * **Interface ICriaCha**
 
 Interface que cria o PecaCha no Tabuleiro
 Método | Objetivo
 ------ | --------
-`criaCha` | Recebe o próprio Tabuleiro e verifica se o número mínimo de rodadas da partida já foi atingido e tenta criar o chá. Retorna void
+`criaCha` | Verifica se o número mínimo de rodadas da partida já foi atingido e tenta criar o chá. Retorna void
 
 ## Componente PecasMoveis
 <img src="./assets/componente-peca-infectado.png" alt="componente-peca-infectado" width="400" />
@@ -156,10 +156,10 @@ Objetivo | Representar as Pecas que semovimentam pelo tabuleiro
 Interface | `<interface em Java do componente>`
 ```java
 public interface IMovimento{
-	boolean verificarMovimento(int x_final, int y_final);
+	boolean verificarMovimento(int x_final, int y_final, PecasMoveis peca, Tabuleiro tab);
 }
 public interface IAtaque{
-	void atacar(Peca inimigo);
+	void atacar(Peca inimigo,Tabuleiro tab);
 }
 ```
 
@@ -169,14 +169,14 @@ public interface IAtaque{
 Interface que lida com os movimento no Tabuleiro
 Método | Objetivo
 ------ | --------
-`movimento` | Recebe como parâmetro as coordenadas do posição final e caso o Tabuleiro verifique que o movimento é válido, a peça executa o movimento.
+`movimento` | Recebe como parâmetro as coordenadas do posição final, a peça e o tabuleiro e caso o Tabuleiro verifique que o movimento é válido, a peça executa o movimento.
 
 * **Interface IAtaque**
 
 Interface que lida com as mecânicas de ataque entre peças
 Método | Objetivo
 ------ | --------
-`atacar` | Recebe a peça como parametro, verifica se ela é diferente de null e inimiga, caso passe pelas condições chama o Tabuleiro para que este execute o ataque à peça inimiga. Retorna void
+`atacar` | Recebe a peça como parametro, verifica se ela é diferente de null e inimiga, caso passe pelas condições chama o Tabuleiro, que também é passado como parâmetro, para que este execute o ataque à peça inimiga. Retorna void
 
 ## Componente PecaMedico
 <img src="./assets/componente-peca-medico.png" alt="componente-peca-medico" width="400" />
@@ -193,7 +193,7 @@ Objetivo | Representar as Pecas do time dos médicos
 Interface | `<interface em Java do componente>`
 ```java
 public interface ITransferir{
-	void transferirItens(PecaMedico medico);
+	void transferirItens(PecaMedico medico, Tabuleiro tab);
 }
 ```
 
@@ -203,7 +203,7 @@ public interface ITransferir{
 Interface que lida com as transferências de itens entre uma PecaBau e uma PecaMedico
 Método | Objetivo
 ------ | --------
-`transferirItens` | Recebe a própria PecaMedico como parâmetro e verifica os PecaBau próximos. Caso encontre um PecaBau suficientemente próximo chama este para executar a transferêcia de itens. Retorna void
+`transferirItens` | Recebe a própria PecaMedico e o tabuleiro como parâmetro e verifica os PecaBau próximos a ela. Caso encontre um PecaBau suficientemente próximo chama este para executar a transferêcia de itens. Retorna void
 
 ## Componente PecaBau
 <img src="./assets/componente-peca-bau.png" alt="componente-peca-bau" width="400" />
@@ -219,10 +219,10 @@ Objetivo | Representar os baús que gardam itens no jogo
 Interface | `<interface em Java do componente>`
 ```java
 public interface ITransferir{
-	void transferirItens(PecaMedico medico);
+	void transferirItens(PecaMedico medico, Tabuleiro tab);
 }
 public interface IGuardaCha{
-	void verificarBau();
+	void verificarBau(Tabuleiro tab);
 }
 ```
 
@@ -232,7 +232,7 @@ public interface IGuardaCha{
 Interface que lida com as transferências de itens entre uma PecaBau e uma PecaMedico
 Método | Objetivo
 ------ | --------
-`transferirItens` | Recebe a PecaMedico como parâmetro e executa a transferência dos itens contidos na PecaBau para a PecaMedico. Retorna void
+`transferirItens` | Recebe a PecaMedico e o tabuleiro como parâmetro e executa a transferência dos itens contidos na PecaBau para a PecaMedico. Retorna void
 
 * **Interface IGuardaCha**
 
@@ -257,10 +257,10 @@ Objetivo | Representar o item chá de boldo
 Interface | `<interface em Java do componente>`
 ```java
 public interface IGuardaCha{
-	void verificarBau();
+	void verificarBau(Tabuleiro tab);
 }
 public interface ICriaCha{
-	void criaCha(Tabuleiro tab);
+	void criaCha();
 }
 ```
 
@@ -277,7 +277,7 @@ Método | Objetivo
 Interface que cria o PecaCha no Tabuleiro
 Método | Objetivo
 ------ | --------
-`criaCha` | Recebe o Tabuleiro e cria a PecaCha no jogo, que deve ser única. Retorna void
+`criaCha` | Cria a PecaCha no jogo, que deve ser única. Retorna void
 
 # Plano de Exceções
 
