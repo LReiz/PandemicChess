@@ -23,6 +23,8 @@ public abstract class PecasMoveis extends Peca implements IAtaque, IMovimento {
 	public boolean movendo = false;
 	public boolean finalizouMovimento;
 	private BufferedImage sprite;
+	public int numMascarasInicial = 6;
+	public int numAlgemasInicial = 0;
 	
 	// Atributos para Multiplayer
 	public int indexNoVetor;

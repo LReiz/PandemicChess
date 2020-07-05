@@ -85,6 +85,8 @@ public class Tabuleiro implements IMovimento, ICriaCha, IAtaque {
 		for(int i = 0; i < entidadesMedicos.size(); i++) {
 			entidadesMedicos.get(i).pos[1] = Integer.parseInt(String.valueOf(snapshot.child("pecasmedicos").child("vetor").child(String.valueOf(i)).child("x").getValue()));
 			entidadesMedicos.get(i).pos[0] = Integer.parseInt(String.valueOf(snapshot.child("pecasmedicos").child("vetor").child(String.valueOf(i)).child("y").getValue()));
+			entidadesMedicos.get(i).mascaras = entidadesMedicos.get(i).numMascarasInicial;
+			entidadesMedicos.get(i).algemas = entidadesMedicos.get(i).numAlgemasInicial;
 			vetorPecasMoveis[(int)(entidadesMedicos.get(i).pos[0]/Tabuleiro.DC)][(int)(entidadesMedicos.get(i).pos[1]/Tabuleiro.DC)] = entidadesMedicos.get(i);
 		}
 		
