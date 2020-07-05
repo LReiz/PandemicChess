@@ -45,10 +45,10 @@ Dois jogadores competem com seus times pela vitória, cada um com seu objetivo. 
 
 # Slides do Projeto
 ## Slides da Prévia
-[Link dos Slides](https://docs.google.com/presentation/d/1KDkpZwINmNoawVvCUoEiNdXEPe-MgW5p7afNmaXl2f0/edit#slide=id.p)
+-
 
 ## Slides da Apresentação Final
--
+[Link dos Slides](https://docs.google.com/presentation/d/1KDkpZwINmNoawVvCUoEiNdXEPe-MgW5p7afNmaXl2f0/edit#slide=id.p)
 
 # Destaques de Código
 -
