@@ -174,7 +174,7 @@ public class Jogo extends Canvas implements KeyListener, Runnable {
 	private void iniciarFireBase() {
 		FileInputStream serviceAccount = null;
 		try {
-			serviceAccount = new FileInputStream("./data/serviceAccountKey.json");
+			serviceAccount = new FileInputStream("./serviceAccountKey.json");
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
