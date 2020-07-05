@@ -34,7 +34,7 @@ public class PecaInfectado extends PecasMoveis {
 			animacaoBaixo[i] = Jogo.spritesheet.getSprite(i*Tabuleiro.DC, 4*Tabuleiro.DC, Tabuleiro.DC, Tabuleiro.DC);
 
 	}
-	int f=0;
+
 	public void att() throws NaoVazio, ForaDeAlcance, MuitoDistante, BauVazio, ChaNaoColetado {
 		// atualização da peça no modo multiplayer local
 		if(!Jogo.multiplayerRemoto) {
@@ -47,7 +47,7 @@ public class PecaInfectado extends PecasMoveis {
 				}
 			}
 		// atualização da peça no modo multiplayer remoto
-		} else 
+		} else
 			if(Jogo.multiplayerRemoto) {
 			if(movendo) {
 				movendo = movimento(PecasMoveis.proxPosicaoInfectadoX, PecasMoveis.proxPosicaoInfectadoY, this, Jogo.tabuleiro);
