@@ -43,7 +43,7 @@ public class PecaInfectado extends PecasMoveis {
 				if(!movendo) {
 					atualizarVetorBau(pos[1] - (Tabuleiro.DC*PecasMoveis.infectadoAtualDirX), pos[0] - (Tabuleiro.DC*PecasMoveis.infectadoAtualDirY));
 					PecasMoveis.infectadoSelecionado = false;
-					Tabuleiro.trocarVez();
+					Jogo.tabuleiro.trocarVez = true;
 				}
 			}
 		// atualização da peça no modo multiplayer remoto
@@ -51,10 +51,11 @@ public class PecaInfectado extends PecasMoveis {
 			if(Jogo.multiplayerRemoto) {
 			if(movendo) {
 				movendo = movimento(PecasMoveis.proxPosicaoInfectadoX, PecasMoveis.proxPosicaoInfectadoY, this, Jogo.tabuleiro);
-				if(!movendo) {
+				if(!movendo && finalizouMovimento) {
 					atualizarVetorBau(pos[1] - (Tabuleiro.DC*PecasMoveis.infectadoAtualDirX), pos[0] - (Tabuleiro.DC*PecasMoveis.infectadoAtualDirY));
 					PecasMoveis.infectadoSelecionado = false;
-					Tabuleiro.trocarVez();
+					finalizouMovimento = false;
+					Jogo.tabuleiro.trocarVez = true;
 				}
 			}
 		}
@@ -70,10 +71,11 @@ public class PecaInfectado extends PecasMoveis {
 		// yParede e xParede são as coordenadas de uma possível parede entre os dois
 		int xParede = 0;
 		int yParede = 0;
+
 		for(int yy = -2;yy<3;yy++) {
-			if(yInf+yy < 0 || yInf+yy >= Tabuleiro.DC) continue;
+			if(yInf+yy < 0 || yInf+yy > Tabuleiro.DC) continue;
 			for(int xx = -2;xx<3;xx++) {
-				if(xInf+xx < 0 || xInf+xx >= Tabuleiro.DC) continue;
+				if(xInf+xx < 0 || xInf+xx > Tabuleiro.DC) continue;
 				if(tab.vetorPecasMoveis[yInf+yy][xInf+xx] instanceof PecaMedico) {	
 
 					if(Math.abs(yy) % 2 == 0 && Math.abs(xx) % 2 == 0) {
@@ -83,15 +85,37 @@ public class PecaInfectado extends PecasMoveis {
 					}
 					else if((Math.abs(yy) == 2 && Math.abs(xx) == 1)
 							||Math.abs(yy) == 1 && Math.abs(xx) == 2) {
+						int yParedeDiagonal, xParedeDiagonal;
+						int yParedeFrontal, xParedeFrontal;
 						if(Math.abs(yy)>Math.abs(xx)) {
-							if(yy>0) yParede = yInf + yy - 1;
-							else yParede = xInf + yy + 1;
-							xParede = xInf;
+							xParedeFrontal = xInf;
+							if(yy > 0) yParedeFrontal = yInf +yy -1;
+							else yParedeFrontal = yInf + yy + 1;
+							
+							yParedeDiagonal = yParedeFrontal;
+							xParedeDiagonal = xInf + xx;
+							
+							System.out.println("y > x");
 						}
 						else {
-							yParede = yInf;
-							if(xx>0) xParede = xInf + xx - 1;
-							else xParede = xInf + xx + 1;
+							yParedeFrontal = yInf;
+							if(xx>0) xParedeFrontal = xInf + xx - 1;
+							else xParedeFrontal = xInf + xx + 1;
+							
+							xParedeDiagonal = xParedeFrontal;
+							yParedeDiagonal = yInf + yy;
+							System.out.println("x > y");
+						}
+						System.out.println("parede frontal =" + yParedeFrontal +"," + xParedeFrontal);
+						System.out.println("parede Diagonal =" + yParedeDiagonal +"," + xParedeDiagonal);
+						System.out.println("A parede frontal existe:" + tab.vetorCelulas[yParedeFrontal][xParedeFrontal].colisao);
+						System.out.println("A parede Diagonal existe:" + tab.vetorCelulas[yParedeDiagonal][xParedeDiagonal].colisao);
+						if(tab.vetorCelulas[yParedeDiagonal][xParedeDiagonal].colisao == true)continue;
+						else if(tab.vetorCelulas[yParedeFrontal][xParedeFrontal].colisao == true)continue;
+						else {
+							vetorInimigos[len] = (tab.vetorPecasMoveis[yInf+yy][xInf+xx]);
+							len++;
+							continue;
 						}
 					}
 					

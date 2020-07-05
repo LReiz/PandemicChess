@@ -67,7 +67,7 @@ public class InterfaceInicial {
 			
 			g.setColor(new Color(R, G, B));
 			g.setFont(new Font("arial", 1, 15));
-			g.drawString("Pandemic CHESS!!!", (Jogo.LARGURA-140)/2, 50);
+			g.drawString("PANDEMIC CHESS", (Jogo.LARGURA-140)/2, 50);
 		
 			g.setFont(new Font("arial", 1, 10));
 			

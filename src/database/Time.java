@@ -38,9 +38,9 @@ public class Time {
 			this.index = String.valueOf(PecasMoveis.indexMedico);
 			for(int i = 0; i < Tabuleiro.entidadesMedicos.size(); i++) {
 				if(Tabuleiro.entidadesMedicos.get(i).movendo) {
-					vetor.get(String.valueOf(i)).movendo = "1";					
+					vetor.get(String.valueOf(i)).movendo = "1";
 				} else {
-					vetor.get(String.valueOf(i)).movendo = "0";										
+					vetor.get(String.valueOf(i)).movendo = "0";
 				}
 			}
 			
@@ -56,9 +56,11 @@ public class Time {
 				if(Tabuleiro.entidadesInfectados.get(i).movendo) {
 					vetor.get(String.valueOf(i)).movendo = "1";
 				} else {
-					vetor.get(String.valueOf(i)).movendo = "0";					
+					vetor.get(String.valueOf(i)).movendo = "0";
 				}
 			}
 		}
+		
 	}
+	
 }
