@@ -167,6 +167,7 @@ public class Jogo extends Canvas implements KeyListener, Runnable {
 				Tabuleiro.entidadesMedicos.get(i).renderizarSemPixelizar(g);
 			}			
 		}
+		tabuleiro.renderizarSemPixelizar(g);
 		
 		bs.show();
 	}

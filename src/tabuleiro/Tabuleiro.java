@@ -1,5 +1,6 @@
 package tabuleiro;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -34,7 +35,7 @@ public class Tabuleiro implements IMovimento, ICriaCha, IAtaque {
 	public static int vezJogador = 1;			// medicos 1; infectados: 2
 	public boolean trocarVez;
 	public static int rodada = 1;
-	public static int rodadaCriaCha = 4;
+	public static int rodadaCriaCha = 48;
 	public static boolean chaCriado;
 	
 	// Vetores dos elementos do mapa
@@ -53,8 +54,10 @@ public class Tabuleiro implements IMovimento, ICriaCha, IAtaque {
 	private int numMedicos = 0;
 	private int maxInfectados = 5;		// padrão: 5
 	private int numInfectados = 0;
-	private int maxBaus = 10;			// padrão: 8
+	private int maxBaus = 10;			// padrão: 10
 	private int numBaus = 0;
+	private int maxAlgemasPorBau = 3;	// padrão: 2
+	private int maxMascarasPorBau = 6;	// padrão: 6
 	
 	public Tabuleiro(String endereco) {
 		this.numMedicos = this.maxMedicos;
@@ -181,6 +184,11 @@ public class Tabuleiro implements IMovimento, ICriaCha, IAtaque {
 			g.drawRect(entidadesInfectados.get(PecasMoveis.indexInfectado).pos[1], entidadesInfectados.get(PecasMoveis.indexInfectado).pos[0], Tabuleiro.DC, Tabuleiro.DC);
 	}
 	
+	public void renderizarSemPixelizar(Graphics g) {
+		g.setFont(new Font("arial", 1, 15));
+		g.drawString("Rodada: " + rodada, 20, 30);
+	}
+	
 	private void inicializarMapa(String endereco) {
 		vetorCelulas = new Celulas[Jogo.ALTURA][Jogo.ALTURA];
 		
@@ -244,7 +252,7 @@ public class Tabuleiro implements IMovimento, ICriaCha, IAtaque {
 					&& !vetorCelulas[yy][xx].colisao
 					&& Jogo.rand.nextInt(100) < 1) {
 				
-				PecaBau bau = new PecaBau(xx*DC, yy*DC, Jogo.rand.nextInt(6), Jogo.rand.nextInt(2), PecaBau.PECA_BAU);
+				PecaBau bau = new PecaBau(xx*DC, yy*DC, Jogo.rand.nextInt(maxMascarasPorBau+1), Jogo.rand.nextInt(maxAlgemasPorBau+1), PecaBau.PECA_BAU);
 				
 				vetorBaus[yy][xx] = bau;
 				entidadesBau.add(bau);
@@ -431,20 +439,14 @@ public class Tabuleiro implements IMovimento, ICriaCha, IAtaque {
 	
 	public void verificarVitoria() throws ChaNaoColetado{
 		if(entidadesMedicos.size() <= 0) {
-			System.out.println("VITÓRIA DOS INFECTADOS");
-			System.out.println("Genocídio: O vírus venceu a humanidade!");
 			Jogo.estadoDoJogo = "vitoriaInfectados";
 		}
 		else if(entidadesInfectados.size() <= 0) {
-			System.out.println("VITÓRIA DOS MÉDICOS");
-			System.out.println("Lockdown: Todos os infectados foram colocados em quarentena!");
 			Jogo.estadoDoJogo = "vitoriaMedicosLock";
 		}
 		else {
 			if((vetorPecasMoveis[15][8] instanceof PecaMedico && vetorPecasMoveis[15][8].cha == true) ||
 				(vetorPecasMoveis[15][9] instanceof PecaMedico && vetorPecasMoveis[15][9].cha == true)){
-				System.out.println("VITÓRIA DOS MÉDICOS");
-				System.out.println("Cura encontrada: Os cientistas descobriram que a cura para a doença era um pouco de repouso e um chazinho de boldo!");
 				Jogo.estadoDoJogo = "vitoriaMedicosCura";
 			}
 			else if(((vetorPecasMoveis[15][8] instanceof PecaMedico && vetorPecasMoveis[15][8].cha == false) ||
