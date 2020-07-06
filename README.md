@@ -65,6 +65,8 @@ Em trabalhos anteriores, tivemos como um problema o uso de variáveis de difíci
 int k = 0;       // numero de pecas em risco
 ```
 ```java
+int l = -1; //essa variavel me diz se a peca alvo esta em risco ou nao: 0 -> esta em risco, -1 -> nao esta em risco
+(...)
 if(l == -1) return;  //como a peca alvo nao esta em risco, o mov nao e valido
 
 if (l == 0) { //pode capturar,pois a peca alvo esta em risco
