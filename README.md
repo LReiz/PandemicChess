@@ -111,6 +111,40 @@ Um dos maiores destaques do nosso código foi o uso do Firebase para implementa�
 	}
 ```
 
+Uma ténica utilizada foi utilizado um loop de repetição de 60 frames por segundo, que gerencia a atualização de informações e renderização das telas:
+```java
+// Controle de FPS do Jogo	
+		int fps = 60;
+		double nanosegundosDeUmFrame = 1000000000/fps;
+		double delta = 0;
+		long nanoAnterior = System.nanoTime();
+		long nanoAtual;
+		
+		int numDeFrames = 0;
+		long segPassado = System.currentTimeMillis();
+		
+		while(jogoRodando) {
+			nanoAtual = System.nanoTime();
+			delta += (nanoAtual - nanoAnterior)/nanosegundosDeUmFrame;
+			nanoAnterior = nanoAtual;
+			if(delta >= 1) {
+				try {
+					att();
+				} catch (NaoVazio | ForaDeAlcance | MuitoDistante | BauVazio | ChaNaoColetado e) {
+					e.printStackTrace();
+				}
+				renderizar();
+				numDeFrames++;
+				delta--;
+			}
+			if(System.currentTimeMillis() - segPassado >= 1000) {
+				System.out.println("FPS: " + numDeFrames);
+				numDeFrames = 0;
+				segPassado += 1000;
+			}
+		}
+```
+
 Outro técnica pertinente no nosso jogo foi o uso da Spritesheet (grade de imagens) para gerenciar e centralizar as imagens do jogo em um arquivo só:
 ```java
 	BufferedImage spritesheet;
