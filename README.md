@@ -38,7 +38,7 @@ Dois jogadores competem com seus times pela vitória, cada um com seu objetivo. 
 
 **Sobre a Instalação**
 
-Como foi usado o Realtime Database do Firebase para implementar o multiplayer, é necessário que sejam importadas as bibliotecas do firebase para o projeto e para isso, utilizamos o gerenciador de pacotes Gradle. Além disso é necessário que seja criado um banco de dados próprio e que as credenciais dele sejam inseridas em um arquivo de nome "serviceAccountKey.json" na pasta principal do jogo.
+Como foi usado o Realtime Database do Firebase para implementar o multiplayer remoto, é necessário que sejam importadas as bibliotecas do firebase para o projeto e para isso, utilizamos o gerenciador de pacotes Gradle. Além disso é necessário que seja criado um banco de dados próprio e que as credenciais dele sejam inseridas em um arquivo de nome "serviceAccountKey.json" na pasta principal do jogo. Caso não queira jogar o multiplayer remoto, apenas delete o pacote referente ao Firebase e suas instâncias na classe Jogo.
 
 # Vídeo do Projeto
 ## Vídeo Prévia
