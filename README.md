@@ -27,14 +27,14 @@ Dois jogadores competem com seus times pela vitória, cada um com seu objetivo. 
 
 ## Tutorial
 **Infectados:**
-* As teclas "a" e "d" mudam a seleção do personagem infectado
-* Apertando "r", o infectado selecionado é escolhido para ser movido
-* Por meio das teclas "w","a","s","d", o personagem se movimenta uma casa na direção escolhida
+* As teclas "A" e "D" mudam a seleção do personagem infectado
+* Apertando "R", o infectado selecionado é escolhido para ser movido
+* Por meio das teclas "W","A","S","D", o personagem se movimenta uma casa na direção escolhida
 
 **Médicos:**
-* As teclas "j" e "l" mudam a seleção do personagem medico
+* As teclas "J" e "L" mudam a seleção do personagem medico
 * Apertando "ENTER", o medico selecionado é escolhido para ser movido
-* Por meio das teclas "i","j","k","l", o personagem se movimenta uma casa na direção escolhida
+* Por meio das teclas "I","J","K","L", o personagem se movimenta uma casa na direção escolhida
 
 # Vídeo do Projeto
 ## Vídeo Prévia
