@@ -81,14 +81,53 @@ int yParedeFrontal, xParedeFrontal;
 ```
 
 # Destaques de Código
--
+Um dos maiores destaques do nosso código foi o uso do Firebase para implementação do multiplayer remoto:
+```java
+	public Firebase() {
+		
+	}
+	
+	public void iniciarFireBase() {
+		FileInputStream serviceAccount = null;
+		try {
+			serviceAccount = new FileInputStream("./serviceAccountKey.json");
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		FirebaseOptions options = null;
+		try {
+			options = new FirebaseOptions.Builder()
+			  .setCredentials(GoogleCredentials.fromStream(serviceAccount))
+			  .setDatabaseUrl("https://pandemicchess-16070.firebaseio.com")
+			  .build();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 
-# Destaques de Pattern
-## Diagrama do Pattern
--
+		FirebaseApp.initializeApp(options);
+		
+		iniciarInstanciasFireBase();
+		observadorFirebase();
+	}
+```
 
-## Código do Pattern
--
+Outro técnica pertinente no nosso jogo foi o uso da Spritesheet (grade de imagens) para gerenciar e centralizar as imagens do jogo em um arquivo só:
+```java
+	BufferedImage spritesheet;
+	
+	public Spritesheet(String endereco) {
+	
+			try {
+				spritesheet = ImageIO.read(getClass().getResource(endereco));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}			
+	}
+	
+	public BufferedImage getSprite(int x, int y, int largura, int altura) {
+		return (spritesheet.getSubimage(x, y, largura, altura));
+	}
+```
 
 # Conclusões e Trabalhos Futuros
 No final do projeto, ficou evidente a importância de deixar o código sempre o mais limpo possível e com variáveis e comentários fáceis de serem compreendidos por terceiros. Além disso, o uso de funções que generalizam as interações entre os componentes gera uma organização bastante útil na hora de escrever e compreender o código. Para o futuro, seria interessante a utilização de design patterns para isolar uma função específica de um certo componente, para que futuras atualizações não interfiram nas funcionalidades de outras partes, além de facilitar o debugging do jogo.
