@@ -61,13 +61,23 @@ Após alterarmos os claros problemas de organização do código, buscamos proje
 (inserir imagem aqui)
 
 
-Em trabalhos anteriores, tivemos como um problema o uso de variáveis de difícil compreensão, o que complicou a leitura de código e a correção dele pelo colega de equipe. As imagens a seguir foram retiradas do Lab6: Damas 
+Em trabalhos anteriores, tivemos como um problema o uso de variáveis de difícil compreensão, o que complicou a leitura de código e a correção dele pelo colega de equipe. Os trechos a seguir foram retiradas do Lab6: Damas 
+```java
+int k = 0;       // numero de pecas em risco
+```
+```java
+if(l == -1) return;  //como a peca alvo nao esta em risco, o mov nao e valido
 
-(inserir imagens aqui)
-
+if (l == 0) { //pode capturar,pois a peca alvo esta em risco
+```
 Neste trabalho, buscamos utilizar variáveis mais autoexplicativas, mesmo que elas fossem grandes e cansativas de escrever repetidamente. Alguns exemplos podem ser vistos a seguir:
-
-(inserir imagens aqui)
+```java
+public PecaMedico medicoPortadorDoCha;
+```
+```java
+int yParedeDiagonal, xParedeDiagonal;
+int yParedeFrontal, xParedeFrontal;
+```
 
 # Destaques de Código
 -
