@@ -183,11 +183,9 @@ Método | Objetivo
 <img src="./assets/componente-peca-medico.png" alt="componente-peca-medico" width="400" />
 
 ### Interfaces
-* **Interface ITransferir**
-<img src="./assets/interface-transferir.png" alt="interface-transferir" width="800" />
 
-* **Interface ICapturaCha**
-<img src="./assets/interface-transferir.png" alt="interface-captura-cha" width="800" />
+<img src="./assets/interface-transferir.png" alt="interface-transferir" width="800" />
+<img src="./assets/interface-captura-cha.png" alt="interface-captura-cha" width="800" />
 
 
 Campo | Valor
@@ -263,6 +261,9 @@ Método | Objetivo
 
 <img src="./assets/interface-cria-cha.png" alt="interface-cria-cha" width="800" />
 
+<img src="./assets/interface-captura-cha.png" alt="interface-captura-cha" width="800" />
+
+
 Campo | Valor
 ----- | -----
 Classe | `<caminho completo da classe com pacotes>`
@@ -275,6 +276,9 @@ public interface IGuardaCha{
 }
 public interface ICriaCha{
 	void criaCha();
+}
+public interface ICapturaCha{
+	void pegarChaNoChao(Tabuleiro tab, PecaMedico med);
 }
 ```
 
@@ -292,6 +296,13 @@ Interface que cria o PecaCha no Tabuleiro
 Método | Objetivo
 ------ | --------
 `criaCha` | Cria a PecaCha no jogo, que deve ser única. Retorna void
+
+* **Interface ICapturaCha**
+
+Interface que realiza a captura do cha no chão pelo médico
+Método | Objetivo
+------ | --------
+`pegarChaNoChao` | Recebe como parâmetro uma PecaMedico, que é atribída ao medicoPortadorDoCha. Retorna void
 
 # Plano de Exceções
 
