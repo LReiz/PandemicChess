@@ -52,6 +52,7 @@ public class Jogo extends Canvas implements KeyListener, Runnable {
 	public boolean jogoRodando = false;
 	public static boolean multiplayerRemoto = false;
 	public static String estadoDoJogo = "telaInicial";		// 1: "telaInicial"; 2: escolherTime; 3: "conectando"; 4: "jogando"
+	public static int mapaAtual = 2;						// mapas disponíveis --> [1, 2]
 	
 	// Ferramentas
 	private Thread thread;
@@ -89,7 +90,7 @@ public class Jogo extends Canvas implements KeyListener, Runnable {
 		imagemPrincipal = new BufferedImage(LARGURA, ALTURA, BufferedImage.TYPE_INT_RGB);
 		spritesheet = new Spritesheet("/spritesheet.png");
 		
-		tabuleiro = new Tabuleiro("/mapa2.png");
+		tabuleiro = new Tabuleiro(String.valueOf(mapaAtual));
 		
 		this.setPreferredSize(new Dimension(LARGURA*ESCALA, ALTURA*ESCALA));
 		addKeyListener(this);

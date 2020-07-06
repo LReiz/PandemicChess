@@ -4,7 +4,7 @@
 * João Vitor Baptista Moreira - RA: 237833
 
 ## Descrição
-Jogo de Tabuleiro com um contexto de pandemia.
+Jogo de tabuleiro com contexto de pandemia
 
 ## Objetivo 
 Dois jogadores competem com seus times pela vitória, cada um com seu objetivo. O time dos médicos procura controlar a doença e salvar toda a população, enquanto que o time dos Infectados tenta disseminar a doença a todo custo. 
@@ -25,11 +25,65 @@ Dois jogadores competem com seus times pela vitória, cada um com seu objetivo. 
 * **Lockdown:** Se só sobram médicos no mapa, os médicos ganham.
 * **Genocídio:** Se só sobram infectados no mapa, os Infectados ganham.
 
-## Vídeo do Projeto
+## Tutorial
+**Infectados:**
+* As teclas "a" e "d" mudam a seleção do personagem infectado
+* Apertando "r", o infectado selecionado é escolhido para ser movido
+* Por meio das teclas "w","a","s","d", o personagem se movimenta uma casa na direção escolhida
+
+**Médicos:**
+* As teclas "j" e "l" mudam a seleção do personagem medico
+* Apertando "ENTER", o medico selecionado é escolhido para ser movido
+* Por meio das teclas "i","j","k","l", o personagem se movimenta uma casa na direção escolhida
+
+# Vídeo do Projeto
+## Vídeo Prévia
 [Explicação do Projeto](https://www.youtube.com/watch?v=WkQB7zuo9eI)
 
-## Slides do Projeto
+## Vídeo do Jogo
+-
+
+# Slides do Projeto
+## Slides da Prévia
+[Link da Prévia dos Slides](https://docs.google.com/presentation/d/17pTjVT8FDkaQrVg6ztnDF_Xvrid9u82tG4S9LGsOXoo/edit#slide=id.g8ba9af6037_0_342)
+
+## Slides da Apresentação Final
 [Link dos Slides](https://docs.google.com/presentation/d/1KDkpZwINmNoawVvCUoEiNdXEPe-MgW5p7afNmaXl2f0/edit#slide=id.p)
+
+## Relatório de Evolução
+Inicialmente, tivemos dificuldade com a forma de organizar o projeto a partir de interfaces, uma vez que não tínhamos entendido tão bem como utilizá-las na nossa proposta de jogo. O primeiro diagrama de componentes pode ser visto abaixo:
+
+(inserir imagem aqui)
+
+
+Após alterarmos os claros problemas de organização do código, buscamos projetar um diagrama de interfaces que relacionasse melhor as entidades do jogo entre si com base nas características que tivessem em comum. No final, construímos o seguinte diagrama, com todas as entidades conectadas entre si por meio de interfaces:
+
+(inserir imagem aqui)
+
+
+Em trabalhos anteriores, tivemos como um problema o uso de variáveis de difícil compreensão, o que complicou a leitura de código e a correção dele pelo colega de equipe. As imagens a seguir foram retiradas do Lab6: Damas 
+
+(inserir imagens aqui)
+
+Neste trabalho, buscamos utilizar variáveis mais autoexplicativas, mesmo que elas fossem grandes e cansativas de escrever repetidamente. Alguns exemplos podem ser vistos a seguir:
+
+(inserir imagens aqui)
+
+# Destaques de Código
+-
+
+# Destaques de Pattern
+## Diagrama do Pattern
+-
+
+## Código do Pattern
+-
+
+# Conclusões e Trabalhos Futuros
+No final do projeto, ficou evidente a importância de deixar o código sempre o mais limpo possível e com variáveis e comentários fáceis de serem compreendidos por terceiros. Além disso, o uso de funções que generalizam as interações entre os componentes gera uma organização bastante útil na hora de escrever e compreender o código. Para o futuro, seria interessante a utilização de design patterns para isolar uma função específica de um certo componente, para que futuras atualizações não interfiram nas funcionalidades de outras partes, além de facilitar o debugging do jogo.
+
+# Diagramas
+## Diagrama Geral do Projeto
 
 ## Diagrama Geral de Componentes
 ![Diagrama Geral](./assets/diagrama-componentes.png)
@@ -52,13 +106,13 @@ Objetivo | Organizar as Celulas e Pecas em vetores
 Interface | `<interface em Java do componente>`
 ```java
 public interface IMovimento{
-	boolean verificarMovimento(int x_final, int y_final);
+	boolean verificarMovimento(int x_final, int y_final, PecasMoveis peca, Tabuleiro tab);
 }
 public interface IAtaque{
-	void atacar(Peca inimigo);
+	void atacar(PecasMoveis inimigo, Tabuleiro tab);
 }
 public interface ICriaCha{
-	void criaCha(Tabuleiro tab);
+	void criaCha();
 }
 ```
 
@@ -68,21 +122,21 @@ public interface ICriaCha{
 Interface que lida com os movimento no Tabuleiro
 Método | Objetivo
 ------ | --------
-`movimento` | Recebe como parâmetro as coordenadas do posição final e retorna true se for possível fazer o movimento ou false caso contrário.
+`movimento` | Recebe como parâmetro as coordenadas do posição final, a peça a ser movida e o tabuleiro e retorna true se for possível fazer o movimento ou false caso contrário.
 
 * **Interface IAtaque**
 
 Interface que lida com as mecânicas de ataque entre peças
 Método | Objetivo
 ------ | --------
-`atacar` | Recebe a peça inimiga como parâmetro e realiza o ataque à essa peça e retorna void
+`atacar` | Recebe a peça inimiga e o tabuleiro como parâmetro e realiza o ataque à essa peça. Retorna void
 
 * **Interface ICriaCha**
 
 Interface que cria o PecaCha no Tabuleiro
 Método | Objetivo
 ------ | --------
-`criaCha` | Recebe o próprio Tabuleiro e verifica se o número mínimo de rodadas da partida já foi atingido e tenta criar o chá. Retorna void
+`criaCha` | Verifica se o número mínimo de rodadas da partida já foi atingido e tenta criar o chá. Retorna void
 
 ## Componente PecasMoveis
 <img src="./assets/componente-peca-infectado.png" alt="componente-peca-infectado" width="400" />
@@ -102,10 +156,10 @@ Objetivo | Representar as Pecas que semovimentam pelo tabuleiro
 Interface | `<interface em Java do componente>`
 ```java
 public interface IMovimento{
-	boolean verificarMovimento(int x_final, int y_final);
+	boolean verificarMovimento(int x_final, int y_final, PecasMoveis peca, Tabuleiro tab);
 }
 public interface IAtaque{
-	void atacar(Peca inimigo);
+	void atacar(Peca inimigo,Tabuleiro tab);
 }
 ```
 
@@ -115,14 +169,14 @@ public interface IAtaque{
 Interface que lida com os movimento no Tabuleiro
 Método | Objetivo
 ------ | --------
-`movimento` | Recebe como parâmetro as coordenadas do posição final e caso o Tabuleiro verifique que o movimento é válido, a peça executa o movimento.
+`movimento` | Recebe como parâmetro as coordenadas do posição final, a peça e o tabuleiro e caso o Tabuleiro verifique que o movimento é válido, a peça executa o movimento.
 
 * **Interface IAtaque**
 
 Interface que lida com as mecânicas de ataque entre peças
 Método | Objetivo
 ------ | --------
-`atacar` | Recebe a peça como parametro, verifica se ela é diferente de null e inimiga, caso passe pelas condições chama o Tabuleiro para que este execute o ataque à peça inimiga. Retorna void
+`atacar` | Recebe a peça como parametro, verifica se ela é diferente de null e inimiga, caso passe pelas condições chama o Tabuleiro, que também é passado como parâmetro, para que este execute o ataque à peça inimiga. Retorna void
 
 ## Componente PecaMedico
 <img src="./assets/componente-peca-medico.png" alt="componente-peca-medico" width="400" />
@@ -139,7 +193,7 @@ Objetivo | Representar as Pecas do time dos médicos
 Interface | `<interface em Java do componente>`
 ```java
 public interface ITransferir{
-	void transferirItens(PecaMedico medico);
+	void transferirItens(PecaMedico medico, Tabuleiro tab);
 }
 ```
 
@@ -149,7 +203,7 @@ public interface ITransferir{
 Interface que lida com as transferências de itens entre uma PecaBau e uma PecaMedico
 Método | Objetivo
 ------ | --------
-`transferirItens` | Recebe a própria PecaMedico como parâmetro e verifica os PecaBau próximos. Caso encontre um PecaBau suficientemente próximo chama este para executar a transferêcia de itens. Retorna void
+`transferirItens` | Recebe a própria PecaMedico e o tabuleiro como parâmetro e verifica os PecaBau próximos a ela. Caso encontre um PecaBau suficientemente próximo chama este para executar a transferêcia de itens. Retorna void
 
 ## Componente PecaBau
 <img src="./assets/componente-peca-bau.png" alt="componente-peca-bau" width="400" />
@@ -165,10 +219,10 @@ Objetivo | Representar os baús que gardam itens no jogo
 Interface | `<interface em Java do componente>`
 ```java
 public interface ITransferir{
-	void transferirItens(PecaMedico medico);
+	void transferirItens(PecaMedico medico, Tabuleiro tab);
 }
 public interface IGuardaCha{
-	void verificarBau();
+	void verificarBau(Tabuleiro tab);
 }
 ```
 
@@ -178,7 +232,7 @@ public interface IGuardaCha{
 Interface que lida com as transferências de itens entre uma PecaBau e uma PecaMedico
 Método | Objetivo
 ------ | --------
-`transferirItens` | Recebe a PecaMedico como parâmetro e executa a transferência dos itens contidos na PecaBau para a PecaMedico. Retorna void
+`transferirItens` | Recebe a PecaMedico e o tabuleiro como parâmetro e executa a transferência dos itens contidos na PecaBau para a PecaMedico. Retorna void
 
 * **Interface IGuardaCha**
 
@@ -203,10 +257,10 @@ Objetivo | Representar o item chá de boldo
 Interface | `<interface em Java do componente>`
 ```java
 public interface IGuardaCha{
-	void verificarBau();
+	void verificarBau(Tabuleiro tab);
 }
 public interface ICriaCha{
-	void criaCha(Tabuleiro tab);
+	void criaCha();
 }
 ```
 
@@ -223,15 +277,15 @@ Método | Objetivo
 Interface que cria o PecaCha no Tabuleiro
 Método | Objetivo
 ------ | --------
-`criaCha` | Recebe o Tabuleiro e cria a PecaCha no jogo, que deve ser única. Retorna void
+`criaCha` | Cria a PecaCha no jogo, que deve ser única. Retorna void
 
-## Modelo do Plano de Exceções
+# Plano de Exceções
 
-### Diagrama da hierarquia de exceções
+## Diagrama da hierarquia de exceções
 
 <img src="./assets/classes-erros-movimento.png" alt="interface-cria-cha" width="800" />
 
-### Descrição das classes de exceção
+## Descrição das classes de exceção
 
 Classe | Descrição 
 ------ | ---------
