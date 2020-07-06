@@ -185,7 +185,7 @@ Método | Objetivo
 ### Interfaces
 
 <img src="./assets/interface-transferir.png" alt="interface-transferir" width="800" />
-<img src="./assets/interface-captura-cha.png" alt="interface-captura-cha" width="800" />
+<img src="./assets/interface-captura-cha.PNG" alt="interface-captura-cha" width="800" />
 
 
 Campo | Valor
@@ -261,7 +261,7 @@ Método | Objetivo
 
 <img src="./assets/interface-cria-cha.png" alt="interface-cria-cha" width="800" />
 
-<img src="./assets/interface-captura-cha.png" alt="interface-captura-cha" width="800" />
+<img src="./assets/interface-captura-cha.PNG" alt="interface-captura-cha" width="800" />
 
 
 Campo | Valor
