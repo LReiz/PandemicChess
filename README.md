@@ -37,6 +37,7 @@ Dois jogadores competem com seus times pela vitória, cada um com seu objetivo. 
 * Por meio das teclas "I","J","K","L", o personagem se movimenta uma casa na direção escolhida
 
 **Sobre a Instalação**
+
 Como foi usado o Realtime Database do Firebase para implementar o multiplayer, é necessário que sejam importadas as bibliotecas do firebase para o projeto e para isso, utilizamos o gerenciador de pacotes Gradle. Além disso é necessário que seja criado um banco de dados próprio e que as credenciais dele sejam inseridas em um arquivo de nome "serviceAccountKey.json" na pasta principal do jogo.
 
 # Vídeo do Projeto
