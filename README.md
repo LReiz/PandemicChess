@@ -283,7 +283,9 @@ Método | Objetivo
 
 ## Diagrama da hierarquia de exceções
 
-<img src="./assets/classes-erros-movimento.png" alt="interface-cria-cha" width="800" />
+<img src="./assets/classes-erros-movimento.png" alt="erros-movimento" width="800" />
+
+<img src="./assets/classes-excecoes-bau-cha.PNG" alt="outras-excecoes" width="800" />
 
 ## Descrição das classes de exceção
 
@@ -294,3 +296,5 @@ ForaDeAlcance | Esse erro ocorre quando o jogador tenta se mover para fora do ta
 NaoVazio | Esse erro ocorre quando o jogador tenta se mover para uma casa não-vazia do tabuleiro
 MuitoDistante | Esse erro ocorre quando o jogador tenta se mover quando não é a sua vez
 ForaDoTurno | Esse erro ocorre quando o jogador tenta mover uma peça em mais de uma casa
+BauVazio | Esse erro ocorre quando um médico tenta pegar itens de um baú quando ele está vazio
+ChaNaoColetado | Esse erro ocorre quando um médico chega ao hospital sem o chá
