@@ -58,16 +58,26 @@ Inicialmente, tivemos dificuldade com a forma de organizar o projeto a partir de
 
 Após alterarmos os claros problemas de organização do código, buscamos projetar um diagrama de interfaces que relacionasse melhor as entidades do jogo entre si com base nas características que tivessem em comum. No final, construímos o seguinte diagrama, com todas as entidades conectadas entre si por meio de interfaces:
 
-(inserir imagem aqui)
+![Diagrama Geral](./assets/diagrama-geral-de-componentes.PNG)
 
 
-Em trabalhos anteriores, tivemos como um problema o uso de variáveis de difícil compreensão, o que complicou a leitura de código e a correção dele pelo colega de equipe. As imagens a seguir foram retiradas do Lab6: Damas 
+Em trabalhos anteriores, tivemos como um problema o uso de variáveis de difícil compreensão, o que complicou a leitura de código e a correção dele pelo colega de equipe. Os trechos a seguir foram retiradas do Lab6: Damas 
+```java
+int k = 0;       // numero de pecas em risco
+```
+```java
+if(l == -1) return;  //como a peca alvo nao esta em risco, o mov nao e valido
 
-(inserir imagens aqui)
-
+if (l == 0) { //pode capturar,pois a peca alvo esta em risco
+```
 Neste trabalho, buscamos utilizar variáveis mais autoexplicativas, mesmo que elas fossem grandes e cansativas de escrever repetidamente. Alguns exemplos podem ser vistos a seguir:
-
-(inserir imagens aqui)
+```java
+public PecaMedico medicoPortadorDoCha;
+```
+```java
+int yParedeDiagonal, xParedeDiagonal;
+int yParedeFrontal, xParedeFrontal;
+```
 
 # Destaques de Código
 -
@@ -83,10 +93,11 @@ Neste trabalho, buscamos utilizar variáveis mais autoexplicativas, mesmo que el
 No final do projeto, ficou evidente a importância de deixar o código sempre o mais limpo possível e com variáveis e comentários fáceis de serem compreendidos por terceiros. Além disso, o uso de funções que generalizam as interações entre os componentes gera uma organização bastante útil na hora de escrever e compreender o código. Para o futuro, seria interessante a utilização de design patterns para isolar uma função específica de um certo componente, para que futuras atualizações não interfiram nas funcionalidades de outras partes, além de facilitar o debugging do jogo.
 
 # Diagramas
-## Diagrama Geral do Projeto
+## Hierarquia de classes
+<img src="./assets/hierarquia-de-classes.PNG" alt="hierarquia-de-classes" width="600" />
 
 ## Diagrama Geral de Componentes
-![Diagrama Geral](./assets/diagrama-componentes.png)
+![Diagrama Geral](./assets/diagrama-geral-de-componentes.PNG)
 
 ## Componente Tabuleiro
 <img src="./assets/componente-tabuleiro.png" alt="componente-tabuleiro" width="600" />
@@ -182,8 +193,10 @@ Método | Objetivo
 <img src="./assets/componente-peca-medico.png" alt="componente-peca-medico" width="400" />
 
 ### Interfaces
-* **Interface ITransferir**
+
 <img src="./assets/interface-transferir.png" alt="interface-transferir" width="800" />
+<img src="./assets/interface-captura-cha.PNG" alt="interface-captura-cha" width="800" />
+
 
 Campo | Valor
 ----- | -----
@@ -195,8 +208,10 @@ Interface | `<interface em Java do componente>`
 public interface ITransferir{
 	void transferirItens(PecaMedico medico, Tabuleiro tab);
 }
+public interface ICapturaCha{
+	void pegarChaNoChao(Tabuleiro tab, PecaMedico med);
+}
 ```
-
 ### Detalhamento de Interfaces
 * **Interface ITransferir**
 
@@ -205,6 +220,13 @@ Método | Objetivo
 ------ | --------
 `transferirItens` | Recebe a própria PecaMedico e o tabuleiro como parâmetro e verifica os PecaBau próximos a ela. Caso encontre um PecaBau suficientemente próximo chama este para executar a transferêcia de itens. Retorna void
 
+* **Interface ICapturaCha**
+
+Interface que realiza a captura do cha no chão pelo médico
+
+Método | Objetivo
+------ | --------
+`pegarChaNoChao` | Recebe a própria PecaMedico e o tabuleiro como parâmetro e verifica se o chá está nas vizinhanças. Caso esteja, muda o atributo cha para true e chama o método na PecaCha. Retorna void
 ## Componente PecaBau
 <img src="./assets/componente-peca-bau.png" alt="componente-peca-bau" width="400" />
 
@@ -249,6 +271,9 @@ Método | Objetivo
 
 <img src="./assets/interface-cria-cha.png" alt="interface-cria-cha" width="800" />
 
+<img src="./assets/interface-captura-cha.PNG" alt="interface-captura-cha" width="800" />
+
+
 Campo | Valor
 ----- | -----
 Classe | `<caminho completo da classe com pacotes>`
@@ -261,6 +286,9 @@ public interface IGuardaCha{
 }
 public interface ICriaCha{
 	void criaCha();
+}
+public interface ICapturaCha{
+	void pegarChaNoChao(Tabuleiro tab, PecaMedico med);
 }
 ```
 
@@ -279,11 +307,20 @@ Método | Objetivo
 ------ | --------
 `criaCha` | Cria a PecaCha no jogo, que deve ser única. Retorna void
 
+* **Interface ICapturaCha**
+
+Interface que realiza a captura do cha no chão pelo médico
+Método | Objetivo
+------ | --------
+`pegarChaNoChao` | Recebe como parâmetro uma PecaMedico, que é atribída ao medicoPortadorDoCha. Retorna void
+
 # Plano de Exceções
 
 ## Diagrama da hierarquia de exceções
 
-<img src="./assets/classes-erros-movimento.png" alt="interface-cria-cha" width="800" />
+<img src="./assets/classes-erros-movimento.png" alt="erros-movimento" width="800" />
+
+<img src="./assets/classes-excecoes-bau-cha.PNG" alt="outras-excecoes" width="800" />
 
 ## Descrição das classes de exceção
 
@@ -292,5 +329,7 @@ Classe | Descrição
 ErroMovimento | Engloba todos os erros relacionados ao movimento de pecas
 ForaDeAlcance | Esse erro ocorre quando o jogador tenta se mover para fora do tabuleiro
 NaoVazio | Esse erro ocorre quando o jogador tenta se mover para uma casa não-vazia do tabuleiro
-MuitoDistante | Esse erro ocorre quando o jogador tenta se mover quando não é a sua vez
-ForaDoTurno | Esse erro ocorre quando o jogador tenta mover uma peça em mais de uma casa
+MuitoDistante | Esse erro ocorre quando o jogador tenta mover uma peça em mais de uma casa
+ForaDoTurno | Esse erro ocorre quando o jogador tenta se mover quando não é a sua vez
+BauVazio | Esse erro ocorre quando um médico tenta pegar itens de um baú quando ele está vazio
+ChaNaoColetado | Esse erro ocorre quando um médico chega ao hospital sem o chá
