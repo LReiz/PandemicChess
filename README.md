@@ -26,6 +26,10 @@ Dois jogadores competem com seus times pela vitória, cada um com seu objetivo. 
 * **Genocídio:** Se só sobram infectados no mapa, os Infectados ganham.
 
 ## Tutorial
+**Interface Inicial:**
+* As teclas "W" e "S" mudam a seleção das opções
+* A tecla "ENTER" confirma a opção atual
+
 **Infectados:**
 * As teclas "A" e "D" mudam a seleção do personagem infectado
 * Apertando "R", o infectado selecionado é escolhido para ser movido
