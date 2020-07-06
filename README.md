@@ -86,7 +86,7 @@ No final do projeto, ficou evidente a importância de deixar o código sempre o 
 ## Diagrama Geral do Projeto
 
 ## Diagrama Geral de Componentes
-![Diagrama Geral](./assets/diagrama-componentes.png)
+![Diagrama Geral](./assets/diagrama-geral-de-componentes.PNG)
 
 ## Componente Tabuleiro
 <img src="./assets/componente-tabuleiro.png" alt="componente-tabuleiro" width="600" />
