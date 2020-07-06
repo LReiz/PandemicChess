@@ -41,7 +41,7 @@ Dois jogadores competem com seus times pela vitória, cada um com seu objetivo. 
 [Explicação do Projeto](https://www.youtube.com/watch?v=WkQB7zuo9eI)
 
 ## Vídeo do Jogo
--
+[Explicação do Projeto](https://www.youtube.com/watch?v=-7LFomUKYqk)
 
 # Slides do Projeto
 ## Slides da Prévia
