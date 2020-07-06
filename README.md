@@ -58,7 +58,7 @@ Inicialmente, tivemos dificuldade com a forma de organizar o projeto a partir de
 
 Após alterarmos os claros problemas de organização do código, buscamos projetar um diagrama de interfaces que relacionasse melhor as entidades do jogo entre si com base nas características que tivessem em comum. No final, construímos o seguinte diagrama, com todas as entidades conectadas entre si por meio de interfaces:
 
-(inserir imagem aqui)
+![Diagrama Geral](./assets/diagrama-geral-de-componentes.PNG)
 
 
 Em trabalhos anteriores, tivemos como um problema o uso de variáveis de difícil compreensão, o que complicou a leitura de código e a correção dele pelo colega de equipe. Os trechos a seguir foram retiradas do Lab6: Damas 
