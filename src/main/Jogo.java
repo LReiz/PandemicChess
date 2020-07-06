@@ -27,6 +27,7 @@ import com.google.firebase.database.ValueEventListener;
 import database.ConjuntoBau;
 import database.ConjuntoPeca;
 import database.DocCha;
+import database.Firebase;
 import database.Time;
 import entidades.PecasMoveis;
 import erros.BauVazio;
@@ -70,20 +71,8 @@ public class Jogo extends Canvas implements KeyListener, Runnable {
 	
 	// Firebase (multiplayer)
 	public static int timeDoMultiplayerRemoto;
-	public static FirebaseDatabase db;
-	public static DatabaseReference ref;
-	public static DatabaseReference medRef;
-	public static DatabaseReference infRef;
-	public static DatabaseReference pecaMedRef;
-	public static DatabaseReference pecaInfRef;
-	public static DatabaseReference pecaBauRef;
-	public static DatabaseReference pecaChaRef;
-	public static Time medDoc;
-	public static Time infDoc;
-	public static ConjuntoPeca medConj;
-	public static ConjuntoPeca infConj;
-	public static ConjuntoBau bauConj;
-	public static DocCha chaConj;
+	public static Firebase firebase;
+
 	
 	// inicia o jogo
 	private Jogo() {
@@ -113,7 +102,8 @@ public class Jogo extends Canvas implements KeyListener, Runnable {
 			InterfaceInicial.att();
 		} else if(estadoDoJogo == "conectando") {
 			if(multiplayerRemoto) {
-				iniciarFireBase();
+				firebase = new Firebase();
+				firebase.iniciarFireBase();
 			}
 			estadoDoJogo = "jogando";
 		}else if(estadoDoJogo == "pausado") {
@@ -121,7 +111,7 @@ public class Jogo extends Canvas implements KeyListener, Runnable {
 		} else if(estadoDoJogo == "jogando") {
 			tabuleiro.att();
 			if(multiplayerRemoto)
-				attFireBase();	
+				firebase.att();	
 		}
 
 	}
@@ -171,160 +161,6 @@ public class Jogo extends Canvas implements KeyListener, Runnable {
 		tabuleiro.renderizarSemPixelizar(g);
 		
 		bs.show();
-	}
-	
-	private void iniciarFireBase() {
-		FileInputStream serviceAccount = null;
-		try {
-			serviceAccount = new FileInputStream("./serviceAccountKey.json");
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
-		FirebaseOptions options = null;
-		try {
-			options = new FirebaseOptions.Builder()
-			  .setCredentials(GoogleCredentials.fromStream(serviceAccount))
-			  .setDatabaseUrl("https://pandemicchess-16070.firebaseio.com")
-			  .build();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
-		FirebaseApp.initializeApp(options);
-		
-		iniciarInstanciasFireBase();
-		observadorFirebase();
-	}
-	
-	private void iniciarInstanciasFireBase() {
-		db = FirebaseDatabase.getInstance();
-		ref = db.getReference();
-		
-		// Banco de Dados usado durante o jogo
-		medRef = ref.child("medicos");
-		infRef = ref.child("infectados");
-		medDoc = new Time(Tabuleiro.entidadesMedicos.size());
-		infDoc = new Time(Tabuleiro.entidadesInfectados.size() + Tabuleiro.entidadesMedicos.size());
-		medRef.setValueAsync(medDoc);
-		infRef.setValueAsync(infDoc);
-		
-		// Banco de Dados para inicializar as peças no tabuleiro
-		pecaMedRef = ref.child("conjuntos/pecasmedicos");
-		pecaInfRef = ref.child("conjuntos/pecasinfectados");
-		pecaBauRef = ref.child("conjuntos/pecasbaus");
-		medConj = new ConjuntoPeca(Tabuleiro.entidadesMedicos);
-		infConj = new ConjuntoPeca(Tabuleiro.entidadesInfectados);
-		bauConj = new ConjuntoBau(Tabuleiro.entidadesBau);
-		pecaMedRef.setValueAsync(medConj);
-		pecaInfRef.setValueAsync(infConj);
-		pecaBauRef.setValueAsync(bauConj);
-
-	}
-	
-	public static void iniciarChaFireBase() {
-		pecaChaRef = ref.child("cha");
-		pecaChaRef.setValueAsync(chaConj);
-	}
-	
-	private void observadorFirebase() {
-		ref.child("conjuntos").addValueEventListener(new ValueEventListener() {
-			
-			@Override
-			public void onDataChange(DataSnapshot snapshot) {
-				tabuleiro.reiniciarTabuleiro(snapshot);
-				
-			}
-			
-			@Override
-			public void onCancelled(DatabaseError error) {
-				
-				
-			}
-			
-		});
-		
-		if(Jogo.timeDoMultiplayerRemoto == 1) {
-			ref.child("infectados").addValueEventListener(new ValueEventListener() {
-				
-				@Override
-				public void onDataChange(DataSnapshot snapshot) {
-					PecasMoveis.infectadoAtualDirX = Integer.parseInt(String.valueOf(snapshot.child("dirX").getValue()));
-					PecasMoveis.infectadoAtualDirY = Integer.parseInt(String.valueOf(snapshot.child("dirY").getValue()));
-					PecasMoveis.proxPosicaoInfectadoX = Integer.parseInt(String.valueOf(snapshot.child("proxX").getValue()));
-					PecasMoveis.proxPosicaoInfectadoY = Integer.parseInt(String.valueOf(snapshot.child("proxY").getValue()));
-					PecasMoveis.indexInfectado = Integer.parseInt(String.valueOf(snapshot.child("index").getValue()));
-					for(int i = 0; i < Tabuleiro.entidadesInfectados.size(); i++) {
-						infDoc.vetor.get(String.valueOf(i)).movendo = String.valueOf(snapshot.child("vetor").child(String.valueOf(i)).child("movendo").getValue());
-						if(Integer.parseInt(infDoc.vetor.get(String.valueOf(i)).movendo) == 1) {
-							Tabuleiro.entidadesInfectados.get(i).movendo = true;
-						}
-					}
-				}
-				
-				@Override
-				public void onCancelled(DatabaseError error) {
-					
-					
-				}
-				
-			});
-		}
-		
-		if(Jogo.timeDoMultiplayerRemoto == 2) {
-			ref.child("medicos").addValueEventListener(new ValueEventListener() {
-				
-				@Override
-				public void onDataChange(DataSnapshot snapshot) {
-					PecasMoveis.medicoAtualDirX = Integer.parseInt(String.valueOf(snapshot.child("dirX").getValue()));
-					PecasMoveis.medicoAtualDirY = Integer.parseInt(String.valueOf(snapshot.child("dirY").getValue()));
-					PecasMoveis.proxPosicaoMedicoX = Integer.parseInt(String.valueOf(snapshot.child("proxX").getValue()));
-					PecasMoveis.proxPosicaoMedicoY = Integer.parseInt(String.valueOf(snapshot.child("proxY").getValue()));
-					PecasMoveis.indexMedico = Integer.parseInt(String.valueOf(snapshot.child("index").getValue()));
-					for(int i = 0; i < Tabuleiro.entidadesMedicos.size(); i++) {
-						medDoc.vetor.get(String.valueOf(i)).movendo = String.valueOf(snapshot.child("vetor").child(String.valueOf(i)).child("movendo").getValue());
-						if(Integer.parseInt(medDoc.vetor.get(String.valueOf(i)).movendo) == 1) {
-							Tabuleiro.entidadesMedicos.get(i).movendo = true;
-						}
-					}
-				}
-				
-				@Override
-				public void onCancelled(DatabaseError error) {
-					
-					
-				}
-				
-			});
-			
-			ref.child("cha").addValueEventListener(new ValueEventListener() {
-				
-				@Override
-				public void onDataChange(DataSnapshot snapshot) {
-					tabuleiro.vetorBaus[(int)(tabuleiro.pecaCha.pos[0]/Tabuleiro.DC)][(int)(tabuleiro.pecaCha.pos[1]/Tabuleiro.DC)].cha = false;
-					tabuleiro.pecaCha.pos[1] = Integer.parseInt(String.valueOf(snapshot.child("x").getValue()));
-					tabuleiro.pecaCha.pos[0] = Integer.parseInt(String.valueOf(snapshot.child("y").getValue()));
-					tabuleiro.vetorBaus[(int)(tabuleiro.pecaCha.pos[0]/Tabuleiro.DC)][(int)(tabuleiro.pecaCha.pos[1]/Tabuleiro.DC)].cha = true;
-				}
-				
-				@Override
-				public void onCancelled(DatabaseError error) {
-					
-					
-				}
-				
-			});
-		}
-	}
-	
-	private void attFireBase() {
-		if(Jogo.timeDoMultiplayerRemoto == 1) {
-			medDoc.att();
-			medRef.setValueAsync(medDoc);
-		}
-		if(Jogo.timeDoMultiplayerRemoto == 2) {
-			infDoc.att();
-			infRef.setValueAsync(infDoc);			
-		}
 	}
 	
 	private void iniciarFrame() {

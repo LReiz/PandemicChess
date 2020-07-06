@@ -389,8 +389,8 @@ public class Tabuleiro implements IMovimento, ICriaCha, IAtaque {
 			pecaCha = pecaCha.criaCha();
 			chaCriado = true;
 			if(Jogo.multiplayerRemoto && Jogo.timeDoMultiplayerRemoto == 1) {
-				Jogo.chaConj = new DocCha(pecaCha.pos[1], pecaCha.pos[0]);
-				Jogo.iniciarChaFireBase();
+				Jogo.firebase.chaConj = new DocCha(pecaCha.pos[1], pecaCha.pos[0]);
+				Jogo.firebase.iniciarChaFireBase();
 			}
 		}
 		return null;
