@@ -83,7 +83,8 @@ Neste trabalho, buscamos utilizar variáveis mais autoexplicativas, mesmo que el
 No final do projeto, ficou evidente a importância de deixar o código sempre o mais limpo possível e com variáveis e comentários fáceis de serem compreendidos por terceiros. Além disso, o uso de funções que generalizam as interações entre os componentes gera uma organização bastante útil na hora de escrever e compreender o código. Para o futuro, seria interessante a utilização de design patterns para isolar uma função específica de um certo componente, para que futuras atualizações não interfiram nas funcionalidades de outras partes, além de facilitar o debugging do jogo.
 
 # Diagramas
-## Diagrama Geral do Projeto
+## Hierarquia de classes
+<img src="./assets/hierarquia-de-classes.PNG" alt="hierarquia-de-classes" width="600" />
 
 ## Diagrama Geral de Componentes
 ![Diagrama Geral](./assets/diagrama-geral-de-componentes.PNG)
@@ -185,6 +186,10 @@ Método | Objetivo
 * **Interface ITransferir**
 <img src="./assets/interface-transferir.png" alt="interface-transferir" width="800" />
 
+* **Interface ICapturaCha**
+<img src="./assets/interface-transferir.png" alt="interface-captura-cha" width="800" />
+
+
 Campo | Valor
 ----- | -----
 Classe | `<caminho completo da classe com pacotes>`
@@ -195,8 +200,10 @@ Interface | `<interface em Java do componente>`
 public interface ITransferir{
 	void transferirItens(PecaMedico medico, Tabuleiro tab);
 }
+public interface ICapturaCha{
+	void pegarChaNoChao(Tabuleiro tab, PecaMedico med);
+}
 ```
-
 ### Detalhamento de Interfaces
 * **Interface ITransferir**
 
@@ -205,6 +212,13 @@ Método | Objetivo
 ------ | --------
 `transferirItens` | Recebe a própria PecaMedico e o tabuleiro como parâmetro e verifica os PecaBau próximos a ela. Caso encontre um PecaBau suficientemente próximo chama este para executar a transferêcia de itens. Retorna void
 
+* **Interface ICapturaCha**
+
+Interface que realiza a captura do cha no chão pelo médico
+
+Método | Objetivo
+------ | --------
+`pegarChaNoChao` | Recebe a própria PecaMedico e o tabuleiro como parâmetro e verifica se o chá está nas vizinhanças. Caso esteja, muda o atributo cha para true e chama o método na PecaCha. Retorna void
 ## Componente PecaBau
 <img src="./assets/componente-peca-bau.png" alt="componente-peca-bau" width="400" />
 
