@@ -53,7 +53,7 @@ Dois jogadores competem com seus times pela vitória, cada um com seu objetivo. 
 ## Relatório de Evolução
 Inicialmente, tivemos dificuldade com a forma de organizar o projeto a partir de interfaces, uma vez que não tínhamos entendido tão bem como utilizá-las na nossa proposta de jogo. O primeiro diagrama de componentes pode ser visto abaixo:
 
-<img src="./assets/diagrama-antigo.png .png" alt="diagrama-antigo" width="800" />
+<img src="./assets/diagrama-antigo.png" alt="diagrama-antigo" width="800" />
 
 Após alterarmos os claros problemas de organização do código, buscamos projetar um diagrama de interfaces que relacionasse melhor as entidades do jogo entre si com base nas características que tivessem em comum. No final, construímos o seguinte diagrama, com todas as entidades conectadas entre si por meio de interfaces:
 
